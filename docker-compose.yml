@@ -9,6 +9,8 @@ services:
     hostname: jugamos
     restart: unless-stopped
     environment:
+      - JUGAMOS_VAPID_PUBLIC_KEY=           # your push notifications public key
+      - JUGAMOS_VAPID_PRIVATE_KEY=          # your push notifications private key
       - JUGAMOS_FQDN=                       # your public instance domain (ie: myjugamos.com)
       - JUGAMOS_CLOUDFLARE_TOKEN=           # your Cloudflare API key
     volumes:
