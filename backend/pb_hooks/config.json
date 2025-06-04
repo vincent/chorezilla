@@ -1,0 +1,9 @@
+{
+  "site": {
+    "name": "this comes from pocketbase admin settings",
+    "logo": "/app_logo.svg",
+    "copyright": "Same as above",
+    "year": 2024
+  },
+  "signupAllowed": true
+}

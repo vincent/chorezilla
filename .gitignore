@@ -1,0 +1,8 @@
+.cache
+.local
+.npm
+.env
+.ash_history
+.IDEAS.md
+playwright-report
+test-results
