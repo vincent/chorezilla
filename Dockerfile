@@ -22,7 +22,7 @@ FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y ca-certificates debian-keyring debian-archive-keyring apt-transport-https curl gpg
 
 # Create directories
-WORKDIR /srv/spoties/
+WORKDIR /srv/jugamos/
 RUN mkdir -p deployed
 
 # Copy built frontend
@@ -43,17 +43,17 @@ RUN curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | t
 RUN apt update
 RUN apt install -y caddy
 RUN caddy add-package github.com/caddy-dns/cloudflare
-RUN echo "echo Starting Spoties...                                                                                    \n\
-if [ \"\${SPOTIES_FQDN}\" = \"\" ]; then echo 'error: missing SPOTIES_FQDN'; exit 100; fi                             \n\
-if [ \"\${SPOTIES_CLOUDFLARE_TOKEN}\" = \"\" ]; then echo 'error: missing SPOTIES_CLOUDFLARE_TOKEN'; exit 100; fi   \n\n\
-sed -i \"s%SPOTIES_FQDN%\${SPOTIES_FQDN}%\" /srv/spoties/deployed/backend/Caddyfile                                   \n\
-sed -i \"s%SPOTIES_CLOUDFLARE_TOKEN%\${SPOTIES_CLOUDFLARE_TOKEN}%\" /srv/spoties/deployed/backend/Caddyfile         \n\n\
-caddy run --config /srv/spoties/deployed/backend/Caddyfile &                                                        \n\n\
-/srv/spoties/deployed/backend/pocketbase serve \${SPOTIES_DEBUG} --http 0.0.0.0:8090 --dir /srv/spoties/data --hooksDir /srv/spoties/deployed/backend/pb_hooks --migrationsDir /srv/spoties/deployed/backend/pb_migrations --publicDir /srv/spoties/frontend \n\n\
-" > /srv/spoties/deployed/entrypoint.sh
+RUN echo "echo Starting Jugamos...                                                                                    \n\
+if [ \"\${JUGAMOS_FQDN}\" = \"\" ]; then echo 'error: missing JUGAMOS_FQDN'; exit 100; fi                             \n\
+if [ \"\${JUGAMOS_CLOUDFLARE_TOKEN}\" = \"\" ]; then echo 'error: missing JUGAMOS_CLOUDFLARE_TOKEN'; exit 100; fi   \n\n\
+sed -i \"s%JUGAMOS_FQDN%\${JUGAMOS_FQDN}%\" /srv/jugamos/deployed/backend/Caddyfile                                   \n\
+sed -i \"s%JUGAMOS_CLOUDFLARE_TOKEN%\${JUGAMOS_CLOUDFLARE_TOKEN}%\" /srv/jugamos/deployed/backend/Caddyfile         \n\n\
+caddy run --config /srv/jugamos/deployed/backend/Caddyfile &                                                        \n\n\
+/srv/jugamos/deployed/backend/pocketbase serve \${JUGAMOS_DEBUG} --http 0.0.0.0:8090 --dir /srv/jugamos/data --hooksDir /srv/jugamos/deployed/backend/pb_hooks --migrationsDir /srv/jugamos/deployed/backend/pb_migrations --publicDir /srv/jugamos/frontend \n\n\
+" > /srv/jugamos/deployed/entrypoint.sh
 
 # Expose ports
 EXPOSE 80
 EXPOSE 443
 
-CMD ["sh", "/srv/spoties/deployed/entrypoint.sh"]
+CMD ["sh", "/srv/jugamos/deployed/entrypoint.sh"]
