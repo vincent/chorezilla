@@ -1,21 +1,12 @@
 
-volumes:
-  caddy_data:
-  jugamos_data:
-
 services:
   jugamos:
     image: ghcr.io/vincent/jugamos:main
-    hostname: jugamos
     restart: unless-stopped
-    environment:
-      - JUGAMOS_VAPID_PUBLIC_KEY=           # your push notifications public key
-      - JUGAMOS_VAPID_PRIVATE_KEY=          # your push notifications private key
-      - JUGAMOS_FQDN=                       # your public instance domain (ie: myjugamos.com)
-      - JUGAMOS_CLOUDFLARE_TOKEN=           # your Cloudflare API key
     volumes:
-      - caddy_data:/root/.local/share/caddy # for persistent LetsEncrypt certificates
-      - jugamos_data:/srv/jugamos/data      # for persistent PocketBase databases
+      - jugamos_data:/srv/jugamos/data
     ports:
-      - 80:80
-      - 443:443
+      - 8090:8090
+
+volumes:
+  jugamos_data: # for persistent database
