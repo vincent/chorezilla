@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { ModeWatcher } from 'mode-watcher';
+	import { Toaster } from "$lib/components/ui/sonner";
 	import NavMini from '$lib/components/nav-mini/nav-mini.svelte';
 	import Notifications from '$lib/components/notifications/notifications.svelte';
 
@@ -23,3 +24,4 @@
 {@render children()}
 
 <Notifications vapidPublicKey={data.config.vapidPublicKey} />
+<Toaster />

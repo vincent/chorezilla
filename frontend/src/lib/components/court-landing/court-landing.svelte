@@ -8,6 +8,7 @@
 	import CourtSettings from './court-settings.svelte';
 	import { client } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
+	import { toast } from 'svelte-sonner';
 
 	let { court }: { court: CourtsResponse } = $props();
 	let error = $state(null)
@@ -28,7 +29,7 @@
 		client
 			.send(`/api/match/prepare`, { method: "post", body: { court: court.id } })
 			.then(m => {
-				debugger;
+				toast.success("Match created");
 				goto(`/match/${m.id}/lobby`);
 			})
 			.catch(e => error = e)

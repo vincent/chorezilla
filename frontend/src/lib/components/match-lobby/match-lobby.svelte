@@ -7,6 +7,7 @@
 	import CourtTitle from '../court-title/court-title.svelte';
 	import { client } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
+	import { toast } from "svelte-sonner";
 
 	let { court, match }: { court: CourtsResponse, match: MatchesResponse } = $props();
 
@@ -29,14 +30,20 @@
 	function startMatch() {
 		client
 			.send(`/api/match/start`, { method: "post", body: { match: match.id } })
-			.then(_ => goto(`/match/${match.id}/in-progress`))
+			.then(_ => {
+				toast.success("Match started");
+				goto(`/match/${match.id}/in-progress`)
+			})
 			.catch(e => error = e)
 	}
 
 	function cancelMatch() {
 		client
 			.send(`/api/match/cancel`, { method: "post", body: { match: match.id } })
-			.then(_ => goto(`/join/${court.qr_code}`))
+			.then(_ => {
+				toast.warning("Match cancelled");
+				goto(`/join/${court.qr_code}`);
+			})
 			.catch(e => error = e)
 	}
 </script>
