@@ -2,7 +2,7 @@
 	import { Button } from '$lib/components/ui/button/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { Separator } from '$lib/components/ui/separator/index.js';
-	import type { CourtsResponse, MatchesResponse } from '$lib/pocketbase/generated-types';
+	import type { CourtsResponse, MatchesResponse, MatchParticipantsResponse, UsersResponse } from '$lib/pocketbase/generated-types';
 	import { CheckIcon, HourglassIcon	} from 'lucide-svelte';
 	import CourtTitle from '../court-title/court-title.svelte';
 	import { client } from '$lib/pocketbase';
@@ -10,18 +10,33 @@
 
 	let { court, match }: { court: CourtsResponse, match: MatchesResponse } = $props();
 
-	let own = $state(Math.random() > 0.5);
+	let own = $state(match.creator === client.authStore.record?.id);
+	let participants = $state<MatchParticipantsResponse[]>([])
 	let error = $state(null)
-	let users = $state([
-		{ id: 1, status: 'creator', expand: { user: { id: 'azdazd', name: 'Elsa' } } },
-		{ id: 2, status: 'accepted', expand: { user: { id: 'zegfzef', name: 'Giovanni' } } },
-		{ id: 3, status: 'waiting', expand: { user: { id: 'regre', name: 'Vincent' } } }
-	]);
 
+	setInterval(listParticipants, 3 * 1000);
+	listParticipants();
+
+	function listParticipants() {
+		client.collection("match_participants")
+			.getFullList<MatchParticipantsResponse>({
+				filter: client.filter("match = {:id}", match),
+				expand: 'user',
+			})
+			.then(list => participants = list)
+	}
+	
 	function startMatch() {
 		client
 			.send(`/api/match/start`, { method: "post", body: { match: match.id } })
-			.then(_ => goto("./in-progress"))
+			.then(_ => goto(`/match/${match.id}/in-progress`))
+			.catch(e => error = e)
+	}
+
+	function cancelMatch() {
+		client
+			.send(`/api/match/cancel`, { method: "post", body: { match: match.id } })
+			.then(_ => goto(`/join/${court.qr_code}`))
 			.catch(e => error = e)
 	}
 </script>
@@ -33,10 +48,10 @@
 </CourtTitle>
 <Separator class="my-4" />
 <div class="flex h-full w-full flex-col gap-4 overflow-y-auto px-4 text-sm">
-	{#each users as row}
+	{#each participants as row}
 		<div class="flex gap-4">
 			<Label class="me-auto text-2xl"
-				>{row.expand.user.name}
+				>{(row.expand as any).user.name}
 				{#if row.status === 'creator'}<span class="opacity-50"> host</span>{/if}</Label
 			>
 			{#if row.status === 'creator'}
@@ -61,13 +76,14 @@
 			<Button
 				variant="outline"
 				class="hover:dark:bg-gree7-500 h-30 w-full bg-green-500 text-2xl hover:bg-green-700 dark:bg-green-500"
+				disabled={participants.length < 2}
 				onclick={startMatch}>Start the match !</Button
 			>
 			<Button variant="outline" class="h-30 w-full text-2xl">Call for challengers</Button>
 			<Button
 				variant="outline"
 				class="h-20 w-full bg-red-500 text-2xl hover:bg-red-700 dark:bg-red-500 hover:dark:bg-red-700"
-				href={`/join/${court.qr_code}`}>Cancel</Button
+				onclick={cancelMatch}>Cancel</Button
 			>
 		{:else}
 			<Button

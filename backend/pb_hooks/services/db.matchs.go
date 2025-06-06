@@ -10,7 +10,11 @@ import (
 )
 
 func PrepareMatch(app *pocketbase.PocketBase, userId string, courtId string) (*core.Record, error) {
-	collection, err := app.FindCollectionByNameOrId("matches")
+	matches, err := app.FindCollectionByNameOrId("matches")
+	if err != nil {
+		return nil, err
+	}
+	participants, err := app.FindCollectionByNameOrId("match_participants")
 	if err != nil {
 		return nil, err
 	}
@@ -39,22 +43,35 @@ func PrepareMatch(app *pocketbase.PocketBase, userId string, courtId string) (*c
 		return nil, err
 	}
 
-	var record = core.NewRecord(collection)
-	record.Set("status", "lobby")
-	record.Set("creator", userId)
-	record.Set("court", court.Id)
-	record.Set("max_players", 10)
-	record.Set("scheduled_start_time", time.Now().Add(5*time.Minute).Format(time.RFC3339))
-	record.Set("sport_type", court.FieldsData()["sport_type"])
+	var m = core.NewRecord(matches)
+	m.Set("status", "lobby")
+	m.Set("creator", userId)
+	m.Set("court", court.Id)
+	m.Set("max_players", 10)
+	m.Set("scheduled_start_time", time.Now().Add(5*time.Minute).Format(time.RFC3339))
+	m.Set("sport_type", court.FieldsData()["sport_type"])
 
-	err = app.Save(record)
+	err = app.Save(m)
 	if err != nil {
 		app.Logger().Error("[matchs] cannot insert match", "error", err)
 		return nil, err
 	}
-	app.Logger().Info("[matchs] insert match", "id", record.Id)
+	app.Logger().Info("[matchs] insert match", "id", m.Id)
 
-	return record, nil
+	var p = core.NewRecord(participants)
+	p.Set("match", m.Id)
+	p.Set("user", userId)
+	p.Set("status", "creator")
+	p.Set("joined_at", time.Now().Format(time.RFC3339))
+
+	err = app.Save(p)
+	if err != nil {
+		app.Logger().Error("[matchs] cannot insert participant", "error", err)
+		return nil, err
+	}
+	app.Logger().Info("[matchs] insert participant", "id", p.Id)
+
+	return m, nil
 }
 
 func StartMatch(app *pocketbase.PocketBase, userId string, matchId string) (*core.Record, error) {
@@ -71,6 +88,30 @@ func StartMatch(app *pocketbase.PocketBase, userId string, matchId string) (*cor
 
 	record.Set("status", "playing")
 	record.Set("actual_start_time", "todo: current datetime in ISO format")
+
+	err = app.Save(record)
+	if err != nil {
+		app.Logger().Error("[matchs] cannot update match", "error", err)
+		return nil, err
+	}
+	app.Logger().Info("[matchs] update match", "id", record.Id)
+
+	return record, nil
+}
+
+func CancelMatch(app *pocketbase.PocketBase, userId string, matchId string) (*core.Record, error) {
+	record, err := app.FindRecordById("matches", matchId)
+	if err != nil {
+		app.Logger().Error("[matchs] no such match", "error", err)
+		return nil, err
+	}
+	if record.GetString("creator") != userId {
+		err = errors.New("only the creator can cancel the match")
+		app.Logger().Error("[matchs] cannot cancel match", "error", err)
+		return nil, err
+	}
+
+	record.Set("status", "cancelled")
 
 	err = app.Save(record)
 	if err != nil {
