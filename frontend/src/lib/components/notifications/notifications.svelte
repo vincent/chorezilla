@@ -1,18 +1,21 @@
 <script lang="ts">
+	import { client } from '$lib/pocketbase';
 	import { onMount } from 'svelte';
 
 	let { vapidPublicKey } = $props();
 
 	function subscribe() {
+		if (!vapidPublicKey) return Promise.reject("no public VAPID key")
 		navigator.serviceWorker.ready
-			.then(function (registration) {
-				return registration.pushManager.subscribe({
-					userVisibleOnly: true,
-					applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
-				});
-			})
-			.then((subscription) => console.log(JSON.stringify({ subscription })))
-			.catch((err) => console.error(err));
+			.then(registration => registration.pushManager.subscribe({
+				userVisibleOnly: true,
+				applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)
+			}))
+			.then(subscription => client.collection("user_subscriptions").create({
+				user: client.authStore.record?.id,
+				subscription,
+			}))
+			.catch(err => console.error(err));
 	}
 
 	function urlBase64ToUint8Array(base64String: string) {

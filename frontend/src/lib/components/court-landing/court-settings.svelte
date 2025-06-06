@@ -1,13 +1,43 @@
 <script lang="ts">
-	import { MehIcon } from 'lucide-svelte';
-	import { Button } from '../ui/button';
-	import { Label } from '../ui/label';
+	import { client } from '$lib/pocketbase';
 	import { Switch } from '../ui/switch';
+	import { Label } from '../ui/label';
+	import { onMount } from 'svelte';
+
+	const challengers = client.collection("court_challengers");
+
+	let { court } = $props();
+	let checked = $state(false)
+
+	onMount(() => getCourtNotification().then(row => checked = !!row))
+
+	function getCourtNotification() {
+		return challengers
+			.getList(1, 1, {
+				filter: client.filter(`user = {:user} && court = {:court}`, { 
+					user: client.authStore.record?.id,
+					court: court.id,
+				})
+			})
+			.then(list => list.items[0])
+	}
+
+	function toggleCourtNotification(enabled: boolean) {
+		getCourtNotification()
+			.then(row => !!row
+				? challengers.update(row.id, { enabled })
+				: challengers.create({ 
+					user: client.authStore.record?.id,
+					court: court.id,
+					enabled
+				})
+			)
+	}
 </script>
 
 <div class="p-5">
 	<div class="flex items-center space-x-2">
-		<Switch id="notify-me" />
+		<Switch id="notify-me" bind:checked onCheckedChange={toggleCourtNotification} />
 		<Label for="notify-me" class="ms-4 text-xl"
 			>Notify me when someone is looking for challengers</Label
 		>

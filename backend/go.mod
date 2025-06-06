@@ -12,6 +12,8 @@ require (
 	golang.org/x/exp v0.0.0-20250408133849-7e4ce0ab07d0
 )
 
+require github.com/SherClockHolmes/webpush-go v1.4.0 // indirect
+
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.7 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
@@ -86,7 +88,6 @@ require (
 	google.golang.org/protobuf v1.36.6 // indirect
 	modernc.org/gc/v3 v3.1.0 // indirect
 	modernc.org/libc v1.62.1 // indirect
-	
 	modernc.org/mathutil v1.7.1 // indirect
 	modernc.org/memory v1.10.0 // indirect
 	modernc.org/sqlite v1.37.0 // indirect

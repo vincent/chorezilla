@@ -1,20 +1,20 @@
+import { goto } from '$app/navigation';
 import { client } from '$lib/pocketbase';
 import type { CourtsResponse } from '$lib/pocketbase/generated-types';
-import type { PageLoad } from './$types';
+import type { LayoutLoad } from './$types';
 
-export const load: PageLoad = async ({ url, params, fetch }) => {
-	// if (!client.authStore.isValid) {
-	//   return redirect(
-	//     303,
-	//     url.pathname.match(/^\/event\/\w/) ? `/login?return_url=${url}` : "/"
-	//   );
-	// }
-
+export const load: LayoutLoad = async ({ url, params, fetch }) => {
 	const court: Promise<CourtsResponse> = client
 		.collection('courts')
 		.getFirstListItem<CourtsResponse>(client.filter(`qr_code={:qr}`, params), {
 			fetch,
 			expand: 'location'
+		})
+		.catch(({ status }) => {
+			if (status === 404 && !url.pathname.match(/\/form\/$/)) {
+				goto(`${url.pathname}form/`)
+			}
+			return {} as unknown as CourtsResponse
 		});
 
 	return {

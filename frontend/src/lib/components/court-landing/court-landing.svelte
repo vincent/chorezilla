@@ -51,6 +51,6 @@
 </div>
 <CourtHistory {lastMatchs} mostActive={[]}>
 	{#snippet settings()}
-		<CourtSettings />
+		<CourtSettings {court} />
 	{/snippet}
 </CourtHistory>

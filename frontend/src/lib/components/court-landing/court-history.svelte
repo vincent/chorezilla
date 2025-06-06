@@ -4,10 +4,10 @@
 	import { Separator } from '../ui/separator';
 	import { formatDate } from '$lib/utils';
 
-	let { lastMatchs, mostActive, settings = null } = $props();
+	let { lastMatchs, mostActive, settings = null, active = 'settings' } = $props();
 </script>
 
-<Tabs.Root value="last" class="p-4">
+<Tabs.Root bind:value={active} class="p-4">
 	<Tabs.List class="grid h-15 w-full grid-cols-3">
 		<Tabs.Trigger class="text-xl" value="last">Last</Tabs.Trigger>
 		<Tabs.Trigger class="text-xl" value="famous">Active</Tabs.Trigger>
