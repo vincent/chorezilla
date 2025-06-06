@@ -6,7 +6,7 @@ import type { LayoutLoad } from './$types';
 export const load: LayoutLoad = async ({ params, fetch }) => {
 	const match = client
 		.collection('matches')
-		.getOne<MatchesResponse>(params.id, { fetch, expand: 'court,creator' })
+		.getOne<MatchesResponse>(params.id, { fetch, expand: 'court,creator,court.location' })
 		.then(m => {
 			if (m.status !== 'lobby') goto(`/join/${(m.expand as any).court.qr_code}`);
 			return m;

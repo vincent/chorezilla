@@ -4,36 +4,91 @@ import (
 	"encoding/json"
 	"os"
 
-	webpush "github.com/SherClockHolmes/webpush-go"
+	"github.com/SherClockHolmes/webpush-go"
+	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase"
-	"github.com/pocketbase/pocketbase/core"
 )
 
-func notificationCourtCallChallengers(app *pocketbase.PocketBase, callerId string, courtId string) error {
-	var record *core.Record
+type CallPushNotification struct {
+	Caller       string `json:"caller"`
+	Sport        string `json:"sport"`
+	LocationName string `json:"location"`
+	CourtName    string `json:"court"`
+	MatchID      string `json:"matchId"`
+}
 
-	record, err := app.FindRecordById("courts", courtId)
+func CallMatchChallengers(app *pocketbase.PocketBase, callerId string, matchId string) (error, int) {
+
+	caller, err := app.FindRecordById("users", callerId)
 	if err != nil {
-		return err
+		return err, 0
 	}
 
-	app.Logger().Info("[subscriptions] insert subscription", "id", record.Id)
-
-	// Decode subscription
-	s := &webpush.Subscription{}
-	json.Unmarshal([]byte("<YOUR_SUBSCRIPTION>"), s)
-
-	// Send Notification
-	resp, err := webpush.SendNotification([]byte("Test"), s, &webpush.Options{
-		Subscriber:      "example@example.com",
-		VAPIDPublicKey:  os.Getenv("JUGAMOS_VAPID_PUBLIC_KEY"),
-		VAPIDPrivateKey: os.Getenv("JUGAMOS_VAPID_PRIVATE_KEY"),
-		TTL:             30,
-	})
+	match, err := app.FindRecordById("matches", matchId)
 	if err != nil {
-		// TODO: Handle error
+		return err, 0
 	}
-	defer resp.Body.Close()
 
-	return nil
+	challengers, err := app.FindAllRecords("court_challengers",
+		dbx.NewExp("court = {:court} AND user != {:user}",
+			dbx.Params{"court": match.GetString("court"), "user": caller.Id}),
+	)
+	if err != nil {
+		app.Logger().Info("[challenge] cannot find challengers", "err", err)
+		return err, 0
+	}
+
+	app.Logger().Info("[challenge] found challengers", "challengers", len(challengers))
+
+	subscriptions := []string{}
+
+	if len(challengers) > 0 {
+		for _, row := range challengers {
+			s, err := app.FindRecordsByFilter(
+				"user_subscriptions",
+				"user = {:user}",
+				"created",
+				1,
+				0,
+				dbx.Params{"user": row.GetString("user")},
+			)
+			if err == nil {
+				app.Logger().Info("[challenge] found challenger subscription for match", "id", match.Id)
+				subscriptions = append(subscriptions, s[0].GetString("subscription"))
+			}
+		}
+
+		app.Logger().Info("[challenge] call challengers for match", "subscriptions", len(subscriptions), "id", match.Id)
+
+		notification := &CallPushNotification{
+			CourtName: "CourtName",
+			Caller:    caller.GetString("name"),
+			MatchID:   match.Id,
+			Sport:     "tennis",
+		}
+		notificationBody, _ := json.Marshal(notification)
+
+		for _, row := range subscriptions {
+			s := &webpush.Subscription{}
+			err := json.Unmarshal([]byte(row), s)
+			if err != nil {
+				app.Logger().Warn("[challenge] cannot use subscription", "subscription", row)
+				continue
+			}
+
+			// Send Notification
+			resp, err := webpush.SendNotification([]byte(notificationBody), s, &webpush.Options{
+				Subscriber:      "example@example.com",
+				VAPIDPublicKey:  os.Getenv("JUGAMOS_VAPID_PUBLIC_KEY"),
+				VAPIDPrivateKey: os.Getenv("JUGAMOS_VAPID_PRIVATE_KEY"),
+				TTL:             30,
+			})
+			if err != nil {
+				app.Logger().Info("[challenge] error using subscription", "subscription", row, "error", err)
+			}
+			defer resp.Body.Close()
+		}
+	}
+
+	return nil, len(subscriptions)
 }

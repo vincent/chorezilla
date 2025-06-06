@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
-	import { Label } from '$lib/components/ui/label/index.js';
-	import { Separator } from '$lib/components/ui/separator/index.js';
-	import type { CourtsResponse, MatchesResponse, MatchParticipantsResponse, UsersResponse } from '$lib/pocketbase/generated-types';
+	import { Button } from '$lib/components/ui/button';
+	import { Label } from '$lib/components/ui/label';
+	import { Separator } from '$lib/components/ui/separator';
+	import type { CourtsResponse, MatchesResponse, MatchParticipantsResponse } from '$lib/pocketbase/generated-types';
 	import { CheckIcon, HourglassIcon	} from 'lucide-svelte';
 	import CourtTitle from '../court-title/court-title.svelte';
 	import { client } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 	import { toast } from "svelte-sonner";
+	import { onDestroy, onMount } from 'svelte';
 
 	let { court, match }: { court: CourtsResponse, match: MatchesResponse } = $props();
 
@@ -15,7 +16,10 @@
 	let participants = $state<MatchParticipantsResponse[]>([])
 	let error = $state(null)
 
-	setInterval(listParticipants, 3 * 1000);
+	// TODO: better realtime
+	let to = $state(0)
+	onMount(() => to = setInterval(listParticipants, 5 * 1000))
+	onDestroy(() => clearInterval(to))
 	listParticipants();
 
 	function listParticipants() {
@@ -34,6 +38,16 @@
 				toast.success("Match started");
 				goto(`/match/${match.id}/in-progress`)
 			})
+			.catch(e => error = e)
+	}
+
+	function callChallengers() {
+		client
+			.send(`/api/match/call`, { method: "post", body: { match: match.id } })
+			.then(count => count
+				? toast.success(`${count} challengers called`)
+				: toast.warning(`No challengers found`)
+			)
 			.catch(e => error = e)
 	}
 
@@ -86,7 +100,10 @@
 				disabled={participants.length < 2}
 				onclick={startMatch}>Start the match !</Button
 			>
-			<Button variant="outline" class="h-30 w-full text-2xl">Call for challengers</Button>
+			<Button
+				variant="outline"
+				class="h-30 w-full text-2xl"
+				onclick={callChallengers}>Call for challengers</Button>
 			<Button
 				variant="outline"
 				class="h-20 w-full bg-red-500 text-2xl hover:bg-red-700 dark:bg-red-500 hover:dark:bg-red-700"
