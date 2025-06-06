@@ -6,8 +6,11 @@
 	import CourtHistory from './court-history.svelte';
 	import { Label } from '$lib/components/ui/label';
 	import CourtSettings from './court-settings.svelte';
+	import { client } from '$lib/pocketbase';
+	import { goto } from '$app/navigation';
 
 	let { court }: { court: CourtsResponse } = $props();
+	let error = $state(null)
 	const ma = {
 		id: 1,
 		end_time: '2025-05-12 19:49:28 UTC',
@@ -20,6 +23,16 @@
 	};
 
 	let lastMatchs = $state([ma, ma, ma, ma, ma, ma, ma, ma, ma, ma, ma, ma]);
+
+	function prepareMatch() {
+		client
+			.send(`/api/match/prepare`, { method: "post", body: { court: court.id } })
+			.then(m => {
+				debugger;
+				goto(`/match/${m.id}/lobby`);
+			})
+			.catch(e => error = e)
+	}
 </script>
 
 <CourtTitle {court} />
@@ -42,7 +55,7 @@
 			<Label for="header">Come back later !</Label>
 		</div>
 	{:else if court.status === 'active'}
-		<Button variant="outline" class="h-30 w-full text-xl" href={`${court.qr_code}/lobby`}
+		<Button variant="outline" class="h-30 w-full text-xl" onclick={prepareMatch}
 			>Start a match</Button
 		>
 	{/if}

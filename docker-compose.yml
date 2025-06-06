@@ -3,6 +3,9 @@ services:
   jugamos:
     image: ghcr.io/vincent/jugamos:main
     restart: unless-stopped
+    environment:
+      - JUGAMOS_VAPID_PUBLIC_KEY=           # your push notifications public key
+      - JUGAMOS_VAPID_PRIVATE_KEY=          # your push notifications private key
     volumes:
       - jugamos_data:/srv/jugamos/data
     ports:

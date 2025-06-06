@@ -38,7 +38,7 @@ export const load: LayoutLoad = async ({ url, fetch }) => {
 	} else if (!client.authStore.isValid) {
 		return redirect(303, '/login?redirect_url=' + url.pathname);
 	
-	} else if (url.pathname.startsWith('/join/')) {
+	} else if (url.pathname.startsWith('/join/') || url.pathname.startsWith('/match/')) {
 		// keep going
 	
 	} else {
