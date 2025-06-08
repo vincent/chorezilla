@@ -9,9 +9,9 @@
 	let { court } = $props();
 	let checked = $state(false)
 
-	onMount(() => getCourtNotification().then(row => checked = !!row))
+	onMount(() => getCourtNotificationSetting().then(row => checked = !!row))
 
-	function getCourtNotification() {
+	function getCourtNotificationSetting() {
 		return challengers
 			.getList(1, 1, {
 				filter: client.filter(`user = {:user} && court = {:court}`, { 
@@ -22,8 +22,8 @@
 			.then(list => list.items[0])
 	}
 
-	function toggleCourtNotification(enabled: boolean) {
-		getCourtNotification()
+	function toggleCourtNotificationSetting(enabled: boolean) {
+		getCourtNotificationSetting()
 			.then(row => !!row
 				? challengers.update(row.id, { enabled })
 				: challengers.create({ 
@@ -37,10 +37,10 @@
 
 <div class="p-5">
 	<div class="flex items-center space-x-2">
-		<Switch id="notify-me" bind:checked onCheckedChange={toggleCourtNotification} />
-		<Label for="notify-me" class="ms-4 text-xl"
-			>Notify me when someone is looking for challengers</Label
-		>
+		<Switch id="notify-me" bind:checked onCheckedChange={toggleCourtNotificationSetting} />
+		<Label for="notify-me" class="ms-4 text-xl">
+			Notify when others seek challengers here
+		</Label>
 	</div>
 
 	<div class="mt-10">

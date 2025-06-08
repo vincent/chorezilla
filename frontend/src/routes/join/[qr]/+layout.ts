@@ -14,7 +14,7 @@ export const load: LayoutLoad = async ({ url, params, fetch }) => {
 			if (status === 404 && !url.pathname.match(/\/form\/$/)) {
 				goto(`${url.pathname}form/`)
 			}
-			return {} as unknown as CourtsResponse
+			return { status: 'active' } as unknown as CourtsResponse
 		});
 
 	return {

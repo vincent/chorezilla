@@ -23,7 +23,7 @@
 		}
 	};
 
-	let lastMatchs = $state([ma, ma, ma, ma, ma, ma, ma, ma, ma, ma, ma, ma]);
+	let mostActive = $state([ma, ma, ma, ma, ma, ma, ma, ma, ma, ma, ma, ma]);
 
 	function prepareMatch() {
 		client
@@ -63,7 +63,7 @@
 
 	<!-- <pre>{JSON.stringify(court, null, 2)}</pre> -->
 </div>
-<CourtHistory {lastMatchs} mostActive={[]}>
+<CourtHistory {mostActive}>
 	{#snippet settings()}
 		<CourtSettings {court} />
 	{/snippet}

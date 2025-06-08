@@ -11,8 +11,6 @@
 		<CourtLoading />
 	{:then court}
         <CourtForm {court} />
-
-        <pre>{JSON.stringify(court, null, 2)}</pre>
 	{:catch}
         <Alert.Root>
             <Alert.Title>Error</Alert.Title>
