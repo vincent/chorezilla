@@ -1,14 +1,16 @@
 <script lang="ts">
+	import type { UsersResponse } from '$lib/pocketbase/generated-types';
+	import TitleHeader from '../title-header/TitleHeader.svelte';
+	import { cn, type WithElementRef } from '$lib/utils.js';
+	import { client, providerLogin } from '$lib/pocketbase';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
-	import { GalleryVerticalEndIcon } from 'lucide-svelte';
-	import type { HTMLAttributes } from 'svelte/elements';
-	import { cn, type WithElementRef } from '$lib/utils.js';
-	import { client, providerLogin } from '$lib/pocketbase';
-	import type { UsersResponse } from '$lib/pocketbase/generated-types';
 	import { goto } from '$app/navigation';
 	import * as Alert from '../ui/alert';
+	import type { AuthProviderInfo } from 'pocketbase';
+	import { error } from '@sveltejs/kit';
 
 	let {
 		siteName,
@@ -32,9 +34,17 @@
 		password: ''
 	});
 
+	function providerLoginAndRedirect(provider: AuthProviderInfo) {
+		providerLogin(provider, collection)
+			.then(_ => goto(redirectUrl || '/welcome'))
+			.catch(error => {
+				console.log(error);
+				issue = error.toString();
+			})
+	}
+
 	async function submit(e: SubmitEvent) {
 		e.preventDefault();
-		let user: UsersResponse;
 
 		try {
 			if (signup) {
@@ -42,9 +52,9 @@
 				await collection.requestVerification(form.email);
 			}
 
-			user = (await collection.authWithPassword<UsersResponse>(form.email, form.password)).record;
-
+			await collection.authWithPassword<UsersResponse>(form.email, form.password);
 			goto(redirectUrl || '/welcome');
+
 		} catch (error: any) {
 			console.log(error);
 			issue = error.toString();
@@ -54,17 +64,9 @@
 
 <div class={cn('mt-[-40px] mb-4 flex flex-col gap-6', className)} bind:this={ref} {...restProps}>
 	<form onsubmit={submit}>
-		<div class="flex flex-col gap-6">
-			<div class="flex flex-col items-center gap-2">
-				<a href="##" class="flex flex-col items-center gap-2 font-medium">
-					<div class="flex size-8 items-center justify-center rounded-md">
-						<GalleryVerticalEndIcon class="size-6" />
-					</div>
-					<span class="sr-only">¿Jugamos?</span>
-				</a>
-				<h1 class="text-3xl font-bold">¿Jugamos?</h1>
-			</div>
+		<TitleHeader />
 
+		<div class="flex flex-col gap-6">
 			{#await collection.listAuthMethods({ $autoCancel: false }) then methods}
 				<div class="grid gap-4 sm:grid-cols-2">
 					{#if methods.oauth2?.providers.length}
@@ -76,7 +78,7 @@
 									type="button"
 									class="h-15 w-full"
 									variant="outline"
-									onclick={() => providerLogin(p, collection)}
+									onclick={() => providerLoginAndRedirect(p)}
 								>
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 										<path
