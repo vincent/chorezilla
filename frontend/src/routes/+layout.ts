@@ -34,19 +34,19 @@ export const load: LayoutLoad = async ({ url, fetch }) => {
 
 	if (url.pathname.startsWith('/login') || url.pathname.startsWith('/welcome')) {
 		// keep going
-	
+
 	} else if (!client.authStore.isValid) {
 		return redirect(303, '/login?redirect_url=' + url.pathname);
-	
+
 	} else if (url.pathname.startsWith('/join/') || url.pathname.startsWith('/match/')) {
 		// keep going
-	
+
 	} else {
 		return redirect(301, '/welcome?redirect_url=' + url.pathname)
 	}
-
 	try {
 		config = await client.send('/api/config', { fetch, requestKey: 'config' });
+
 	} catch (e: any) {
 		console.error(e);
 	}

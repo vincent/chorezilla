@@ -39,12 +39,16 @@ function getSubscription() {
     : navigator.serviceWorker.ready.then((r) => r.pushManager.getSubscription());
 }
 
-export function initMatchNotifications(publicKey: string) {
+export function initMatchNotifications(publicKey: string, shouldSubscribe = false) {
   vapidPublicKey = publicKey;
   subscribed.set(false);
 
   getSubscription()
-    .then<PushSubscription | RecordModel | null>(sub => sub ? Promise.resolve(sub) : subscribe())
+    .then<PushSubscription | RecordModel | null>(sub => {
+      if (sub) return Promise.resolve(sub)
+      if (shouldSubscribe) subscribe()
+      throw new Error("wait until asked to subscribe")
+    })
     .then(_ => subscribed.set(true))
     .then(_ => console.debug('subscribed to match notifications'))
     .catch((e) => console.error('cannot use service-worker'));
