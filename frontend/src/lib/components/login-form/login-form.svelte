@@ -36,11 +36,11 @@
 
 	function providerLoginAndRedirect(provider: AuthProviderInfo) {
 		providerLogin(provider, collection)
-			.then(_ => goto(redirectUrl || '/welcome'))
-			.catch(error => {
+			.then((_) => goto(redirectUrl || '/welcome'))
+			.catch((error) => {
 				console.log(error);
 				issue = error.toString();
-			})
+			});
 	}
 
 	async function submit(e: SubmitEvent) {
@@ -54,7 +54,6 @@
 
 			await collection.authWithPassword<UsersResponse>(form.email, form.password);
 			goto(redirectUrl || '/welcome');
-
 		} catch (error: any) {
 			console.log(error);
 			issue = error.toString();

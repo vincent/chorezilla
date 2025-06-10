@@ -10,11 +10,11 @@
 	{#await data.court}
 		<CourtLoading />
 	{:then court}
-        <CourtForm {court} />
+		<CourtForm {court} />
 	{:catch}
-        <Alert.Root>
-            <Alert.Title>Error</Alert.Title>
-            <Alert.Description>Can't display court form.</Alert.Description>
-        </Alert.Root>
+		<Alert.Root>
+			<Alert.Title>Error</Alert.Title>
+			<Alert.Description>Can't display court form.</Alert.Description>
+		</Alert.Root>
 	{/await}
 </div>

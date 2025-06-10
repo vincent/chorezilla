@@ -2,63 +2,67 @@
 	import { Button } from '$lib/components/ui/button';
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
-	import type { CourtsResponse, MatchesResponse, MatchParticipantsResponse } from '$lib/pocketbase/generated-types';
-	import { CheckIcon, HourglassIcon	} from 'lucide-svelte';
+	import type {
+		CourtsResponse,
+		MatchesResponse,
+		MatchParticipantsResponse
+	} from '$lib/pocketbase/generated-types';
+	import { CheckIcon, HourglassIcon } from 'lucide-svelte';
 	import CourtTitle from '../court-title/court-title.svelte';
 	import { client } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
-	import { toast } from "svelte-sonner";
+	import { toast } from 'svelte-sonner';
 	import { onDestroy, onMount } from 'svelte';
 
-	let { court, match }: { court: CourtsResponse, match: MatchesResponse } = $props();
+	let { court, match }: { court: CourtsResponse; match: MatchesResponse } = $props();
 
 	let own = $state(match.creator === client.authStore.record?.id);
-	let participants = $state<MatchParticipantsResponse[]>([])
-	let error = $state(null)
+	let participants = $state<MatchParticipantsResponse[]>([]);
+	let error = $state(null);
 
 	// TODO: better realtime
-	let to = $state(0)
-	onMount(() => to = setInterval(listParticipants, 5 * 1000))
-	onDestroy(() => clearInterval(to))
+	let to = $state(0);
+	onMount(() => (to = setInterval(listParticipants, 5 * 1000)));
+	onDestroy(() => clearInterval(to));
 	listParticipants();
 
 	function listParticipants() {
-		client.collection("match_participants")
+		client
+			.collection('match_participants')
 			.getFullList<MatchParticipantsResponse>({
-				filter: client.filter("match = {:id}", match),
-				expand: 'user',
+				filter: client.filter('match = {:id}', match),
+				expand: 'user'
 			})
-			.then(list => participants = list)
+			.then((list) => (participants = list));
 	}
-	
+
 	function startMatch() {
 		client
-			.send(`/api/match/start`, { method: "post", body: { match: match.id } })
-			.then(_ => {
-				toast.success("Match started");
-				goto(`/match/${match.id}/in-progress`)
+			.send(`/api/match/start`, { method: 'post', body: { match: match.id } })
+			.then((_) => {
+				toast.success('Match started');
+				goto(`/match/${match.id}/in-progress`);
 			})
-			.catch(e => error = e)
+			.catch((e) => (error = e));
 	}
 
 	function callChallengers() {
 		client
-			.send(`/api/match/call`, { method: "post", body: { match: match.id } })
-			.then(count => count
-				? toast.success(`${count} challengers called`)
-				: toast.warning(`No challengers found`)
+			.send(`/api/match/call`, { method: 'post', body: { match: match.id } })
+			.then((count) =>
+				count ? toast.success(`${count} challengers called`) : toast.warning(`No challengers found`)
 			)
-			.catch(e => error = e)
+			.catch((e) => (error = e));
 	}
 
 	function cancelMatch() {
 		client
-			.send(`/api/match/cancel`, { method: "post", body: { match: match.id } })
-			.then(_ => {
-				toast.warning("Match cancelled");
+			.send(`/api/match/cancel`, { method: 'post', body: { match: match.id } })
+			.then((_) => {
+				toast.warning('Match cancelled');
 				goto(`/join/${court.qr_code}`);
 			})
-			.catch(e => error = e)
+			.catch((e) => (error = e));
 	}
 </script>
 
@@ -100,10 +104,9 @@
 				disabled={participants.length < 2}
 				onclick={startMatch}>Start the match !</Button
 			>
-			<Button
-				variant="outline"
-				class="h-30 w-full text-2xl"
-				onclick={callChallengers}>Call for challengers</Button>
+			<Button variant="outline" class="h-30 w-full text-2xl" onclick={callChallengers}
+				>Call for challengers</Button
+			>
 			<Button
 				variant="outline"
 				class="h-20 w-full bg-red-500 text-2xl hover:bg-red-700 dark:bg-red-500 hover:dark:bg-red-700"

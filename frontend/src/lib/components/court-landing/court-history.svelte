@@ -11,7 +11,7 @@
 		<Tabs.Trigger class="text-xl" value="famous">Players</Tabs.Trigger>
 		<Tabs.Trigger class="text-xl" value="settings">Settings</Tabs.Trigger>
 	</Tabs.List>
-	<Tabs.Content value="famous" class="p-4 space-y-4">
+	<Tabs.Content value="famous" class="space-y-4 p-4">
 		<div class="text-xl">Most active players here</div>
 		<div class="space-y-4 p-2">
 			<div class="h-[40svh] overflow-y-scroll">

@@ -11,7 +11,7 @@
 	import { toast } from 'svelte-sonner';
 
 	let { court }: { court: CourtsResponse } = $props();
-	let error = $state(null)
+	let error = $state(null);
 	const ma = {
 		id: 1,
 		end_time: '2025-05-12 19:49:28 UTC',
@@ -27,12 +27,12 @@
 
 	function prepareMatch() {
 		client
-			.send(`/api/match/prepare`, { method: "post", body: { court: court.id } })
-			.then(m => {
-				toast.success("Match created");
+			.send(`/api/match/prepare`, { method: 'post', body: { court: court.id } })
+			.then((m) => {
+				toast.success('Match created');
 				goto(`/match/${m.id}/lobby`);
 			})
-			.catch(e => error = e)
+			.catch((e) => (error = e));
 	}
 </script>
 

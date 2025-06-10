@@ -2,9 +2,9 @@
 	import '../app.css';
 	import { page } from '$app/stores';
 	import { ModeWatcher } from 'mode-watcher';
-	import { Toaster } from "$lib/components/ui/sonner";
+	import { Toaster } from '$lib/components/ui/sonner';
 	import NavMini from '$lib/components/nav-mini/nav-mini.svelte';
-	
+
 	const { data, children } = $props();
 	const metadata = $derived(data.metadata ?? {});
 	const { name: siteName, url: siteUrl, logo: siteLogo } = $derived(data.config.site ?? {});

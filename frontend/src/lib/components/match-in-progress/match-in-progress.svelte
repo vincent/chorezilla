@@ -5,7 +5,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { HourglassIcon } from 'lucide-svelte';
 
-	let { court, match }: { court: CourtsResponse, match: MatchesResponse } = $props();
+	let { court, match }: { court: CourtsResponse; match: MatchesResponse } = $props();
 </script>
 
 <CourtTitle {court}>

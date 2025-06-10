@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-static";
+import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -11,7 +11,7 @@ const config = {
 		adapter: adapter({
 			// Prerendering turned off. Turn it on if you know what you're doing.
 			prerender: { entries: [] },
-			fallback: "index.html", // enable SPA mode
+			fallback: 'index.html' // enable SPA mode
 		})
 	}
 };

@@ -11,22 +11,27 @@
 	let { court }: { court: CourtsResponse } = $props();
 	let form = $state({
 		locationName: (court.expand as any)?.location?.name || '',
-		...court,
-	})
+		...court
+	});
 </script>
 
-<CourtTitle court={court.name ? court : { name: 'Create a new place' } as any} />
+<CourtTitle court={court.name ? court : ({ name: 'Create a new place' } as any)} />
 <Separator class="my-4" />
 <div class="flex flex-col gap-4 overflow-y-auto px-4 text-sm">
 	<form class="flex flex-col gap-4">
-		<div class="flex flex-col gap-4 location-input-group">
+		<div class="location-input-group flex flex-col gap-4">
 			<Label class="text-xl">Location</Label>
 			<GeoLocationSearch bind:textValue={form.locationName} />
 		</div>
 		<Separator class="my-2" />
 		<div class="flex flex-col gap-4">
 			<Label for="header" class="text-xl">Court name</Label>
-			<Input id="header" class="text-xl"value={form.name} placeholder="ex: Main field, Table two, West side, .." />
+			<Input
+				id="header"
+				class="text-xl"
+				value={form.name}
+				placeholder="ex: Main field, Table two, West side, .."
+			/>
 		</div>
 		<div class="flex flex-col gap-4">
 			<Label for="type" class="text-xl">Sport</Label>
@@ -67,4 +72,3 @@
 		<Button variant="outline" class="mt-8 h-15 text-xl">Done</Button>
 	</form>
 </div>
-
