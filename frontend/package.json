@@ -49,6 +49,7 @@
 	},
 	"dependencies": {
 		"@sveltejs/adapter-static": "^3.0.8",
+		"easyqrcodejs": "^4.6.2",
 		"lucide-svelte": "^0.511.0",
 		"places-autocomplete-svelte": "^2.2.12",
 		"pocketbase": "^0.26.0",

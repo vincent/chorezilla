@@ -3,7 +3,7 @@
 	import * as NavigationMenu from '../ui/navigation-menu';
 </script>
 
-<div class="flex w-full justify-end">
+<div class="nav-header flex w-full justify-end">
 	<NavigationMenu.Root class="p-4 pe-8">
 		<NavigationMenu.List>
 			<NavigationMenu.Item class="ms-auto">
