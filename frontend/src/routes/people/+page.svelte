@@ -3,6 +3,8 @@
 	import { people } from '$lib/stores/people';
 	import { Search, User, UserPlus } from '@lucide/svelte';
 
+	people.loadCollection();
+
 	let filter = $state('')
 	let filteredPeople = $derived(
 		$people.filter(r => !filter

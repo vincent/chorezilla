@@ -27,7 +27,7 @@ export {};
 
 declare module "$app/types" {
 	export interface AppTypes {
-		RouteId(): "/" | "/chores" | "/chores/add" | "/chores/[id]" | "/chores/[id]/edit" | "/login" | "/people" | "/people/add" | "/people/[id]" | "/people/[id]/edit" | "/rooms" | "/rooms/add" | "/rooms/[id]" | "/rooms/[id]/chores" | "/rooms/[id]/edit" | "/settings" | "/signup";
+		RouteId(): "/" | "/chores" | "/chores/add" | "/chores/[id]" | "/chores/[id]/edit" | "/login" | "/people" | "/people/add" | "/people/[id]" | "/people/[id]/edit" | "/rooms" | "/rooms/add" | "/rooms/[id]" | "/rooms/[id]/chores" | "/rooms/[id]/edit" | "/settings";
 		RouteParams(): {
 			"/chores/[id]": { id: string };
 			"/chores/[id]/edit": { id: string };
@@ -53,10 +53,9 @@ declare module "$app/types" {
 			"/rooms/[id]": { id: string };
 			"/rooms/[id]/chores": { id: string };
 			"/rooms/[id]/edit": { id: string };
-			"/settings": Record<string, never>;
-			"/signup": Record<string, never>
+			"/settings": Record<string, never>
 		};
-		Pathname(): "/" | "/chores" | "/chores/" | "/chores/add" | "/chores/add/" | `/chores/${string}` & {} | `/chores/${string}/` & {} | `/chores/${string}/edit` & {} | `/chores/${string}/edit/` & {} | "/login" | "/login/" | "/people" | "/people/" | "/people/add" | "/people/add/" | `/people/${string}` & {} | `/people/${string}/` & {} | `/people/${string}/edit` & {} | `/people/${string}/edit/` & {} | "/rooms" | "/rooms/" | "/rooms/add" | "/rooms/add/" | `/rooms/${string}` & {} | `/rooms/${string}/` & {} | `/rooms/${string}/chores` & {} | `/rooms/${string}/chores/` & {} | `/rooms/${string}/edit` & {} | `/rooms/${string}/edit/` & {} | "/settings" | "/settings/" | "/signup" | "/signup/";
+		Pathname(): "/" | "/chores" | "/chores/" | "/chores/add" | "/chores/add/" | `/chores/${string}` & {} | `/chores/${string}/` & {} | `/chores/${string}/edit` & {} | `/chores/${string}/edit/` & {} | "/login" | "/login/" | "/people" | "/people/" | "/people/add" | "/people/add/" | `/people/${string}` & {} | `/people/${string}/` & {} | `/people/${string}/edit` & {} | `/people/${string}/edit/` & {} | "/rooms" | "/rooms/" | "/rooms/add" | "/rooms/add/" | `/rooms/${string}` & {} | `/rooms/${string}/` & {} | `/rooms/${string}/chores` & {} | `/rooms/${string}/chores/` & {} | `/rooms/${string}/edit` & {} | `/rooms/${string}/edit/` & {} | "/settings" | "/settings/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/robots.txt" | string & {};
 	}

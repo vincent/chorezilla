@@ -1,16 +1,42 @@
 {
-	"/": [],
-	"/chores/add": [],
-	"/chores/[id]": [],
-	"/chores/[id]/edit": [],
-	"/login": [],
-	"/people": [],
-	"/people/add": [],
-	"/people/[id]/edit": [],
-	"/rooms": [],
-	"/rooms/add": [],
-	"/rooms/[id]/chores": [],
-	"/rooms/[id]/edit": [],
-	"/settings": [],
-	"/signup": []
+	"/": [
+		"src/routes/+layout.ts",
+		"src/routes/+layout.ts"
+	],
+	"/chores/add": [
+		"src/routes/+layout.ts"
+	],
+	"/chores/[id]": [
+		"src/routes/+layout.ts"
+	],
+	"/chores/[id]/edit": [
+		"src/routes/+layout.ts"
+	],
+	"/login": [
+		"src/routes/+layout.ts"
+	],
+	"/people": [
+		"src/routes/+layout.ts"
+	],
+	"/people/add": [
+		"src/routes/+layout.ts"
+	],
+	"/people/[id]/edit": [
+		"src/routes/+layout.ts"
+	],
+	"/rooms": [
+		"src/routes/+layout.ts"
+	],
+	"/rooms/add": [
+		"src/routes/+layout.ts"
+	],
+	"/rooms/[id]/chores": [
+		"src/routes/+layout.ts"
+	],
+	"/rooms/[id]/edit": [
+		"src/routes/+layout.ts"
+	],
+	"/settings": [
+		"src/routes/+layout.ts"
+	]
 }

@@ -1,39 +1,25 @@
 import { get, writable } from 'svelte/store';
 import type { Room } from '../models/room.ts';
+import { client } from '$lib/pocketbase/index.js';
+import type { RoomsRecord } from '$lib/pocketbase/generated-types.js';
 
 const createRoomsStore = () => {
-	const { subscribe, set, update } = writable<Room[]>([
-		{
-			id: '1',
-			title: 'Living Room',
-			location: 'First Floor',
-			description: 'Main family area',
-			icon: 'bathtub',
-			iconColor: 'green'
-		},
-		{
-			id: '2',
-			title: 'Kitchen',
-			location: 'First Floor',
-			description: 'Where we cook',
-			icon: 'broom',
-			iconColor: 'yellow'
-		}
-	]);
+	const { subscribe, set, update } = writable<RoomsRecord[]>([]);
+
+	const roomsDB = () => client.collection('rooms')
+
+	const loadCollection = () => roomsDB().getFullList<RoomsRecord>().then(set);
 
 	return {
 		set,
 		update,
 		subscribe,
+		loadCollection,
 		reset: () => set([]),
-
 		findRoom: (id: string) => get(rooms).find(r => r.id === id),
-
-		addRoom: (room: Room) => update((rooms) => [...rooms, room]),
-
-		removeRoom: (id: string) => update((rooms) => rooms.filter((room) => room.id !== id)),
-
-		updateRoom: (updatedRoom: Room) => update((rooms) => rooms.map((room) => room.id === updatedRoom.id ? { ...room, ...updatedRoom } : room)),
+		addRoom: (room: Room) => roomsDB().create(room).then(loadCollection),
+		removeRoom: (id: string) => roomsDB().delete(id).then(loadCollection),
+		updateRoom: (updatedRoom: Room) => roomsDB().update(updatedRoom.id, updatedRoom).then(loadCollection),
 	};
 };
 

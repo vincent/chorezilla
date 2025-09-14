@@ -120,10 +120,6 @@ func main() {
 
 	// Register custom config route
 	pb_routes.RegisterConfigRoute(app, hooksDir)
-	pb_routes.RegisterPrepareMatchRoute(app, hooksDir)
-	pb_routes.RegisterStartMatchRoute(app, hooksDir)
-	pb_routes.RegisterCancelMatchRoute(app, hooksDir)
-	pb_routes.RegisterCallMatchChallengersRoute(app, hooksDir)
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)

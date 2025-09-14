@@ -5,6 +5,8 @@
 	import Header from '$lib/components/Header.svelte';
     import { page } from '$app/state';
 	import { onMount } from 'svelte';
+	import { client } from '$lib/pocketbase';
+	import { currentHousehold } from '$lib/stores/households';
 
 	const { data, children } = $props();
 	const metadata = $derived(data.metadata ?? {});
@@ -25,11 +27,13 @@
 
 <div class="bg-gray-50 dark:bg-gray-800 h-screen font-sans">
 
-    <Header />
+    <Header household={$currentHousehold} />
 
     <section class="mb-8">
         {@render children?.()}
     </section>
 
-    <BottomNav active={page.route.id} />
+	{#if client.authStore.isValid}
+	    <BottomNav active={page.route.id} />
+	{/if}
 </div>

@@ -3,6 +3,8 @@
 	import RoomCard from '$lib/components/RoomCard.svelte';
 	import { Plus, Search } from '@lucide/svelte';
 
+	rooms.loadCollection();
+
 	let filter = $state('')
 	let filteredRooms = $derived(
 		$rooms.filter(r => !filter
