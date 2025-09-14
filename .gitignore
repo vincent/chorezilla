@@ -1,8 +1,28 @@
-.cache
-.local
-.npm
+node_modules
+.llm
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
 .env
-.ash_history
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
 .IDEAS.md
 playwright-report
 test-results

@@ -12,6 +12,6 @@ func main() {
 	if err != nil {
 		// TODO: Handle error
 	}
-	log.Printf("JUGAMOS_VAPID_PUBLIC_KEY=%s", publicKey)
-	log.Printf("JUGAMOS_VAPID_PRIVATE_KEY=%s", privateKey)
+	log.Printf("CHORES_VAPID_PUBLIC_KEY=%s", publicKey)
+	log.Printf("CHORES_VAPID_PRIVATE_KEY=%s", privateKey)
 }

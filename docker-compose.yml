@@ -1,15 +1,15 @@
 
 services:
-  jugamos:
-    image: ghcr.io/vincent/jugamos:main
+  chores:
+    image: ghcr.io/vincent/chores:main
     restart: unless-stopped
     environment:
-      - JUGAMOS_VAPID_PUBLIC_KEY=           # your push notifications public key
-      - JUGAMOS_VAPID_PRIVATE_KEY=          # your push notifications private key
+      - CHORES_VAPID_PUBLIC_KEY=           # your push notifications public key
+      - CHORES_VAPID_PRIVATE_KEY=          # your push notifications private key
     volumes:
-      - jugamos_data:/srv/jugamos/data
+      - chores_data:/srv/chores/data
     ports:
       - 8090:8090
 
 volumes:
-  jugamos_data: # for persistent database
+  chores_data: # for persistent database

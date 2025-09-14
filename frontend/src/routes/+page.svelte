@@ -1,17 +1,16 @@
 <script lang="ts">
-	import TitleHeader from '../lib/components/title-header/TitleHeader.svelte';
+	import WelcomeSection from '$lib/components/WelcomeSection.svelte';
+	import StatsSection from '$lib/components/StatsSection.svelte';
+	import ChoresSection from '$lib/components/ChoresSection.svelte';
+
+	import { chores } from '$lib/stores/chores';
 </script>
 
-<div class="mt-[-40px] mb-4 flex flex-col gap-6">
-	<TitleHeader />
-	<div class="flex flex-col items-center gap-2 p-4">
-		<span class="text-lg font-semibold text-yellow-800">Permissions needed</span>
-		<p class="text-center text-yellow-700">To use the app, we need your permission.</p>
-		<ul>
-			<li>GeoLocation: to find nearby spots</li>
-			<li>Notifications: to receive invites</li>
-		</ul>
-		<br /><br />
-		<p>You can change your notification preferences at any time in your browser settings.</p>
-	</div>
-</div>
+<!-- Main Content -->
+<main class="container mx-auto px-4 py-6">
+
+	<WelcomeSection />
+	<StatsSection />
+
+	<ChoresSection title="Today's Chores" chores={$chores} />
+</main>

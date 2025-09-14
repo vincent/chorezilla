@@ -40,7 +40,7 @@ function getSubscription() {
 		: navigator.serviceWorker.ready.then((r) => r.pushManager.getSubscription());
 }
 
-export function initMatchNotifications(publicKey: string, shouldSubscribe = false) {
+export function initNotifications(publicKey: string, shouldSubscribe = false) {
 	vapidPublicKey = publicKey;
 	subscribed.set(false);
 
@@ -50,7 +50,7 @@ export function initMatchNotifications(publicKey: string, shouldSubscribe = fals
 			if (shouldSubscribe) subscribe();
 			throw new Error('wait until asked to subscribe');
 		})
-		.then((_) => subscribed.set(true))
-		.then((_) => console.debug('subscribed to match notifications'))
-		.catch((e) => console.error('cannot use service-worker'));
+		.then(() => subscribed.set(true))
+		.then(() => console.debug('subscribed to notifications'))
+		.catch(() => console.error('cannot use service-worker'));
 }

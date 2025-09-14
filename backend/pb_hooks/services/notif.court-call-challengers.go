@@ -79,8 +79,8 @@ func CallMatchChallengers(app *pocketbase.PocketBase, callerId string, matchId s
 			// Send Notification
 			resp, err := webpush.SendNotification([]byte(notificationBody), s, &webpush.Options{
 				Subscriber:      "example@example.com",
-				VAPIDPublicKey:  os.Getenv("JUGAMOS_VAPID_PUBLIC_KEY"),
-				VAPIDPrivateKey: os.Getenv("JUGAMOS_VAPID_PRIVATE_KEY"),
+				VAPIDPublicKey:  os.Getenv("CHORES_VAPID_PUBLIC_KEY"),
+				VAPIDPrivateKey: os.Getenv("CHORES_VAPID_PRIVATE_KEY"),
 				TTL:             30,
 			})
 			if err != nil {

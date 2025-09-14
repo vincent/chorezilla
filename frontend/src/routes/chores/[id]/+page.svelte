@@ -1,0 +1,45 @@
+<script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
+	import Title from '$lib/components/Title.svelte';
+	import { type Chore } from '$lib/models/chore.svelte';
+	import { chores } from '$lib/stores/chores';
+	import { onMount } from 'svelte';
+
+	let chore: Chore | undefined;
+
+	onMount(() => {
+		if (!page.params.id) return;
+		chore = chores.findChore(page.params.id);
+	});
+
+	function handleDone() {
+		chores.updateChore({ ...chore } as Chore);
+		goto('/chores');
+	}
+</script>
+
+{#if chore}
+	<section class="max-w-xl mx-auto mt-8 p-6 bg-white dark:bg-gray-700 rounded-xl shadow">
+		<Title title={chore.title}/>
+		<p class="text-gray-500 mb-1">{chore.location} • {chore.due}</p>
+		<p class="text-gray-700 mt-4">{chore.description}</p>
+
+		<div class="flex justify-between">
+			<button
+				type="button"
+				onclick={handleDone}
+				class="mt-2 p-3 rounded-lg border-green-300 bg-green-100 text-green-600 font-bold hover:bg-green-200 transition-colors cursor-pointer"
+			>Mark as done</button>
+			<a
+				href={`/chores/${chore.id}/edit`}
+				class="mt-2 p-3 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors"
+			>Edit</a>
+		</div>
+	</section>
+{:else}
+	<section class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-xl shadow">
+		<h1 class="text-xl font-bold text-gray-800">Chore not found</h1>
+		<p class="text-gray-500">No details available for this chore.</p>
+	</section>
+{/if}

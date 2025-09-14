@@ -40,7 +40,7 @@ func RegisterConfigRoute(app *pocketbase.PocketBase, hooksDir string) {
 			}
 			site["url"] = settings.Meta.AppURL
 			site["name"] = settings.Meta.AppName
-			config["vapidPublicKey"] = os.Getenv("JUGAMOS_VAPID_PUBLIC_KEY")
+			config["vapidPublicKey"] = os.Getenv("CHORES_VAPID_PUBLIC_KEY")
 
 			return e.JSON(http.StatusOK, config)
 		})

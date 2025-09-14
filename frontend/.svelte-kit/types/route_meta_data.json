@@ -1,0 +1,16 @@
+{
+	"/": [],
+	"/chores/add": [],
+	"/chores/[id]": [],
+	"/chores/[id]/edit": [],
+	"/login": [],
+	"/people": [],
+	"/people/add": [],
+	"/people/[id]/edit": [],
+	"/rooms": [],
+	"/rooms/add": [],
+	"/rooms/[id]/chores": [],
+	"/rooms/[id]/edit": [],
+	"/settings": [],
+	"/signup": []
+}
