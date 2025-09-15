@@ -6,31 +6,44 @@
 	import { type Chore } from '$lib/models/chore.svelte';
   import ChoreForm from '$lib/components/ChoreForm.svelte';
 	import Title from '$lib/components/Title.svelte';
+	import { people } from '$lib/stores/people';
+	import { rooms } from '$lib/stores/rooms';
+	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
+	import { Trash } from '@lucide/svelte';
 
   let id = '';
-  let initial = null as Chore | null;
+  let initial = null as ChoresRecord | null;
 
   onMount(() => {
-    if (!page.params.id) return;
-    const chore = chores.findChore(page.params.id);
-    if (chore) {
-      initial = {
-        id: chore.id ?? '',
-        title: chore.title ?? '',
-        roomId: chore.roomId ?? '',
-        location: chore.location ?? '',
-        due: chore.due ?? '',
-        description: chore.description ?? '',
-        icon: chore.icon ?? '',
-        iconBg: chore.iconBg ?? '',
-        iconColor: chore.iconColor ?? ''
-      };
-    }
-  });
+    id = String(page.params.id)
 
-  function handleEdit(event: CustomEvent) {
-    chores.updateChore({ ...event.detail });
-    goto(`/chores/${id}`);
+    Promise
+      .all([
+        chores.loadCollection(),
+        people.loadCollection(),
+        rooms.loadCollection(),
+      ])
+      .then(() => {
+        const chore = chores.findChore(id);
+        if (chore) {
+          initial = {
+            id: chore.id ?? '',
+            name: chore.name ?? '',
+            room: chore.room ?? '',
+            icon: chore.icon ?? '',
+            frequency: chore.frequency ?? '',
+            household: chore.household ?? '',
+            created_by: chore.created_by ?? '',
+            description: chore.description ?? '',
+            assigned_users: chore.assigned_users ?? []
+          };
+        }
+      })
+
+	})
+
+  function handleEdit(data: ChoresRecord) {
+    chores.updateChore({ ...data, id }).then(() => goto(`/chores/${id}`));
   }
 </script>
 
@@ -50,8 +63,13 @@
 				<button
 					type="button"
 					class="me-8 mt-2 p-3 rounded-lg border-red-300 bg-red-100 text-red-600 font-bold hover:bg-red-200 transition-colors"
-				>Delete chore</button>
+				><Trash/></button>
 			{/snippet}
     </ChoreForm>
+  {:else}
+		<section class="max-w-xl mx-auto mt-8 p-6 bg-white rounded-xl shadow">
+			<h1 class="text-xl font-bold text-gray-800">Chore not found</h1>
+			<p class="text-gray-500">No details available for this chore.</p>
+		</section>
   {/if}
 </main>

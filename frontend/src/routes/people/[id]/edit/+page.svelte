@@ -5,6 +5,8 @@
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
 	import Title from '$lib/components/Title.svelte';
+	import type { HouseholdMembersRecord } from '$lib/pocketbase/generated-types';
+	import { Trash } from '@lucide/svelte';
 
 	let person: Person | undefined;
 
@@ -13,8 +15,8 @@
 		person = people.findPerson(page.params.id);
 	});
 
-	function handleSubmit(event: CustomEvent<Omit<Person, 'id'>>) {
-		const updated: Person = { ...event.detail, id: String(page.params.id) };
+	function handleSubmit(event: CustomEvent<Person>) {
+		const updated: Person = { ...event.detail, userId: String(page.params.id) };
 		people.updatePerson(updated);
 		goto('/people');
 	}
@@ -37,7 +39,7 @@
 				<button
 					type="button"
 					class="me-8 mt-2 p-3 rounded-lg border-red-300 bg-red-100 text-red-600 font-bold hover:bg-red-200 transition-colors"
-					>Remove person</button
+					><Trash/></button
 				>
 			{/snippet}
 		</PersonForm>

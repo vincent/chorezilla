@@ -1,15 +1,15 @@
 
 services:
-  chores:
-    image: ghcr.io/vincent/chores:main
+  chorezilla:
+    image: ghcr.io/vincent/chorezilla:main
     restart: unless-stopped
     environment:
-      - CHORES_VAPID_PUBLIC_KEY=           # your push notifications public key
-      - CHORES_VAPID_PRIVATE_KEY=          # your push notifications private key
+      - CHOREZILLA_VAPID_PUBLIC_KEY=           # your push notifications public key
+      - CHOREZILLA_VAPID_PRIVATE_KEY=          # your push notifications private key
     volumes:
-      - chores_data:/srv/chores/data
+      - chorezilla_data:/srv/chorezilla/data
     ports:
       - 8090:8090
 
 volumes:
-  chores_data: # for persistent database
+  chorezilla_data: # for persistent database

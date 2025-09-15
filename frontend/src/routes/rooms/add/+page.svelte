@@ -2,22 +2,22 @@
   import { goto } from '$app/navigation';
   import { rooms } from '$lib/stores/rooms';
   import RoomForm from '$lib/components/RoomForm.svelte';
-  import type { Room } from '$lib/models/room';
 	import Title from '$lib/components/Title.svelte';
+	import type { RoomsRecord } from '$lib/pocketbase/generated-types';
+	import { currentHousehold } from '$lib/stores/households';
 
-  function handleAdd(_type: string, detail: Omit<Room, 'id'>) {
-    const { title, location, description, icon, iconBg, iconColor } = detail;
-    const newRoom: Room = {
-      id: Date.now().toString(),
-      title,
-      location,
-      description,
-      icon,
-      iconBg,
-      iconColor
-    };
-    rooms.addRoom(newRoom);
-    goto('/rooms');
+  function handleAdd(detail: Omit<RoomsRecord, 'id'>) {
+    const { name, location, description, icon, icon_color } = detail;
+    rooms
+      .addRoom({
+        household: $currentHousehold.id,
+        description,
+        icon_color,
+        location,
+        name,
+        icon,
+      })
+      .then(() => goto('/rooms'));
   }
 </script>
 

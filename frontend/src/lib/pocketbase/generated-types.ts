@@ -104,6 +104,7 @@ export type ChoresRecord = {
 	description?: string
 	frequency: string
 	household: RecordIdString
+	icon: string
 	id: string
 	last_completed?: IsoDateString
 	name: string
@@ -128,11 +129,10 @@ export type HouseholdsRecord = {
 }
 
 export type RoomsRecord = {
+	color: string
 	created?: IsoDateString
 	description?: string
 	household: RecordIdString
-	icon: string
-	icon_color: string
 	id: string
 	location?: string
 	name: string

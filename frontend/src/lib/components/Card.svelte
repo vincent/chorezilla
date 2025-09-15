@@ -13,7 +13,7 @@
 		{@render icon?.()}
 		<div>
 			<h3 class="font-medium text-gray-800 dark:text-gray-100">{title}</h3>
-			<p class="text-sm text-gray-500 dark:text-gray-500">{subtitle}</p>
+			<p class="text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>
 		</div>
 	</div>
 	<span class="p-2 rounded-full bg-gray-100 text-gray-600">

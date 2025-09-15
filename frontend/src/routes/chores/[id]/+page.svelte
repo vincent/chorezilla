@@ -3,10 +3,11 @@
 	import { page } from '$app/state';
 	import Title from '$lib/components/Title.svelte';
 	import { type Chore } from '$lib/models/chore.svelte';
+	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
 	import { chores } from '$lib/stores/chores';
 	import { onMount } from 'svelte';
 
-	let chore: Chore | undefined;
+	let chore: ChoresRecord | undefined;
 
 	onMount(() => {
 		if (!page.params.id) return;
@@ -14,15 +15,15 @@
 	});
 
 	function handleDone() {
-		chores.updateChore({ ...chore } as Chore);
+		chores.updateChore({ ...chore } as ChoresRecord);
 		goto('/chores');
 	}
 </script>
 
 {#if chore}
 	<section class="max-w-xl mx-auto mt-8 p-6 bg-white dark:bg-gray-700 rounded-xl shadow">
-		<Title title={chore.title}/>
-		<p class="text-gray-500 mb-1">{chore.location} • {chore.due}</p>
+		<Title title={chore.name}/>
+		<p class="text-gray-500 mb-1">{(chore as any).expand.room.name} • {chore.frequency}</p>
 		<p class="text-gray-700 mt-4">{chore.description}</p>
 
 		<div class="flex justify-between">

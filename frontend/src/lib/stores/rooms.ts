@@ -9,8 +9,11 @@ const createRoomsStore = () => {
 
 	const roomsDB = () => client.collection('rooms')
 
-	const loadCollection = () => currentHousehold.current()
-		.then(hid => roomsDB().getFullList<RoomsRecord>({ filter: `household='${hid}'` }).then(set))
+	const loadCollection = () => currentHousehold.id()
+		.then(hid => roomsDB().getFullList<RoomsRecord>({ filter: `household='${hid}'`, expand: 'chores_via_room' }).then(list => {
+			set(list)
+			return list
+		}))
 
 	return {
 		set,
@@ -19,9 +22,9 @@ const createRoomsStore = () => {
 		loadCollection,
 		reset: () => set([]),
 		findRoom: (id: string) => get(rooms).find(r => r.id === id),
-		addRoom: (room: Room) => roomsDB().create(room).then(loadCollection),
-		removeRoom: (id: string) => roomsDB().delete(id).then(loadCollection),
-		updateRoom: (updatedRoom: Room) => roomsDB().update(updatedRoom.id, updatedRoom).then(loadCollection),
+		addRoom: (room: Omit<RoomsRecord, 'id'>) => roomsDB().create(room),
+		removeRoom: (id: string) => roomsDB().delete(id),
+		updateRoom: (updatedRoom: Room) => roomsDB().update(updatedRoom.id, updatedRoom),
 	};
 };
 

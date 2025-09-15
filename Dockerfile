@@ -22,7 +22,7 @@ FROM debian:bookworm-slim
 RUN apt-get update && apt-get install -y ca-certificates debian-keyring debian-archive-keyring apt-transport-https curl gpg
 
 # Create directories
-WORKDIR /srv/chores/
+WORKDIR /srv/chorezilla/
 RUN mkdir -p deployed
 
 # Copy built frontend
@@ -39,4 +39,4 @@ COPY backend/main.go ./deployed/backend/
 # Expose ports
 EXPOSE 8090
 
-CMD ["/srv/chores/deployed/backend/pocketbase", "serve", "--http", "0.0.0.0:8090", "--dir", "/srv/chores/data", "--hooksDir", "/srv/chores/deployed/backend/pb_hooks", "--migrationsDir", "/srv/chores/deployed/backend/pb_migrations", "--publicDir", "/srv/chores/deployed/frontend"]
+CMD ["/srv/chorezilla/deployed/backend/pocketbase", "serve", "--http", "0.0.0.0:8090", "--dir", "/srv/chorezilla/data", "--hooksDir", "/srv/chorezilla/deployed/backend/pb_hooks", "--migrationsDir", "/srv/chorezilla/deployed/backend/pb_migrations", "--publicDir", "/srv/chorezilla/deployed/frontend"]

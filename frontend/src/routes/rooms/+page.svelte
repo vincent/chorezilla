@@ -2,13 +2,16 @@
 	import { rooms } from '$lib/stores/rooms';
 	import RoomCard from '$lib/components/RoomCard.svelte';
 	import { Plus, Search } from '@lucide/svelte';
+	import { onMount } from 'svelte';
 
-	rooms.loadCollection();
+	onMount(() => {
+		rooms.loadCollection();
+	})
 
 	let filter = $state('')
 	let filteredRooms = $derived(
 		$rooms.filter(r => !filter
-			|| r.title.toLowerCase().includes(filter)
+			|| r.name.toLowerCase().includes(filter)
 			|| r.location?.toLowerCase().includes(filter)
 			|| r.description?.toLowerCase().includes(filter)))
 </script>

@@ -11,8 +11,8 @@
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-6">
 
-	<WelcomeSection user={client.authStore.record} pending={dueChores.length} />
-	<StatsSection pending={dueChores.length} completed={completedChores.length} />
+	<WelcomeSection user={client.authStore.record} pending={$dueChores.length} />
+	<StatsSection pending={$dueChores.length} completed={$completedChores.length} />
 
-	<ChoresSection title="Today's Chores" chores={dueChores} />
+	<ChoresSection title="Today's Chores" chores={$dueChores} />
 </main>

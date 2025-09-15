@@ -6,28 +6,33 @@
 	import type { Room } from '$lib/models/room';
 	import RoomForm from '$lib/components/RoomForm.svelte';
 	import Title from '$lib/components/Title.svelte';
+	import type { RoomsRecord } from '$lib/pocketbase/generated-types';
+	import { Trash } from '@lucide/svelte';
 
 	let id = '';
-	let initial: Room | null = null;
+	let initial: RoomsRecord | null = null;
 
 	onMount(() => {
+		
 		if (!page.params.id) return;
 		id = page.params.id;
-		const room = rooms.findRoom(id);
-		if (room) {
-			initial = {
-				id: room.id ?? '',
-				title: room.title ?? '',
-				location: room.location ?? '',
-				description: room.description ?? '',
-				icon: room.icon ?? '',
-				iconBg: room.iconBg ?? '',
-				iconColor: room.iconColor ?? ''
-			};
-		}
+
+		rooms.loadCollection().then(() => {
+			const room = rooms.findRoom(id);
+			if (room) {
+				initial = {
+					id: room.id ?? '',
+					name: room.name ?? '',
+					color: room.color ?? '',
+					location: room.location ?? '',
+					household: room.household ?? '',
+					description: room.description ?? '',
+				};
+			}
+		})
 	});
 
-	function handleEdit(_type: string, detail: Omit<Room, 'id'>) {
+	function handleEdit(detail: Omit<Room, 'id'>) {
 		rooms.updateRoom({ id, ...detail });
 		goto('/rooms');
 	}
@@ -49,7 +54,7 @@
 				<button
 					type="button"
 					class="mt-2 me-8 p-3 rounded-lg border-red-300 bg-red-100 text-red-600 font-bold hover:bg-red-200 transition-colors"
-				>Remove room</button>
+				><Trash/></button>
 			{/snippet}
 		</RoomForm>
 	{/if}

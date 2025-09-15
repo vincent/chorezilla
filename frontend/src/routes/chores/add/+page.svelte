@@ -4,22 +4,30 @@
   import ChoreForm from '$lib/components/ChoreForm.svelte';
 	import { type Chore } from '$lib/models/chore.svelte';
 	import Title from '$lib/components/Title.svelte';
+	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
+	import { currentHousehold } from '$lib/stores/households';
+	import { onMount } from 'svelte';
+	import { people } from '$lib/stores/people';
+	import { rooms } from '$lib/stores/rooms';
 
-  function handleAdd(event: CustomEvent<Chore>) {
-    const { title, roomId, due, description, icon, iconBg, iconColor } = event.detail;
-    const newChore = {
-      id: Date.now().toString(),
-      title,
-      roomId,
-      due,
-      description,
-      icon,
-      iconBg,
-      iconColor,
-      location: '',
-    };
-    chores.addChore(newChore);
-    goto('/chores');
+  onMount(() => {
+		people.loadCollection()
+		rooms.loadCollection()
+	})
+
+  function handleAdd(event: Omit<ChoresRecord, 'id'>) {
+    const { name, room, icon, description, frequency, assigned_users } = event;
+    chores
+      .addChore({
+        household: $currentHousehold.id,
+        assigned_users,
+        frequency,
+        icon,
+        name,
+        room,
+        description,
+      })
+      .then(() => goto('/'))
   }
 </script>
 

@@ -1,4 +1,4 @@
-# ¿Chor.es?
+# ¿ChoreZilla?
 
 <div align="center">
 
@@ -12,7 +12,7 @@ Subscribe to your local sport place, and call for challengers.
 
 ## 🐳 Selfhosting
 
-You can host the platform yourself using the public [docker image](//ghcr.io/vincent/chores:main)
+You can host the platform yourself using the public [docker image](//ghcr.io/vincent/chorezilla:main)
 
 Check the [docker-compose](docker-compose.yml) file as an example.
 
