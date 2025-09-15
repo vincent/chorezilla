@@ -2,13 +2,15 @@ import { get, writable } from 'svelte/store';
 import type { Room } from '../models/room.ts';
 import { client } from '$lib/pocketbase/index.js';
 import type { RoomsRecord } from '$lib/pocketbase/generated-types.js';
+import { currentHousehold } from './households.js';
 
 const createRoomsStore = () => {
 	const { subscribe, set, update } = writable<RoomsRecord[]>([]);
 
 	const roomsDB = () => client.collection('rooms')
 
-	const loadCollection = () => roomsDB().getFullList<RoomsRecord>().then(set);
+	const loadCollection = () => currentHousehold.current()
+		.then(hid => roomsDB().getFullList<RoomsRecord>({ filter: `household='${hid}'` }).then(set))
 
 	return {
 		set,

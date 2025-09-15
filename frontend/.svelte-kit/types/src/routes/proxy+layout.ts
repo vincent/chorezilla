@@ -1,6 +1,6 @@
 // @ts-nocheck
 import type { LayoutLoad } from './$types';
-import { client } from '$lib/pocketbase';
+import { client } from '$lib/pocketbase/index';
 import { redirect } from '@sveltejs/kit';
 
 // turn off SSR - we're JAMstack here

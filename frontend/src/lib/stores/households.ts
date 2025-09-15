@@ -40,6 +40,14 @@ const createCurrentHouseholdStore = () => {
 		set,
 		update,
 		subscribe,
+		current: () => new Promise<string>((resolve) => {
+			const onReady = () => {
+				const id = get(currentHousehold)?.id
+				if (id) resolve(id)
+				else setTimeout(onReady, 200)
+			}
+			onReady()
+		})
 	}
 };
 

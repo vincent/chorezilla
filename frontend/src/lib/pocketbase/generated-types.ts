@@ -107,6 +107,7 @@ export type ChoresRecord = {
 	id: string
 	last_completed?: IsoDateString
 	name: string
+	room: RecordIdString
 	updated?: IsoDateString
 }
 

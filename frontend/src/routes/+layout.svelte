@@ -1,10 +1,9 @@
 <script lang="ts">
 	import '../app.css';
-	// import { initNotifications } from '$lib/hooks/perm-notifications.svelte';
+	import { initNotifications } from '$lib/hooks/perm-notifications.svelte';
 	import BottomNav from '$lib/components/BottomNav.svelte';
 	import Header from '$lib/components/Header.svelte';
     import { page } from '$app/state';
-	import { onMount } from 'svelte';
 	import { client } from '$lib/pocketbase';
 	import { currentHousehold } from '$lib/stores/households';
 
@@ -12,12 +11,9 @@
 	const metadata = $derived(data.metadata ?? {});
 	const { name: siteName, url: siteUrl, logo: siteLogo } = $derived(data.config.site ?? {});
 
-    onMount(() => {
-        // initNotifications('noooo', true)
-    })
-
 	$effect(() => {
 		if (page.error) metadata.title = page.error.message;
+		if (client.authStore.isValid) initNotifications(data.config.vapidPublicKey, true)
 	});
 </script>
 

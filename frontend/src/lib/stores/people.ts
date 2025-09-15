@@ -4,7 +4,8 @@ import { get, writable } from 'svelte/store';
 import { currentHousehold } from './households';
 
 export type Person = {
-	id: string;
+	memberId: string;
+	userId: string;
 	name: string;
 	role?: string;
 	choresCompleted?: number;
@@ -16,18 +17,21 @@ const createPeopleStore = () => {
 
 	const membersDB = () => client.collection('household_members')
 
-	const loadCollection = () => membersDB()
-		.getFullList<HouseholdMembersResponse>({ filter: `household='${get(currentHousehold).id}'`, expand: 'user' })
-		.then(list => set(list.map(row => {
-			const u = (row.expand as any).user as UsersRecord
-			return {
-				id: u.id,
-				name: u.email || 'Unknown',
-				role: row.role || '',
-				choresCompleted: 0,
-				avatarColor: u.avatarColor || 'indigo',
-			}
-		})))
+	const loadCollection = () => currentHousehold.current()
+		.then(hid => membersDB()
+			.getFullList<HouseholdMembersResponse>({ filter: `household='${hid}'`, expand: 'user' })
+			.then(list => set(list.map(row => {
+				const u = (row.expand as any).user as UsersRecord
+				return {
+					memberId: row.id,
+					userId: u.id,
+					name: u.email || 'Unknown',
+					role: row.role || '',
+					choresCompleted: 0,
+					avatarColor: u.avatarColor || 'indigo',
+				}
+			})))
+		)
 
 	return {
 		set,
@@ -35,10 +39,10 @@ const createPeopleStore = () => {
 		subscribe,
 		loadCollection,
 		reset: () => set([]),
-		findPerson: (id: string) => get(people).find(r => r.id === id),
-		addPerson: (person: UsersRecord) => membersDB().create(person).then(loadCollection),
+		findPerson: (id: string) => get(people).find(r => r.userId === id),
+		addPerson: (person: Person) => membersDB().create(person).then(loadCollection),
 		removePerson: (id: string) => membersDB().delete(id).then(loadCollection),
-		updatePerson: (updatedPerson: UsersRecord) => membersDB().update(updatedPerson.id, updatedPerson).then(loadCollection),
+		updatePerson: (updatedPerson: Person) => membersDB().update(updatedPerson.memberId, updatedPerson).then(loadCollection),
 	}
 };
 
