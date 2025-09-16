@@ -2,15 +2,12 @@
 	import { goto } from "$app/navigation";
 	import { client, providerLogin } from "$lib/pocketbase";
 	import type { UsersResponse } from "$lib/pocketbase/generated-types";
+	import { member } from "$lib/stores/auth";
+	import { currentHousehold, households } from "$lib/stores/households";
+	import { members } from "$lib/stores/members";
 	import type { AuthProviderInfo } from "pocketbase";
 
-	let {
-		siteName,
-		redirectUrl,
-	}: {
-		redirectUrl: string | undefined;
-		siteName: string;
-	} = $props();
+	let { redirectUrl } = $props();
 
 	const collection = client.collection('users');
 
@@ -40,25 +37,31 @@
 			if (signup) {
 				await collection.create(form);
 				await collection.requestVerification(form.email);
+				await collection.authWithPassword<UsersResponse>(form.email, form.password);
+				await households.loadCollection();
+				currentHousehold.loadDefault();
+				await member.load();
+
+			} else {
+				await collection.authWithPassword<UsersResponse>(form.email, form.password);
 			}
 
-			await collection.authWithPassword<UsersResponse>(form.email, form.password);
 			goto(redirectUrl || '/');
+
 		} catch (error: any) {
 			console.log(error);
 			issue = error.toString();
 		}
-	}
-  
+	}  
 </script>
 
 <svelte:head>
-	<title>ChoreZilla | {signup ? 'Signup' : 'Login'}</title>
+	<title>ChoreZilla | {signup ? 'Signup' : 'Log in'}</title>
 </svelte:head>
 
-<div class="flex flex-col items-center justify-center min-h-screen bg-gray-50">
+<div class="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-gray-700">
   <form class="bg-white p-8 rounded shadow-md w-full max-w-md" onsubmit={handleSubmit}>
-    <h2 class="text-2xl font-bold mb-6 text-center">Log In</h2>
+    <h2 class="text-2xl font-bold mb-6 text-center">{signup ? 'Signup' : 'Log in'}</h2>
     {#if issue}
       <div class="mb-4 text-red-600">{issue}</div>
     {/if}
@@ -79,9 +82,16 @@
     <button class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition" type="submit">
       Log In
     </button>
-    <p class="mt-4 text-center text-sm">
-      Don't have an account?
-      <button onclick={() => signup = true} class="text-indigo-600 hover:underline">Sign up</button>
-    </p>
+	{#if signup}
+		<p class="mt-4 text-center text-sm">
+			<span class="me-2">Already have an account?</span>
+			<button onclick={() => signup = false} class="text-indigo-600 hover:underline">Sign in</button>
+		</p>
+	{:else}
+		<p class="mt-4 text-center text-sm">
+			<span class="me-2">Don't have an account?</span>
+			<button onclick={() => signup = true} class="text-indigo-600 hover:underline">Sign up</button>
+		</p>
+	{/if}
   </form>
 </div>

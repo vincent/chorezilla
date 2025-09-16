@@ -1,9 +1,12 @@
 <script lang="ts">
-	import WelcomeSection from '$lib/components/WelcomeSection.svelte';
-	import StatsSection from '$lib/components/StatsSection.svelte';
-	import ChoresSection from '$lib/components/ChoresSection.svelte';
 	import { chores, completedChores, dueChores } from '$lib/stores/chores';
+	import WelcomeSection from '$lib/components/WelcomeSection.svelte';
+	import ChoresSection from '$lib/components/ChoresSection.svelte';
+	import StatsSection from '$lib/components/StatsSection.svelte';
+	import { currentHousehold } from '$lib/stores/households';
+	import { button_class } from '$lib/styles.svelte';
 	import { client } from '$lib/pocketbase';
+	import { goto } from '$app/navigation';
 
 	chores.loadCollection()
 </script>
@@ -16,7 +19,24 @@
 <main class="container mx-auto px-4 py-6">
 
 	<WelcomeSection user={client.authStore.record} pending={$dueChores.length} />
-	<StatsSection pending={$dueChores.length} completed={$completedChores.length} />
 
-	<ChoresSection title="Today's Chores" chores={$dueChores} />
+	{#if $currentHousehold}
+		<StatsSection pending={$dueChores.length} completed={$completedChores.length} />
+
+		<ChoresSection title="Today's Chores" chores={$dueChores}>
+			{#snippet empty()}
+				<button
+					onclick={() => goto('/chores/add')}
+					class="w-full {button_class}"
+					type="button"
+				>Create your first chore</button>
+			{/snippet}
+		</ChoresSection>
+	{:else}
+		<button
+			onclick={() => goto('/households/add')}
+			class="w-full {button_class}"
+			type="button"
+		>Create your first place</button>
+	{/if}
 </main>

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { button_class } from "$lib/styles.svelte";
+
 	let { onSubmit, children, submitLabel = 'Submit', altButtons = undefined } = $props();
 </script>
 
@@ -13,7 +15,7 @@
 
 		<button
 			type="submit"
-			class="mt-2 p-3 flex-grow rounded-lg bg-indigo-600 text-white font-bold hover:bg-indigo-700 transition-colors"
+			class="mt-2 p-3 flex-grow {button_class}"
 		>
 			{submitLabel}
 		</button>

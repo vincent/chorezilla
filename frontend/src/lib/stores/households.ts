@@ -1,6 +1,7 @@
+import { goto } from '$app/navigation';
 import { client } from '$lib/pocketbase';
-import type { HouseholdsRecord } from '$lib/pocketbase/generated-types';
 import { get, writable } from 'svelte/store';
+import type { HouseholdsRecord } from '$lib/pocketbase/generated-types';
 
 const createHouseholdsStore = () => {
 	const { subscribe, set, update } = writable<HouseholdsRecord[]>([]);
@@ -12,12 +13,10 @@ const createHouseholdsStore = () => {
 			requestKey: 'households',
 			filter: client.authStore
 				.record?.households
-					.map((h: string) => `id = '${h}'`)
+					.map((h: string) => `id='${h}'`)
 					.join(' || ')
 		})
-		.then(list => {
-			set(list)
-		})
+		.then(set)
 
 	return {
 		set,
@@ -25,6 +24,10 @@ const createHouseholdsStore = () => {
 		subscribe,
 		loadCollection,
 		reset: () => set([]),
+
+		create: (name: string) => db()
+			.create({ name })
+			.then(() => households.loadCollection()),
 	}
 };
 
@@ -33,14 +36,18 @@ export const households = createHouseholdsStore();
 const createCurrentHouseholdStore = () => {
 	const { subscribe, set, update } = writable<HouseholdsRecord>(undefined);
 
-	households.loadCollection().then(() => {
-		set(get(households)[0])
-	})
+	const loadDefault = () => households.loadCollection()
+		.then(() => get(households)[0])
+		.then(set);
+	
+	loadDefault();
 
 	return {
 		set,
 		update,
 		subscribe,
+		loadDefault,
+
 		id: () => new Promise<string>((resolve) => {
 			const onReady = () => {
 				const id = get(currentHousehold)?.id
@@ -48,7 +55,7 @@ const createCurrentHouseholdStore = () => {
 				else setTimeout(onReady, 200)
 			}
 			onReady()
-		})
+		}),
 	}
 };
 
