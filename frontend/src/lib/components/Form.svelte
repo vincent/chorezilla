@@ -3,7 +3,7 @@
 </script>
 
 <form 
-	class="flex flex-col p-8 gap-4 rounded-md bg-white dark:bg-gray-700"
+	class="flex flex-col p-8 gap-5"
 	on:submit|preventDefault={onSubmit}
 >
 	{@render children()}

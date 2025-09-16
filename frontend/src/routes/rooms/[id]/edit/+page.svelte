@@ -39,7 +39,7 @@
 </script>
 
 <svelte:head>
-	<title>Edit Room</title>
+	<title>ChoreZilla | Edit Room</title>
 </svelte:head>
 
 <main class="container mx-auto px-4 py-6">

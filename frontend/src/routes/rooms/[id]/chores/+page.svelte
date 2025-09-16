@@ -6,6 +6,7 @@
 	import { onMount } from "svelte";
 	import type { ChoresRecord, RoomsRecord } from "$lib/pocketbase/generated-types";
 	import { Pen } from "@lucide/svelte";
+	import { isAdmin } from "$lib/stores/auth";
 
 	let roomId = String(page.params.id)
 	let room = $state(null as unknown as RoomsRecord)
@@ -25,12 +26,20 @@
 	})
 </script>
 
+<svelte:head>
+	{#if room}
+		<title>ChoreZilla | Chores in {room.name}</title>
+	{/if}
+</svelte:head>
+
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-6">
 	{#if room}
 		<ChoresSection title={`Chores in ${room.name}`} chores={roomChores}>
 			{#snippet subtitle()}
-				<a class="flex text-gray-500 dark:text-gray-400" href={`/rooms/${room?.id}/edit`}>edit room <Pen class="ms-2"/></a>
+				{#if $isAdmin}
+					<a class="flex text-gray-500 dark:text-gray-400" href={`/rooms/${room?.id}/edit`}>edit room <Pen class="ms-2"/></a>
+				{/if}
 			{/snippet}
 			{#snippet empty()}
 				<span class="text-gray-500 dark:text-gray-400">No chore in {room.name}</span>

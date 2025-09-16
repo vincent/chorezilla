@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { palette } from "$lib/styles.svelte";
+	import { input_class, palette } from "$lib/styles.svelte";
 	import Field from "./Field.svelte";
 	import Form from "./Form.svelte";
 	import { icons } from "./icons";
@@ -39,19 +39,19 @@
 		<input
 			bind:value={name}
 			required
-			class="mt-1 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-800"
+			class={input_class}
 		/>
 	</Field>
 	<Field label="Location">
 		<input
 			bind:value={location}
-			class="mt-1 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-800"
+			class={input_class}
 		/>
 	</Field>
 	<Field label="Description">
 		<textarea
 			bind:value={description}
-			class="mt-1 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-800"
+			class={input_class}
 		></textarea>
 	</Field>
 	<Field label="Color">

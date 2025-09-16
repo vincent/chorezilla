@@ -51,6 +51,10 @@
   
 </script>
 
+<svelte:head>
+	<title>ChoreZilla | {signup ? 'Signup' : 'Login'}</title>
+</svelte:head>
+
 <div class="flex flex-col items-center justify-center min-h-screen bg-gray-50">
   <form class="bg-white p-8 rounded shadow-md w-full max-w-md" onsubmit={handleSubmit}>
     <h2 class="text-2xl font-bold mb-6 text-center">Log In</h2>

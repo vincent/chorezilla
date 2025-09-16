@@ -6,7 +6,7 @@
 	import { type Chore } from '$lib/models/chore.svelte';
   import ChoreForm from '$lib/components/ChoreForm.svelte';
 	import Title from '$lib/components/Title.svelte';
-	import { people } from '$lib/stores/people';
+	import { members } from '$lib/stores/members';
 	import { rooms } from '$lib/stores/rooms';
 	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
 	import { Trash } from '@lucide/svelte';
@@ -20,7 +20,7 @@
     Promise
       .all([
         chores.loadCollection(),
-        people.loadCollection(),
+        members.loadCollection(),
         rooms.loadCollection(),
       ])
       .then(() => {
@@ -45,10 +45,14 @@
   function handleEdit(data: ChoresRecord) {
     chores.updateChore({ ...data, id }).then(() => goto(`/chores/${id}`));
   }
+
+  function handleDelete() {
+    chores.removeChore(id).then(() => goto('/'));
+  }
 </script>
 
 <svelte:head>
-	<title>Edit Chore</title>
+	<title>ChoreZilla | Edit Chore</title>
 </svelte:head>
 
 <main class="container mx-auto px-4 py-6">
@@ -62,6 +66,7 @@
 			{#snippet otherButtons()}
 				<button
 					type="button"
+          onclick={handleDelete}
 					class="me-8 mt-2 p-3 rounded-lg border-red-300 bg-red-100 text-red-600 font-bold hover:bg-red-200 transition-colors"
 				><Trash/></button>
 			{/snippet}

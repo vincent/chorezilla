@@ -27,12 +27,12 @@ export {};
 
 declare module "$app/types" {
 	export interface AppTypes {
-		RouteId(): "/" | "/chores" | "/chores/add" | "/chores/[id]" | "/chores/[id]/edit" | "/login" | "/people" | "/people/add" | "/people/[id]" | "/people/[id]/edit" | "/rooms" | "/rooms/add" | "/rooms/[id]" | "/rooms/[id]/chores" | "/rooms/[id]/edit" | "/settings";
+		RouteId(): "/" | "/chores" | "/chores/add" | "/chores/[id]" | "/chores/[id]/edit" | "/login" | "/members" | "/members/invite" | "/members/[id]" | "/members/[id]/edit" | "/rooms" | "/rooms/add" | "/rooms/[id]" | "/rooms/[id]/chores" | "/rooms/[id]/edit" | "/settings";
 		RouteParams(): {
 			"/chores/[id]": { id: string };
 			"/chores/[id]/edit": { id: string };
-			"/people/[id]": { id: string };
-			"/people/[id]/edit": { id: string };
+			"/members/[id]": { id: string };
+			"/members/[id]/edit": { id: string };
 			"/rooms/[id]": { id: string };
 			"/rooms/[id]/chores": { id: string };
 			"/rooms/[id]/edit": { id: string }
@@ -44,10 +44,10 @@ declare module "$app/types" {
 			"/chores/[id]": { id: string };
 			"/chores/[id]/edit": { id: string };
 			"/login": Record<string, never>;
-			"/people": { id?: string };
-			"/people/add": Record<string, never>;
-			"/people/[id]": { id: string };
-			"/people/[id]/edit": { id: string };
+			"/members": { id?: string };
+			"/members/invite": Record<string, never>;
+			"/members/[id]": { id: string };
+			"/members/[id]/edit": { id: string };
 			"/rooms": { id?: string };
 			"/rooms/add": Record<string, never>;
 			"/rooms/[id]": { id: string };
@@ -55,7 +55,7 @@ declare module "$app/types" {
 			"/rooms/[id]/edit": { id: string };
 			"/settings": Record<string, never>
 		};
-		Pathname(): "/" | "/chores" | "/chores/" | "/chores/add" | "/chores/add/" | `/chores/${string}` & {} | `/chores/${string}/` & {} | `/chores/${string}/edit` & {} | `/chores/${string}/edit/` & {} | "/login" | "/login/" | "/people" | "/people/" | "/people/add" | "/people/add/" | `/people/${string}` & {} | `/people/${string}/` & {} | `/people/${string}/edit` & {} | `/people/${string}/edit/` & {} | "/rooms" | "/rooms/" | "/rooms/add" | "/rooms/add/" | `/rooms/${string}` & {} | `/rooms/${string}/` & {} | `/rooms/${string}/chores` & {} | `/rooms/${string}/chores/` & {} | `/rooms/${string}/edit` & {} | `/rooms/${string}/edit/` & {} | "/settings" | "/settings/";
+		Pathname(): "/" | "/chores" | "/chores/" | "/chores/add" | "/chores/add/" | `/chores/${string}` & {} | `/chores/${string}/` & {} | `/chores/${string}/edit` & {} | `/chores/${string}/edit/` & {} | "/login" | "/login/" | "/members" | "/members/" | "/members/invite" | "/members/invite/" | `/members/${string}` & {} | `/members/${string}/` & {} | `/members/${string}/edit` & {} | `/members/${string}/edit/` & {} | "/rooms" | "/rooms/" | "/rooms/add" | "/rooms/add/" | `/rooms/${string}` & {} | `/rooms/${string}/` & {} | `/rooms/${string}/chores` & {} | `/rooms/${string}/chores/` & {} | `/rooms/${string}/edit` & {} | `/rooms/${string}/edit/` & {} | "/settings" | "/settings/";
 		ResolvedPathname(): `${"" | `/${string}`}${ReturnType<AppTypes['Pathname']>}`;
 		Asset(): "/robots.txt" | string & {};
 	}

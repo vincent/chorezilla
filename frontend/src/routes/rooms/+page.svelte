@@ -4,7 +4,10 @@
 	import { Plus, Search } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 
+	let { data } = $props();
+
 	onMount(() => {
+		data.metadata = { ...data.metadata, title: 'My rooms' }
 		rooms.loadCollection();
 	})
 

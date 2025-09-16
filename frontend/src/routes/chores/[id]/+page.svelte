@@ -3,22 +3,32 @@
 	import { page } from '$app/state';
 	import Title from '$lib/components/Title.svelte';
 	import { type Chore } from '$lib/models/chore.svelte';
+	import { client } from '$lib/pocketbase';
 	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
+	import { isAdmin } from '$lib/stores/auth';
 	import { chores } from '$lib/stores/chores';
 	import { onMount } from 'svelte';
 
+	let id = page.params.id;
 	let chore: ChoresRecord | undefined;
 
 	onMount(() => {
-		if (!page.params.id) return;
-		chore = chores.findChore(page.params.id);
+		if (!id) return;
+		chores.loadCollection().then(() => {
+			chore = chores.findChore(id)
+		});
 	});
 
 	function handleDone() {
-		chores.updateChore({ ...chore } as ChoresRecord);
-		goto('/chores');
+		chores.updateChore({ ...chore, last_completed: new Date().toISOString() } as ChoresRecord).then(c => goto('/'))
 	}
 </script>
+
+<svelte:head>
+	{#if chore}
+		<title>ChoreZilla | {chore.name}</title>
+	{/if}
+</svelte:head>
 
 {#if chore}
 	<section class="max-w-xl mx-auto mt-8 p-6 bg-white dark:bg-gray-700 rounded-xl shadow">
@@ -32,10 +42,12 @@
 				onclick={handleDone}
 				class="mt-2 p-3 rounded-lg border-green-300 bg-green-100 text-green-600 font-bold hover:bg-green-200 transition-colors cursor-pointer"
 			>Mark as done</button>
-			<a
-				href={`/chores/${chore.id}/edit`}
-				class="mt-2 p-3 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors"
-			>Edit</a>
+			{#if $isAdmin}
+				<a
+					href={`/chores/${chore.id}/edit`}
+					class="mt-2 p-3 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors"
+				>Edit</a>
+			{/if}
 		</div>
 	</section>
 {:else}

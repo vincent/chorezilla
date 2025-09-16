@@ -1,18 +1,19 @@
 import { client } from '$lib/pocketbase';
-import type { HouseholdMembersRecord, HouseholdMembersResponse, UsersRecord } from '$lib/pocketbase/generated-types';
-import { get, writable } from 'svelte/store';
+import type { HouseholdMembersResponse, UsersRecord } from '$lib/pocketbase/generated-types';
 import { currentHousehold } from './households';
+import { get, writable } from 'svelte/store';
 
 export type Person = {
 	memberId: string;
 	userId: string;
+	email: string;
 	name: string;
 	role?: string;
 	choresCompleted?: number;
 	avatarColor?: string;
 };
 
-const createPeopleStore = () => {
+const createMembersStore = () => {
 	const { subscribe, set, update } = writable<Person[]>([]);
 
 	const membersDB = () => client.collection('household_members')
@@ -25,10 +26,10 @@ const createPeopleStore = () => {
 				return {
 					memberId: row.id,
 					userId: u.id,
-					name: u.email || 'Unknown',
+					email: u.email || 'Unknown',
+					name: u.name || 'Unknown',
 					role: row.role || '',
 					choresCompleted: 0,
-					avatarColor: u.avatarColor || 'indigo',
 				}
 			})))
 		)
@@ -39,11 +40,11 @@ const createPeopleStore = () => {
 		subscribe,
 		loadCollection,
 		reset: () => set([]),
-		findPerson: (id: string) => get(people).find(r => r.userId === id),
-		addPerson: (person: Person) => membersDB().create(person),
+		findByUserId: (id: string) => get(members).find(r => r.userId === id),
+		invite: (person: Person) => membersDB().create(person),
 		removePerson: (id: string) => membersDB().delete(id),
 		updatePerson: (updatedPerson: Person) => membersDB().update(updatedPerson.memberId, updatedPerson),
 	}
 };
 
-export const people = createPeopleStore();
+export const members = createMembersStore();

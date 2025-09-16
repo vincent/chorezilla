@@ -15,13 +15,13 @@
 	"/login": [
 		"src/routes/+layout.ts"
 	],
-	"/people": [
+	"/members": [
 		"src/routes/+layout.ts"
 	],
-	"/people/add": [
+	"/members/invite": [
 		"src/routes/+layout.ts"
 	],
-	"/people/[id]/edit": [
+	"/members/[id]/edit": [
 		"src/routes/+layout.ts"
 	],
 	"/rooms": [

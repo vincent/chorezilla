@@ -7,11 +7,11 @@
 	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
 	import { currentHousehold } from '$lib/stores/households';
 	import { onMount } from 'svelte';
-	import { people } from '$lib/stores/people';
+	import { members } from '$lib/stores/members';
 	import { rooms } from '$lib/stores/rooms';
 
   onMount(() => {
-		people.loadCollection()
+		members.loadCollection()
 		rooms.loadCollection()
 	})
 
@@ -27,12 +27,12 @@
         room,
         description,
       })
-      .then(() => goto('/'))
+      .then(c => goto(`/chores/${c.id}`))
   }
 </script>
 
 <svelte:head>
-	<title>Add Chore</title>
+	<title>ChoreZilla | Add Chore</title>
 </svelte:head>
 
 <main class="container mx-auto px-4 py-6">

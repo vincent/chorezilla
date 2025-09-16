@@ -6,6 +6,8 @@
     import { page } from '$app/state';
 	import { client } from '$lib/pocketbase';
 	import { currentHousehold } from '$lib/stores/households';
+	import { member } from '$lib/stores/auth';
+	import { fade } from 'svelte/transition';
 
 	const { data, children } = $props();
 	const metadata = $derived(data.metadata ?? {});
@@ -14,20 +16,25 @@
 	$effect(() => {
 		if (page.error) metadata.title = page.error.message;
 		if (client.authStore.isValid) initNotifications(data.config.vapidPublicKey, true)
+		if (client.authStore.isValid) member.load()
 	});
 </script>
 
 <svelte:head>
-	<title>{metadata.title} | {siteName}</title>
+	<title>ChoreZilla | {metadata.title}</title>
 </svelte:head>
 
 <div class="bg-gray-50 dark:bg-gray-800 h-screen font-sans">
 
     <Header household={$currentHousehold} />
 
-    <section class="mb-8">
-        {@render children?.()}
-    </section>
+	{#key page.url.pathname}
+		<div in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
+			<section class="mb-8">
+				{@render children?.()}
+			</section>
+		</div>
+	{/key}
 
 	{#if client.authStore.isValid}
 	    <BottomNav active={page.route.id} />

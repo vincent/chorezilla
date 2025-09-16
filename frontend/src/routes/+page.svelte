@@ -8,6 +8,10 @@
 	chores.loadCollection()
 </script>
 
+<svelte:head>
+	<title>ChoreZilla | Today's Chores</title>
+</svelte:head>
+
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-6">
 

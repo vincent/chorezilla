@@ -7,22 +7,21 @@
 	import { currentHousehold } from '$lib/stores/households';
 
   function handleAdd(detail: Omit<RoomsRecord, 'id'>) {
-    const { name, location, description, icon, icon_color } = detail;
+    const { name, location, description, color } = detail;
     rooms
       .addRoom({
         household: $currentHousehold.id,
         description,
-        icon_color,
         location,
+        color,
         name,
-        icon,
       })
       .then(() => goto('/rooms'));
   }
 </script>
 
 <svelte:head>
-	<title>Add Room</title>
+	<title>ChoreZilla | Add Room</title>
 </svelte:head>
 
 <main class="container mx-auto px-4 py-6">

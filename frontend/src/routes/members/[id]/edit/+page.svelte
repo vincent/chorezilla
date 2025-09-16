@@ -1,26 +1,35 @@
 <script lang="ts">
 	import PersonForm from '$lib/components/PersonForm.svelte';
-	import { people, type Person } from '$lib/stores/people';
+	import { members, type Person } from '$lib/stores/members';
+	import Title from '$lib/components/Title.svelte';
 	import { goto } from '$app/navigation';
+	import { Trash } from '@lucide/svelte';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
-	import Title from '$lib/components/Title.svelte';
-	import type { HouseholdMembersRecord } from '$lib/pocketbase/generated-types';
-	import { Trash } from '@lucide/svelte';
 
+	let id = '';
 	let person: Person | undefined;
 
 	onMount(() => {
-		if (!page.params.id) return;
-		person = people.findPerson(page.params.id);
+		id = String(page.params.id);
+		if (!id) return;
+		members.loadCollection().then(() => {
+			person = members.findByUserId(id);
+		})
 	});
 
 	function handleSubmit(event: CustomEvent<Person>) {
 		const updated: Person = { ...event.detail, userId: String(page.params.id) };
-		people.updatePerson(updated);
-		goto('/people');
+		members.updatePerson(updated);
+		goto('/members');
 	}
 </script>
+
+<svelte:head>
+	{#if person}
+		<title>ChoreZilla | {person.name}</title>
+	{/if}
+</svelte:head>
 
 <main class="container mx-auto px-4 py-6">
 	<Title title="Edit Person"/>
