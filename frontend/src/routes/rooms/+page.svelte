@@ -3,6 +3,7 @@
 	import RoomCard from '$lib/components/RoomCard.svelte';
 	import { Plus, Search } from '@lucide/svelte';
 	import { onMount } from 'svelte';
+	import { isAdmin } from '$lib/stores/auth';
 
 	let { data } = $props();
 
@@ -39,16 +40,17 @@
 			<RoomCard {room} />
 		{/each}
 
-		<!-- Add New Room -->
-		<a
-			href="/rooms/add"
-			class="room-card border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-6 cursor-pointer hover:border-indigo-300 transition-colors"
-		>
-			<div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-3">
-				<Plus class="text-indigo-600"/>
-			</div>
-			<h3 class="font-medium text-gray-800 dark:text-white">Add new room</h3>
-			<p class="text-gray-500 text-sm">Create a new space to manage</p>
-		</a>
+		{#if $isAdmin}
+			<a
+				href="/rooms/add"
+				class="room-card border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-6 cursor-pointer hover:border-indigo-300 transition-colors"
+			>
+				<div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-3">
+					<Plus class="text-indigo-600"/>
+				</div>
+				<h3 class="font-medium text-gray-800 dark:text-white">Add new room</h3>
+				<p class="text-gray-500 text-sm">Create a new space to manage</p>
+			</a>
+		{/if}
 	</div>
 </main>

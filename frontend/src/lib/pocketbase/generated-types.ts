@@ -14,6 +14,7 @@ export enum Collections {
 	Chores = "chores",
 	HouseholdMembers = "household_members",
 	Households = "households",
+	Invitations = "invitations",
 	Rooms = "rooms",
 	UserSubscriptions = "user_subscriptions",
 	Users = "users",
@@ -128,6 +129,16 @@ export type HouseholdsRecord = {
 	updated?: IsoDateString
 }
 
+export type InvitationsRecord = {
+	created?: IsoDateString
+	email: string
+	household: RecordIdString
+	id: string
+	role: string
+	status: string
+	updated?: IsoDateString
+}
+
 export type RoomsRecord = {
 	color: string
 	created?: IsoDateString
@@ -149,7 +160,6 @@ export type UserSubscriptionsRecord<Tsubscription = unknown> = {
 
 export type UsersRecord = {
 	avatar?: string
-	avatarColor?: string
 	created?: IsoDateString
 	email?: string
 	emailVisibility?: boolean
@@ -172,6 +182,7 @@ export type SuperusersResponse<Texpand = unknown> = Required<SuperusersRecord> &
 export type ChoresResponse<Texpand = unknown> = Required<ChoresRecord> & BaseSystemFields<Texpand>
 export type HouseholdMembersResponse<Texpand = unknown> = Required<HouseholdMembersRecord> & BaseSystemFields<Texpand>
 export type HouseholdsResponse<Texpand = unknown> = Required<HouseholdsRecord> & BaseSystemFields<Texpand>
+export type InvitationsResponse<Texpand = unknown> = Required<InvitationsRecord> & BaseSystemFields<Texpand>
 export type RoomsResponse<Texpand = unknown> = Required<RoomsRecord> & BaseSystemFields<Texpand>
 export type UserSubscriptionsResponse<Tsubscription = unknown, Texpand = unknown> = Required<UserSubscriptionsRecord<Tsubscription>> & BaseSystemFields<Texpand>
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>
@@ -187,6 +198,7 @@ export type CollectionRecords = {
 	chores: ChoresRecord
 	household_members: HouseholdMembersRecord
 	households: HouseholdsRecord
+	invitations: InvitationsRecord
 	rooms: RoomsRecord
 	user_subscriptions: UserSubscriptionsRecord
 	users: UsersRecord
@@ -201,6 +213,7 @@ export type CollectionResponses = {
 	chores: ChoresResponse
 	household_members: HouseholdMembersResponse
 	households: HouseholdsResponse
+	invitations: InvitationsResponse
 	rooms: RoomsResponse
 	user_subscriptions: UserSubscriptionsResponse
 	users: UsersResponse
@@ -218,6 +231,7 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'chores'): RecordService<ChoresResponse>
 	collection(idOrName: 'household_members'): RecordService<HouseholdMembersResponse>
 	collection(idOrName: 'households'): RecordService<HouseholdsResponse>
+	collection(idOrName: 'invitations'): RecordService<InvitationsResponse>
 	collection(idOrName: 'rooms'): RecordService<RoomsResponse>
 	collection(idOrName: 'user_subscriptions'): RecordService<UserSubscriptionsResponse>
 	collection(idOrName: 'users'): RecordService<UsersResponse>

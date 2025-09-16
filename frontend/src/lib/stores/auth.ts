@@ -12,7 +12,12 @@ const createMemberStore = () => {
 	const membersDB = () => client.collection('household_members')
 
 	const load = () => currentHousehold.id()
-		.then(hid => membersDB().getFirstListItem<HouseholdMembersRecord>(`household='${hid}'&&user='${client.authStore.record?.id}'`, { expand: 'user' }))
+		.then(hid => membersDB().getFirstListItem<HouseholdMembersRecord>(
+			`household='${hid}'&&user='${client.authStore.record?.id}'`,
+			{
+				requestKey: 'me',
+				expand: 'user',
+			}))
 		.then(set)
 
 	return {

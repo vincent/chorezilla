@@ -9,6 +9,7 @@ const createHouseholdsStore = () => {
 
 	const loadCollection = () => db()
 		.getFullList<HouseholdsRecord>({
+			requestKey: 'households',
 			filter: client.authStore
 				.record?.households
 					.map((h: string) => `id = '${h}'`)

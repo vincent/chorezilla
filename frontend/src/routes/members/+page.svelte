@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Card from '$lib/components/Card.svelte';
+	import { isAdmin } from '$lib/stores/auth';
 	import { members } from '$lib/stores/members';
 	import { Search, User, UserPlus } from '@lucide/svelte';
 
@@ -50,16 +51,17 @@
 			<p class="text-center text-gray-500">No members found.</p>
 		{/if}
 
-		<!-- Add New Person -->
-		<a
-			href="/members/invite"
-			class="person-card border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-6 cursor-pointer hover:border-indigo-300 transition-colors"
-		>
-			<div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-3">
-				<UserPlus class="text-indigo-600"/>
-			</div>
-			<h3 class="font-medium text-gray-800 dark:text-white">Add new person</h3>
-			<p class="text-sm text-gray-500">Invite someone to your household</p>
-		</a>
+		{#if $isAdmin}
+			<a
+				href="/members/invite"
+				class="person-card border-2 border-dashed border-gray-300 rounded-xl flex flex-col items-center justify-center p-6 cursor-pointer hover:border-indigo-300 transition-colors"
+			>
+				<div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center mb-3">
+					<UserPlus class="text-indigo-600"/>
+				</div>
+				<h3 class="font-medium text-gray-800 dark:text-white">Add new person</h3>
+				<p class="text-sm text-gray-500">Invite someone to your household</p>
+			</a>
+		{/if}
 	</div>
 </main>

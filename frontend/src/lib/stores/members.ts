@@ -20,7 +20,11 @@ const createMembersStore = () => {
 
 	const loadCollection = () => currentHousehold.id()
 		.then(hid => membersDB()
-			.getFullList<HouseholdMembersResponse>({ filter: `household='${hid}'`, expand: 'user' })
+			.getFullList<HouseholdMembersResponse>({
+				requestKey: 'household_members',
+				filter: `household='${hid}'`,
+				expand: 'user'
+			})
 			.then(list => set(list.map(row => {
 				const u = (row.expand as any).user as UsersRecord
 				return {

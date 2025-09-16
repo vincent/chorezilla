@@ -26,6 +26,7 @@ const createChoresStore = () => {
 	const choresDB = () => client.collection('chores')
 	
 	const fetchAll = () => currentHousehold.id().then(hid => choresDB().getFullList<ChoresRecord>({
+		requestKey: 'chores',
 		filter: `household='${hid}'`,
 		expand: 'room',
 	}))

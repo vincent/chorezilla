@@ -11,12 +11,12 @@
 
 	const { data, children } = $props();
 	const metadata = $derived(data.metadata ?? {});
-	const { name: siteName, url: siteUrl, logo: siteLogo } = $derived(data.config.site ?? {});
 
 	$effect(() => {
-		if (page.error) metadata.title = page.error.message;
-		if (client.authStore.isValid) initNotifications(data.config.vapidPublicKey, true)
-		if (client.authStore.isValid) member.load()
+		if (client.authStore.isValid) {
+			initNotifications(data.config.vapidPublicKey, true)
+			member.load()
+		}
 	});
 </script>
 

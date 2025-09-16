@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { input_class } from '$lib/styles.svelte';
+	import { input_class, select_class } from '$lib/styles.svelte';
 	import Field from './Field.svelte';
 	import Form from './Form.svelte';
 
@@ -32,15 +32,18 @@
 <Form onSubmit={handleSubmit} {submitLabel}>
 	{#if useEmail}
 		<Field label="Email">
-			<input bind:value={email} required class={input_class} />
-		</Field>
-	{:else}
-		<Field label="Name">
-			<input bind:value={name} required class={input_class} />
+			<input type="email" placeholder="Member email" bind:value={email} required class={input_class} />
 		</Field>
 	{/if}
+	<Field label="Name">
+		<input placeholder="Member name" bind:value={name} required class={input_class} />
+	</Field>
 	<Field label="Role">
-		<input bind:value={role} placeholder="e.g. Roommate" class={input_class} />
+		<select bind:value={role} class={select_class}>
+			<option class="placeholder" value="" disabled hidden>Select a role</option>
+			<option value="user">Regular user (cannot edit chores, members)</option>
+			<option value="admin">Administrator</option>
+		</select>
 	</Field>
 
 	{#snippet altButtons()}
