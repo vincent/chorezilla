@@ -134,6 +134,7 @@ export type InvitationsRecord = {
 	email: string
 	household: RecordIdString
 	id: string
+	name: string
 	role: string
 	status: string
 	updated?: IsoDateString

@@ -1,16 +1,24 @@
 <script lang="ts">
+	import { Search, User, UserCog, UserPlus } from '@lucide/svelte';
 	import Card from '$lib/components/Card.svelte';
-	import { isAdmin } from '$lib/stores/auth';
+	import { invites } from '$lib/stores/invites';
 	import { members } from '$lib/stores/members';
-	import { Search, User, UserPlus } from '@lucide/svelte';
+	import { isAdmin } from '$lib/stores/auth';
 
 	members.loadCollection();
+	invites.loadCollection();
 
 	let filter = $state('')
 	let filteredPeople = $derived(
 		$members.filter(r => !filter
 			|| r.name.toLowerCase().includes(filter)
-			|| r.role?.toLowerCase().includes(filter)))
+			|| r.role?.toLowerCase().includes(filter))
+		)
+	let filteredInvites = $derived(
+		$invites.filter(r => !filter
+			|| r.name.toLowerCase().includes(filter)
+			|| r.role?.toLowerCase().includes(filter))
+		)
 </script>
 
 <svelte:head>
@@ -37,12 +45,10 @@
 			<Card
 				title={person.name}
 				href={`/members/${person.userId}/edit`}
-				subtitle={`${person.role ?? 'Roommate'} • ${person.choresCompleted ?? 0} chores completed`}
+				subtitle={`${person.role || 'Unknown'} • ${person.choresCompleted ?? 0} chores completed`}
 			>
 				{#snippet icon()}
-					<div class={`p-3 rounded-full bg-${person.avatarColor}-100 text-${person.avatarColor}-600`}>
-						<User/>
-					</div>
+					<User class="text-gray-200"/>
 				{/snippet}
 			</Card>
 		{/each}
@@ -50,6 +56,18 @@
 		{#if filteredPeople.length === 0}
 			<p class="text-center text-gray-500">No members found.</p>
 		{/if}
+
+		{#each filteredInvites as person (person.id)}
+			<Card
+				title={person.name}
+				href={`/members`}
+				subtitle={`${person.role || 'Unknown'} • ${person.status}`}
+			>
+				{#snippet icon()}
+					<UserCog class="text-gray-200"/>
+				{/snippet}
+			</Card>
+		{/each}
 
 		{#if $isAdmin}
 			<a

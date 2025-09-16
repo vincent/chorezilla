@@ -25,17 +25,26 @@ const createMembersStore = () => {
 				filter: `household='${hid}'`,
 				expand: 'user'
 			})
-			.then(list => set(list.map(row => {
-				const u = (row.expand as any).user as UsersRecord
-				return {
-					memberId: row.id,
-					userId: u.id,
-					email: u.email || 'Unknown',
-					name: u.name || 'Unknown',
-					role: row.role || '',
-					choresCompleted: 0,
-				}
-			})))
+			.then(list => set(list
+				.filter(row => {
+					if (!(row.expand as any).user) {
+						console.warn(`missing associated user`)
+						return false
+					}
+					return true
+				})
+				.map(row => {
+					const u = (row.expand as any).user as UsersRecord
+					return {
+						memberId: row.id,
+						userId: u.id,
+						email: u.email || 'Unknown',
+						name: u.name || 'Unknown',
+						role: row.role || '',
+						choresCompleted: 0,
+					}
+				}))
+			)
 		)
 
 	return {

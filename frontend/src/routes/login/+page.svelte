@@ -20,7 +20,8 @@
 	const form = $state({
 		email: '',
 		name: '',
-		password: ''
+		password: '',
+		passwordConfirm: '',
 	});
 
 	function providerLoginAndRedirect(provider: AuthProviderInfo) {
@@ -42,7 +43,7 @@
 			}
 
 			await collection.authWithPassword<UsersResponse>(form.email, form.password);
-			goto(redirectUrl || '/welcome');
+			goto(redirectUrl || '/');
 		} catch (error: any) {
 			console.log(error);
 			issue = error.toString();
@@ -69,6 +70,12 @@
       <label class="block mb-1 font-medium" for="password">Password</label>
       <input class="w-full border rounded px-3 py-2" id="password" type="password" bind:value={form.password} required />
     </div>
+	{#if signup}
+		<div class="mb-6">
+		<label class="block mb-1 font-medium" for="passwordConfirm">Confirm password</label>
+		<input class="w-full border rounded px-3 py-2" id="passwordConfirm" type="password" bind:value={form.passwordConfirm} required />
+		</div>
+	{/if}
     <button class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition" type="submit">
       Log In
     </button>

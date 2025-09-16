@@ -1,14 +1,12 @@
 <script lang="ts">
   import PersonForm from '$lib/components/PersonForm.svelte';
-  import { members, type Person } from '$lib/stores/members';
+  import { type Person } from '$lib/stores/members';
 	import Title from '$lib/components/Title.svelte';
+	import { invites } from '$lib/stores/invites';
   import { goto } from '$app/navigation';
 
-  function handleSubmit(event: CustomEvent<Omit<Person, 'id'>>) {
-    const person = event.detail;
-    const id = Date.now().toString();
-    members.addPerson(person);
-    goto('/members');
+  function handleSubmit(data: Omit<Person, 'id'>) {
+    invites.invite(data.email, data.name, data.role || '').then(() => goto('/members'))
   }
 </script>
 

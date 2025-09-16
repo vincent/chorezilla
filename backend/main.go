@@ -16,6 +16,7 @@ import (
 	"github.com/pocketbase/pocketbase/tools/hook"
 
 	pb_routes "pocketbase/pb_hooks/routes"
+	"pocketbase/pb_hooks/services"
 )
 
 func main() {
@@ -117,6 +118,9 @@ func main() {
 		},
 		Priority: 999, // execute as latest as possible to allow users to provide their own route
 	})
+
+	// Custom hooks
+	services.BindPostSignUpInvitationHook(app)
 
 	// Register custom config route
 	pb_routes.RegisterConfigRoute(app, hooksDir)
