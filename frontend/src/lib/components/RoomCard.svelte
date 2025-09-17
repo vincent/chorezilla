@@ -3,7 +3,7 @@
 	import { shadow_hover } from '$lib/styles.svelte';
 	import { Users } from '@lucide/svelte';
 
-	let { room }: { room: RoomsRecord } = $props();
+	let { room, members }: { room: RoomsRecord, members: number } = $props();
 </script>
 
 <a
@@ -23,7 +23,7 @@
 		<p class="text-gray-600 dark:text-gray-300 text-sm mb-3">{room.description}</p>
 		<div class="flex items-center text-sm text-gray-500 dark:text-gray-300">
 			<Users class="w-4 h-4 mr-1" />
-			<span>0 members</span>
+			<span>{members} members</span>
 		</div>
 	</div>
 </a>

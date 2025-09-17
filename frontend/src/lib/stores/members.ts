@@ -1,7 +1,7 @@
-import { client } from '$lib/pocketbase';
 import type { HouseholdMembersResponse, UsersRecord } from '$lib/pocketbase/generated-types';
 import { currentHousehold } from './households';
 import { get, writable } from 'svelte/store';
+import { client } from '$lib/pocketbase';
 
 export type Person = {
 	memberId: string;
@@ -46,13 +46,11 @@ const createMembersStore = () => {
 					filter: `household='${hid}'`,
 					expand: 'user'
 				})
-				.then((list) =>
-					set(
-						list
-							.filter(warnMissingUser)
-							.map(mapToPerson)
-					)
+				.then((list) => list
+					.filter(warnMissingUser)
+					.map(mapToPerson)
 				)
+				.then(set)
 		);
 
 	return {

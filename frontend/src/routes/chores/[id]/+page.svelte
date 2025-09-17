@@ -27,6 +27,15 @@
 			} as ChoresRecord)
 			.then(() => goto('/'));
 	}
+
+	function handleReset() {
+		chores
+			.updateChore({
+				...chore,
+				last_completed: '',
+			} as ChoresRecord)
+			.then(() => goto('/'));
+	}
 </script>
 
 <svelte:head>
@@ -49,6 +58,12 @@
 				>Mark as done</button
 			>
 			{#if $isAdmin}
+				<button
+					type="button"
+					onclick={handleReset}
+					class="ms-auto me-2 mt-2 p-3 rounded-lg border-orange-300 bg-orange-100 text-orange-600 font-bold hover:bg-orange-200 transition-colors cursor-pointer"
+					>Reset</button
+				>
 				<a
 					href={`/chores/${chore.id}/edit`}
 					class="mt-2 p-3 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors"

@@ -1,15 +1,14 @@
 <script lang="ts">
-	import { rooms } from '$lib/stores/rooms';
 	import RoomCard from '$lib/components/RoomCard.svelte';
+	import { chores, memberIdsByRoom } from '$lib/stores/chores.js';
 	import { Plus, Search } from '@lucide/svelte';
-	import { onMount } from 'svelte';
 	import { isAdmin } from '$lib/stores/auth';
-
-	let { data } = $props();
+	import { rooms } from '$lib/stores/rooms';
+	import { onMount } from 'svelte';
 
 	onMount(() => {
-		data.metadata = { ...data.metadata, title: 'My rooms' };
 		rooms.loadCollection();
+		chores.loadCollection();
 	});
 
 	let filter = $state('');
@@ -22,10 +21,15 @@
 				r.description?.toLowerCase().includes(filter)
 		)
 	);
+
+	$effect(() => {
+		console.log($memberIdsByRoom)
+	})
 </script>
 
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-6">
+
 	<!-- Search Bar -->
 	<div class="relative mb-6">
 		<input
@@ -40,7 +44,7 @@
 	<!-- Rooms Grid -->
 	<div class="grid grid-cols-1 gap-4">
 		{#each filteredRooms as room (room.id)}
-			<RoomCard {room} />
+			<RoomCard {room} members={$memberIdsByRoom[room.id]?.length ?? 0} />
 		{/each}
 
 		{#if $isAdmin}

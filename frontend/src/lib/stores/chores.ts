@@ -5,6 +5,10 @@ import { currentHousehold } from './households';
 import type { ChoresRecord } from '$lib/pocketbase/generated-types';
 import { addDays, addHours, addMonths, addWeeks, addYears } from 'date-fns';
 
+function uniques(src: string[]) {
+	return Object.keys(src.reduce((acc, i) => ({ ...acc, [i]: true }), {}))
+}
+
 function isDue(c: ChoresRecord) {
 	if (!c.last_completed) return true;
 
@@ -66,3 +70,19 @@ export const userChores = derived(chores, (cs) =>
 
 export const dueChores = derived(userChores, (cs) => cs.filter((row) => isDue(row)));
 export const completedChores = derived(userChores, (cs) => cs.filter((row) => !isDue(row)));
+
+export const choresByRoom = derived(chores, (cs) => cs.reduce((acc, c) => ({
+	...acc,
+	[c.room]: [
+		...(acc[c.room] || []),
+		c,
+	]
+}), {} as Record<string, ChoresRecord[]>));
+
+export const memberIdsByRoom = derived(chores, (cs) => cs.reduce((acc, c) => ({
+	...acc,
+	[c.room]: uniques([
+		...(acc[c.room] || []),
+		...(c.assigned_users || []),
+	])
+}), {} as Record<string, string[]>));
