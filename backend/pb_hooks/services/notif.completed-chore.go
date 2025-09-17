@@ -24,7 +24,6 @@ func NotifyCompletedChoreToAdminUsers(app *pocketbase.PocketBase, choreId string
 		return 0, err
 	}
 
-	// TODO: check ownership
 	household, err := app.FindRecordById("households", chore.GetString("household"))
 	if err != nil {
 		return 0, err
