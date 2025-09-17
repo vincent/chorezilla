@@ -15,6 +15,7 @@ import (
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 	"github.com/pocketbase/pocketbase/tools/hook"
 
+	"pocketbase/pb_hooks/jobs"
 	pb_routes "pocketbase/pb_hooks/routes"
 	"pocketbase/pb_hooks/services"
 )
@@ -122,8 +123,11 @@ func main() {
 	// Custom hooks
 	services.BindPostSignUpInvitationHook(app)
 
-	// Register custom config route
+	// Custom config route
 	pb_routes.RegisterConfigRoute(app, hooksDir)
+
+	// Custom jobs
+	jobs.RegisterChoresNotificationsJob(app)
 
 	if err := app.Start(); err != nil {
 		log.Fatal(err)

@@ -8,15 +8,16 @@ const createHouseholdsStore = () => {
 
 	const db = () => client.collection('households')
 
-	const loadCollection = () => db()
-		.getFullList<HouseholdsRecord>({
-			requestKey: 'households',
-			filter: client.authStore
-				.record?.households
-					.map((h: string) => `id='${h}'`)
-					.join(' || ')
-		})
-		.then(set)
+	const loadCollection = () => {
+		const hs = client.authStore.record?.households;
+		return !hs?.length
+			? Promise.resolve()
+			: db().getFullList<HouseholdsRecord>({
+				requestKey: 'households',
+				filter: hs.map((h: string) => `id='${h}'`).join(' || ')
+			})
+			.then(set)
+	}
 
 	return {
 		set,

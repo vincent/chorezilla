@@ -1,21 +1,21 @@
 /// <reference types="@sveltejs/kit" />
 
 // type CallPushNotification struct {
-// Caller       string `json:"caller"`
-// Sport        string `json:"sport"`
-// LocationName string `json:"location"`
-// ChoreId      string `json:"choreId"`
+//   Caller       string `json:"caller"`
+//   LocationName string `json:"location"`
+//   ChoreName    string `json:"chore_name"`
+//   ChoreID      string `json:"chore_id"`
 // }
 
 self.addEventListener('push', (event) => {
 	console.log('[Service Worker] Push Received.');
 
 	const data = event.data.json();
-	console.log(`[Service Worker] Push had this data: "${event.data.json()}"`);
+	console.log(`[Service Worker] Push had this data: `, event.data.json());
 
-	const title = 'Chores';
+	const title = 'ChoreZilla';
 	const options = {
-		body: `Attend chore ${data.choreId} now !`,
+		body: `${data.location}: ${data.chore_name} now !`,
 		vibrate: [200, 100, 200, 100, 200, 100, 200],
 		requireInteraction: true,
 		data
@@ -26,7 +26,7 @@ self.addEventListener('push', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
 	console.log('[Service Worker] Push Clicked.');
-	const navigationUrl = `/chores/${event.notification.data.choreId}/lobby`;
+	const navigationUrl = `/chores/${event.notification.data.chore_id}`;
 	event.waitUntil(
 		clients
 			.matchAll({ type: 'window' })
