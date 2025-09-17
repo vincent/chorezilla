@@ -122,6 +122,7 @@ func main() {
 
 	// Custom hooks
 	services.BindPostSignUpInvitationHook(app)
+	services.BindPostChoreCompletionHook(app)
 
 	// Custom config route
 	pb_routes.RegisterConfigRoute(app, hooksDir)

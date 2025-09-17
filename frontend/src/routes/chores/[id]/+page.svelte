@@ -20,7 +20,11 @@
 	});
 
 	function handleDone() {
-		chores.updateChore({ ...chore, last_completed: new Date().toISOString() } as ChoresRecord).then(c => goto('/'))
+		chores.updateChore({
+			...chore,
+			last_completed: new Date().toISOString(),
+			last_completed_by: client.authStore.record?.id,
+		} as ChoresRecord).then(c => goto('/'))
 	}
 </script>
 

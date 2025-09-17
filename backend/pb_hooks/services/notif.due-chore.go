@@ -11,7 +11,8 @@ import (
 )
 
 type DueChoreNotification struct {
-	Caller       string `json:"caller"`
+	Type         string `json:"type"`
+	Household    string `json:"household"`
 	LocationName string `json:"location"`
 	ChoreName    string `json:"chore_name"`
 	ChoreID      string `json:"chore_id"`
@@ -60,7 +61,8 @@ func NotifyDueChoreToAssignedUsers(app *pocketbase.PocketBase, choreId string) (
 		app.Logger().Info("[challenge] call assigned users for chore", "subscriptions", len(subscriptions), "chore", chore.Id)
 
 		notification := &DueChoreNotification{
-			Caller:       household.GetString("name"),
+			Type:         "due-chore",
+			Household:    household.GetString("name"),
 			LocationName: room.GetString("name"),
 			ChoreName:    chore.GetString("name"),
 			ChoreID:      chore.Id,

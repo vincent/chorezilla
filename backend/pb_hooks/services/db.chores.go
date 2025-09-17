@@ -55,7 +55,7 @@ func FindDueChoresToNotify(app *pocketbase.PocketBase) ([]Chore, error) {
 		All(&chores)
 
 	if err != nil {
-		app.Logger().Error("[new-user] cannot find due chores", "error", err)
+		app.Logger().Error("[due-chores-job] cannot find due chores", "error", err)
 		return nil, err
 	}
 
