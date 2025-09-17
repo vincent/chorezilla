@@ -1,8 +1,8 @@
-# ¿ChoreZilla?
+# ChoreZilla
 
 <div align="center">
 
-Subscribe to your local sport place, and call for challengers.
+Manage your chores, assign to other users, get notified.
 
 [![Static Badge](https://img.shields.io/badge/Svelte_5-ff6c47?style=for-the-badge)](https://svelte.dev)
 [![Static Badge](https://img.shields.io/badge/Docker-1D63ED?style=for-the-badge)](https://www.docker.com)
