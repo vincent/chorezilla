@@ -3,7 +3,6 @@ package pb_routes
 
 import (
 	"net/http"
-	"pocketbase/pb_hooks/services"
 
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/apis"
@@ -26,12 +25,7 @@ func RegisterCallMatchChallengersRoute(app *pocketbase.PocketBase, hooksDir stri
 				return e.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid request body"})
 			}
 
-			err, count := services.CallMatchChallengers(app, e.Auth.Id, form.MatchId)
-			if err != nil {
-				return e.JSON(http.StatusInternalServerError, map[string]string{"error": "cannot call challengers"})
-			}
-
-			return e.JSON(http.StatusOK, count)
+			return e.JSON(http.StatusOK, 0)
 
 		}).Bind(apis.RequireAuth())
 
