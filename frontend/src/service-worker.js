@@ -15,13 +15,40 @@ self.addEventListener('push', (event) => {
 	console.log(`[Service Worker] Push had this data: `, event.data.json());
 
 	const title = 'ChoreZilla';
-	const isDue = data.type === 'due-chore';
-	const options = {
-		body: `${data.household} | ${data.location}: ${data.chore_name} ${isDue ? 'is due' : 'completed'}`,
-		vibrate: [200, 100, 200, 100, 200, 100, 200],
-		requireInteraction: isDue,
-		data
-	};
+	let options = {}
+
+	switch (data.type) {
+		case 'due-chore':
+			options = {
+				body: `${data.household} | ${data.location}: ${data.chore_name} is due`,
+				vibrate: [200, 100, 200, 100, 200, 100, 200],
+				requireInteraction: true,
+				data
+			};			
+			break;
+
+		case 'completed-chore':
+			options = {
+				body: `${data.household} | ${data.location}: ${data.chore_name} completed`,
+				vibrate: [200, 100, 200, 100, 200, 100, 200],
+				requireInteraction: false,
+				data
+			};			
+			break;
+	
+		case 'test':
+			options = {
+				body: `Test`,
+				vibrate: [200, 100, 200, 100, 200, 100, 200],
+				requireInteraction: false,
+				data
+			};			
+			break;
+	
+		default:
+			break;
+	}
+
 
 	event.waitUntil(self.registration.showNotification(title, options));
 });
