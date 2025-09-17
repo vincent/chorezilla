@@ -10,13 +10,33 @@ export type Person = {
 	name: string;
 	role?: string;
 	choresCompleted?: number;
-	avatarColor?: string;
 };
 
 const createMembersStore = () => {
 	const { subscribe, set, update } = writable<Person[]>([]);
 
 	const membersDB = () => client.collection('household_members');
+	const usersDB = () => client.collection('users');
+
+	const warnMissingUser = (row: HouseholdMembersResponse) => {
+		if (!(row.expand as any).user) {
+			console.warn(`missing associated user`);
+			return false;
+		}
+		return true;
+	}
+
+	const mapToPerson = (row: HouseholdMembersResponse) => {
+		const u = (row.expand as any).user as UsersRecord;
+		return {
+			memberId: row.id,
+			userId: u.id,
+			email: u.email || 'Unknown',
+			name: u.name || 'Unknown',
+			role: row.role || '',
+			choresCompleted: 0
+		};
+	}
 
 	const loadCollection = () =>
 		currentHousehold.id().then((hid) =>
@@ -29,24 +49,8 @@ const createMembersStore = () => {
 				.then((list) =>
 					set(
 						list
-							.filter((row) => {
-								if (!(row.expand as any).user) {
-									console.warn(`missing associated user`);
-									return false;
-								}
-								return true;
-							})
-							.map((row) => {
-								const u = (row.expand as any).user as UsersRecord;
-								return {
-									memberId: row.id,
-									userId: u.id,
-									email: u.email || 'Unknown',
-									name: u.name || 'Unknown',
-									role: row.role || '',
-									choresCompleted: 0
-								};
-							})
+							.filter(warnMissingUser)
+							.map(mapToPerson)
 					)
 				)
 		);
@@ -60,8 +64,10 @@ const createMembersStore = () => {
 		findByUserId: (id: string) => get(members).find((r) => r.userId === id),
 		invite: (person: Person) => membersDB().create(person),
 		removePerson: (id: string) => membersDB().delete(id),
-		updatePerson: (updatedPerson: Person) =>
-			membersDB().update(updatedPerson.memberId, updatedPerson)
+		updatePerson: (updatedPerson: Person) => Promise.all([
+			membersDB().update(updatedPerson.memberId, updatedPerson),
+			usersDB().update(updatedPerson.userId, { name: updatedPerson.name })
+		])
 	};
 };
 

@@ -88,7 +88,7 @@
 			class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition"
 			type="submit"
 		>
-			Log In
+			{signup ? 'Sign up' : 'Log in'}
 		</button>
 		{#if signup}
 			<p class="mt-4 text-center text-sm">

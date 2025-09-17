@@ -18,10 +18,8 @@
 		});
 	});
 
-	function handleSubmit(event: CustomEvent<Person>) {
-		const updated: Person = { ...event.detail, userId: String(page.params.id) };
-		members.updatePerson(updated);
-		goto('/members');
+	function handleSubmit(person: Person) {
+		members.updatePerson(person).then(() => goto('/members'));
 	}
 </script>
 
@@ -36,10 +34,12 @@
 	{#if person}
 		<PersonForm
 			initial={{
+				userId: person.userId,
+				memberId: person.memberId,
 				name: person.name,
+				email: person.email,
 				role: person.role ?? '',
 				choresCompleted: person.choresCompleted ?? 0,
-				avatarColor: person.avatarColor ?? ''
 			}}
 			submitLabel="Save Changes"
 			onSubmit={handleSubmit}

@@ -2,7 +2,7 @@
 	import { shadow_hover } from '$lib/styles.svelte';
 	import { EllipsisVertical } from '@lucide/svelte';
 
-	let { href, icon = undefined, title, subtitle = undefined } = $props();
+	let { href, icon = undefined, title, infos = undefined, subtitle = undefined } = $props();
 </script>
 
 <a
@@ -16,7 +16,7 @@
 			<p class="text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>
 		</div>
 	</div>
-	<span class="p-2 rounded-full bg-gray-100 text-gray-600">
-		<EllipsisVertical />
-	</span>
+	<div>
+		{@render infos?.()}
+	</div>
 </a>

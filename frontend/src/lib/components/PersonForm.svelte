@@ -6,6 +6,8 @@
 	let {
 		useEmail = false,
 		initial = {
+			userId: '',
+			memberId: '',
 			email: '',
 			name: '',
 			role: ''
@@ -22,9 +24,10 @@
 	function handleSubmit(event: Event) {
 		event.preventDefault();
 		onSubmit?.({
-			email: email || 'Unknown',
-			name: name || 'Unknown',
-			role: role || ''
+			...initial,
+			email: email,
+			name: name,
+			role: role,
 		});
 	}
 </script>
@@ -39,6 +42,10 @@
 				required
 				class={input_class}
 			/>
+		</Field>
+	{:else}
+		<Field label="Email">
+			<div>{email}</div>
 		</Field>
 	{/if}
 	<Field label="Name">
