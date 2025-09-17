@@ -1,3 +1,4 @@
+/* eslint-disable */
 import PocketBase, { type AuthProviderInfo, RecordService } from 'pocketbase';
 import type {
 	AuthModel,

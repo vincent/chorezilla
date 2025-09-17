@@ -13,7 +13,6 @@
 	let initial: RoomsRecord | null = null;
 
 	onMount(() => {
-		
 		if (!page.params.id) return;
 		id = page.params.id;
 
@@ -26,10 +25,10 @@
 					color: room.color ?? '',
 					location: room.location ?? '',
 					household: room.household ?? '',
-					description: room.description ?? '',
+					description: room.description ?? ''
 				};
 			}
-		})
+		});
 	});
 
 	function handleEdit(detail: Omit<Room, 'id'>) {
@@ -43,18 +42,15 @@
 </svelte:head>
 
 <main class="container mx-auto px-4 py-6">
-	<Title title="Edit room"/>
+	<Title title="Edit room" />
 	{#if initial}
-		<RoomForm
-			{initial}
-			submitLabel="Save Changes"
-			onSubmit={handleEdit}
-		>
+		<RoomForm {initial} submitLabel="Save Changes" onSubmit={handleEdit}>
 			{#snippet otherButtons()}
 				<button
 					type="button"
 					class="mt-2 me-8 p-3 rounded-lg border-red-300 bg-red-100 text-red-600 font-bold hover:bg-red-200 transition-colors"
-				><Trash/></button>
+					><Trash /></button
+				>
 			{/snippet}
 		</RoomForm>
 	{/if}

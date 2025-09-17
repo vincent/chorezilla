@@ -1,9 +1,9 @@
 <script>
-	import { Check, Clock } from "@lucide/svelte";
+	import { Check, Clock } from '@lucide/svelte';
 
-	let { pending, completed } = $props()
-
+	let { pending, completed } = $props();
 </script>
+
 <div class="grid grid-cols-2 gap-4 mb-6">
 	<div class="rounded-xl shadow p-4 bg-white dark:bg-gray-700">
 		<div class="flex items-center justify-between">

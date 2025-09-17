@@ -3,7 +3,7 @@
 	import { initNotifications } from '$lib/hooks/perm-notifications.svelte';
 	import BottomNav from '$lib/components/BottomNav.svelte';
 	import Header from '$lib/components/Header.svelte';
-    import { page } from '$app/state';
+	import { page } from '$app/state';
 	import { client } from '$lib/pocketbase';
 	import { currentHousehold } from '$lib/stores/households';
 	import { member } from '$lib/stores/auth';
@@ -14,8 +14,8 @@
 
 	$effect(() => {
 		if (client.authStore.isValid) {
-			initNotifications(data.config.vapidPublicKey, true)
-			member.load()
+			initNotifications(data.config.vapidPublicKey, true);
+			member.load();
 		}
 	});
 </script>
@@ -25,8 +25,7 @@
 </svelte:head>
 
 <div class="bg-gray-50 dark:bg-gray-800 h-screen font-sans">
-
-    <Header household={$currentHousehold} />
+	<Header household={$currentHousehold} />
 
 	{#key page.url.pathname}
 		<div in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>
@@ -37,7 +36,7 @@
 	{/key}
 
 	{#if client.authStore.isValid}
-	    <BottomNav active={page.route.id} />
+		<BottomNav active={page.route.id} />
 	{/if}
 
 	<div class="bg-red-100 text-red-600"></div>

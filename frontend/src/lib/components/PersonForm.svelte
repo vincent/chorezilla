@@ -32,7 +32,13 @@
 <Form onSubmit={handleSubmit} {submitLabel}>
 	{#if useEmail}
 		<Field label="Email">
-			<input type="email" placeholder="Member email" bind:value={email} required class={input_class} />
+			<input
+				type="email"
+				placeholder="Member email"
+				bind:value={email}
+				required
+				class={input_class}
+			/>
 		</Field>
 	{/if}
 	<Field label="Name">

@@ -21,6 +21,8 @@ export default ts.config(
 			globals: { ...globals.browser, ...globals.node }
 		},
 		rules: {
+			'no-useless-escape': 'warn',
+			'@typescript-eslint/no-explicit-any': 'warn',
 			// typescript-eslint strongly recommend that you do not use the no-undef lint rule on TypeScript projects.
 			// see: https://typescript-eslint.io/troubleshooting/faqs/eslint/#i-get-errors-from-the-no-undef-rule-about-global-variables-not-being-defined-even-though-there-are-no-typescript-errors
 			'no-undef': 'off'
@@ -28,6 +30,7 @@ export default ts.config(
 	},
 	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+		ignores: ['**/pocketbase/*.ts'],
 		languageOptions: {
 			parserOptions: {
 				projectService: true,

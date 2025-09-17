@@ -10,10 +10,6 @@ function subscribe(): Promise<RecordModel> {
 	if (!vapidPublicKey) return Promise.reject('no public VAPID key');
 	return navigator.serviceWorker.ready
 		.then((registration) => {
-			navigator.serviceWorker.addEventListener('controllerchange', (_) => {
-				debugger;
-			});
-
 			return registration.pushManager.subscribe({
 				userVisibleOnly: true,
 				applicationServerKey: urlBase64ToUint8Array(vapidPublicKey)

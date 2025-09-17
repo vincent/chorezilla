@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { shadow_hover } from "$lib/styles.svelte";
-	import { EllipsisVertical } from "@lucide/svelte";
+	import { shadow_hover } from '$lib/styles.svelte';
+	import { EllipsisVertical } from '@lucide/svelte';
 
-	let { href, icon = undefined, title, subtitle = undefined } = $props()
+	let { href, icon = undefined, title, subtitle = undefined } = $props();
 </script>
 
 <a

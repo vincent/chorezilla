@@ -6,16 +6,20 @@ import { writable } from 'svelte/store';
 const createInvitesStore = () => {
 	const { subscribe, set, update } = writable<InvitationsRecord[]>([]);
 
-	const invitesDB = () => client.collection('invitations')
+	const invitesDB = () => client.collection('invitations');
 
-	const loadCollection = () => currentHousehold.id()
-		.then(hid => invitesDB().getFullList<InvitationsRecord>({
-			filter: `household='${hid}'&&status='pending'`,
-			requestKey: 'invites',
-		}).then(list => {
-			set(list)
-			return list
-		}))
+	const loadCollection = () =>
+		currentHousehold.id().then((hid) =>
+			invitesDB()
+				.getFullList<InvitationsRecord>({
+					filter: `household='${hid}'&&status='pending'`,
+					requestKey: 'invites'
+				})
+				.then((list) => {
+					set(list);
+					return list;
+				})
+		);
 
 	return {
 		set,
@@ -23,12 +27,16 @@ const createInvitesStore = () => {
 		subscribe,
 		loadCollection,
 		reset: () => set([]),
-		invite: (email: string, name: string, role: string) => currentHousehold.id()
-			.then(household => invitesDB().create({
-				email, name, role,
-				status: 'pending',
-				household,
-			}))
+		invite: (email: string, name: string, role: string) =>
+			currentHousehold.id().then((household) =>
+				invitesDB().create({
+					email,
+					name,
+					role,
+					status: 'pending',
+					household
+				})
+			)
 	};
 };
 

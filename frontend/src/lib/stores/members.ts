@@ -16,36 +16,40 @@ export type Person = {
 const createMembersStore = () => {
 	const { subscribe, set, update } = writable<Person[]>([]);
 
-	const membersDB = () => client.collection('household_members')
+	const membersDB = () => client.collection('household_members');
 
-	const loadCollection = () => currentHousehold.id()
-		.then(hid => membersDB()
-			.getFullList<HouseholdMembersResponse>({
-				requestKey: 'household_members',
-				filter: `household='${hid}'`,
-				expand: 'user'
-			})
-			.then(list => set(list
-				.filter(row => {
-					if (!(row.expand as any).user) {
-						console.warn(`missing associated user`)
-						return false
-					}
-					return true
+	const loadCollection = () =>
+		currentHousehold.id().then((hid) =>
+			membersDB()
+				.getFullList<HouseholdMembersResponse>({
+					requestKey: 'household_members',
+					filter: `household='${hid}'`,
+					expand: 'user'
 				})
-				.map(row => {
-					const u = (row.expand as any).user as UsersRecord
-					return {
-						memberId: row.id,
-						userId: u.id,
-						email: u.email || 'Unknown',
-						name: u.name || 'Unknown',
-						role: row.role || '',
-						choresCompleted: 0,
-					}
-				}))
-			)
-		)
+				.then((list) =>
+					set(
+						list
+							.filter((row) => {
+								if (!(row.expand as any).user) {
+									console.warn(`missing associated user`);
+									return false;
+								}
+								return true;
+							})
+							.map((row) => {
+								const u = (row.expand as any).user as UsersRecord;
+								return {
+									memberId: row.id,
+									userId: u.id,
+									email: u.email || 'Unknown',
+									name: u.name || 'Unknown',
+									role: row.role || '',
+									choresCompleted: 0
+								};
+							})
+					)
+				)
+		);
 
 	return {
 		set,
@@ -53,11 +57,12 @@ const createMembersStore = () => {
 		subscribe,
 		loadCollection,
 		reset: () => set([]),
-		findByUserId: (id: string) => get(members).find(r => r.userId === id),
+		findByUserId: (id: string) => get(members).find((r) => r.userId === id),
 		invite: (person: Person) => membersDB().create(person),
 		removePerson: (id: string) => membersDB().delete(id),
-		updatePerson: (updatedPerson: Person) => membersDB().update(updatedPerson.memberId, updatedPerson),
-	}
+		updatePerson: (updatedPerson: Person) =>
+			membersDB().update(updatedPerson.memberId, updatedPerson)
+	};
 };
 
 export const members = createMembersStore();

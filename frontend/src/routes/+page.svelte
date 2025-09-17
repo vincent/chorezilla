@@ -8,7 +8,7 @@
 	import { client } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 
-	chores.loadCollection()
+	chores.loadCollection();
 </script>
 
 <svelte:head>
@@ -17,7 +17,6 @@
 
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-6">
-
 	<WelcomeSection user={client.authStore.record} pending={$dueChores.length} />
 
 	{#if $currentHousehold}
@@ -25,18 +24,14 @@
 
 		<ChoresSection title="Today's Chores" chores={$dueChores}>
 			{#snippet empty()}
-				<button
-					onclick={() => goto('/chores/add')}
-					class="w-full {button_class}"
-					type="button"
-				>Create your first chore</button>
+				<button onclick={() => goto('/chores/add')} class="w-full {button_class}" type="button"
+					>Create your first chore</button
+				>
 			{/snippet}
 		</ChoresSection>
 	{:else}
-		<button
-			onclick={() => goto('/households/add')}
-			class="w-full {button_class}"
-			type="button"
-		>Create your first place</button>
+		<button onclick={() => goto('/households/add')} class="w-full {button_class}" type="button"
+			>Create your first place</button
+		>
 	{/if}
 </main>

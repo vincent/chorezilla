@@ -15,7 +15,7 @@
 		if (!id) return;
 		members.loadCollection().then(() => {
 			person = members.findByUserId(id);
-		})
+		});
 	});
 
 	function handleSubmit(event: CustomEvent<Person>) {
@@ -32,7 +32,7 @@
 </svelte:head>
 
 <main class="container mx-auto px-4 py-6">
-	<Title title="Edit Person"/>
+	<Title title="Edit Person" />
 	{#if person}
 		<PersonForm
 			initial={{
@@ -48,7 +48,7 @@
 				<button
 					type="button"
 					class="me-8 mt-2 p-3 rounded-lg border-red-300 bg-red-100 text-red-600 font-bold hover:bg-red-200 transition-colors"
-					><Trash/></button
+					><Trash /></button
 				>
 			{/snippet}
 		</PersonForm>

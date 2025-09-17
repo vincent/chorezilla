@@ -32,7 +32,7 @@ export const load: LayoutLoad = async ({ url, fetch }) => {
 		title
 	};
 
-	if (!client.authStore.isValid && ! url.pathname.includes('login')) {
+	if (!client.authStore.isValid && !url.pathname.includes('login')) {
 		return redirect(303, '/login?redirect_url=' + url.pathname);
 	}
 	try {

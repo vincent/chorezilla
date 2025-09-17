@@ -1,8 +1,8 @@
 <script lang="ts">
-    let { title, children = undefined } = $props()
+	let { title, children = undefined } = $props();
 </script>
 
 <div class="flex justify-between items-center mb-4">
-    <h1 class="text-lg font-semibold text-gray-800 dark:text-white">{title}</h1>
-    {@render children?.()}
+	<h1 class="text-lg font-semibold text-gray-800 dark:text-white">{title}</h1>
+	{@render children?.()}
 </div>

@@ -49,7 +49,7 @@
 	<Field label="Location">
 		<select bind:value={room} class={select_class}>
 			<option class="placeholder" value="" disabled hidden>Select a room</option>
-			{#each $rooms as r}
+			{#each $rooms as r (r.id)}
 				<option value={r.id}>{r.name}</option>
 			{/each}
 		</select>
@@ -72,7 +72,7 @@
 		<div class="flex">
 			<select class={select_class} bind:value={icon}>
 				<option class="placeholder" value="" disabled hidden>Select an icon</option>
-				{#each Object.keys(icons) as c}
+				{#each Object.keys(icons) as c (c)}
 					<option value={c}>{c}</option>
 				{/each}
 			</select>
@@ -82,7 +82,7 @@
 		</div>
 	</Field>
 	<Field label="Assigned">
-		{#each $members as p}
+		{#each $members as p (p.memberId)}
 			<label class="flex items-center ms-5 m-3"
 				><input type="checkbox" class="me-3 h-5 w-5" value={p.userId} bind:group={assigned_users} />
 				{p.name}</label

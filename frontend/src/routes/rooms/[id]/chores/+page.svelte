@@ -1,29 +1,26 @@
 <script lang="ts">
-	import ChoresSection from "$lib/components/ChoresSection.svelte";
-	import { page } from "$app/state";
-	import { chores } from "$lib/stores/chores";
-	import { rooms } from "$lib/stores/rooms";
-	import { onMount } from "svelte";
-	import type { ChoresRecord, RoomsRecord } from "$lib/pocketbase/generated-types";
-	import { Pen } from "@lucide/svelte";
-	import { isAdmin } from "$lib/stores/auth";
+	import ChoresSection from '$lib/components/ChoresSection.svelte';
+	import { page } from '$app/state';
+	import { chores } from '$lib/stores/chores';
+	import { rooms } from '$lib/stores/rooms';
+	import { onMount } from 'svelte';
+	import type { ChoresRecord, RoomsRecord } from '$lib/pocketbase/generated-types';
+	import { Pen } from '@lucide/svelte';
+	import { isAdmin } from '$lib/stores/auth';
 
-	let roomId = String(page.params.id)
-	let room = $state(null as unknown as RoomsRecord)
-	let roomChores = $state<ChoresRecord[]>([])
+	let roomId = String(page.params.id);
+	let room = $state(null as unknown as RoomsRecord);
+	let roomChores = $state<ChoresRecord[]>([]);
 
 	onMount(() => {
-		Promise.all([
-			chores.loadCollection(),
-			rooms.loadCollection(),
-		])
-		.then(() => rooms.findRoom(roomId))
-		.then(r => {
-			if (!r) return;
-			roomChores = chores.findChoresByRoomId(roomId)
-			room = r
-		})
-	})
+		Promise.all([chores.loadCollection(), rooms.loadCollection()])
+			.then(() => rooms.findRoom(roomId))
+			.then((r) => {
+				if (!r) return;
+				roomChores = chores.findChoresByRoomId(roomId);
+				room = r;
+			});
+	});
 </script>
 
 <svelte:head>
@@ -38,7 +35,9 @@
 		<ChoresSection title={`Chores in ${room.name}`} chores={roomChores}>
 			{#snippet subtitle()}
 				{#if $isAdmin}
-					<a class="flex text-gray-500 dark:text-gray-400" href={`/rooms/${room?.id}/edit`}>edit room <Pen class="ms-2"/></a>
+					<a class="flex text-gray-500 dark:text-gray-400" href={`/rooms/${room?.id}/edit`}
+						>edit room <Pen class="ms-2" /></a
+					>
 				{/if}
 			{/snippet}
 			{#snippet empty()}

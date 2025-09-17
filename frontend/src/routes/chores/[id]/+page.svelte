@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import Title from '$lib/components/Title.svelte';
-	import { type Chore } from '$lib/models/chore.svelte';
 	import { client } from '$lib/pocketbase';
 	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
 	import { isAdmin } from '$lib/stores/auth';
@@ -15,16 +14,18 @@
 	onMount(() => {
 		if (!id) return;
 		chores.loadCollection().then(() => {
-			chore = chores.findChore(id)
+			chore = chores.findChore(id);
 		});
 	});
 
 	function handleDone() {
-		chores.updateChore({
-			...chore,
-			last_completed: new Date().toISOString(),
-			last_completed_by: client.authStore.record?.id,
-		} as ChoresRecord).then(c => goto('/'))
+		chores
+			.updateChore({
+				...chore,
+				last_completed: new Date().toISOString(),
+				last_completed_by: client.authStore.record?.id
+			} as ChoresRecord)
+			.then(() => goto('/'));
 	}
 </script>
 
@@ -36,7 +37,7 @@
 
 {#if chore}
 	<section class="max-w-xl mx-auto mt-8 p-6 bg-white dark:bg-gray-700 rounded-xl shadow">
-		<Title title={chore.name}/>
+		<Title title={chore.name} />
 		<p class="text-gray-500 mb-1">{(chore as any).expand.room.name} • {chore.frequency}</p>
 		<p class="text-gray-700 mt-4">{chore.description}</p>
 
@@ -45,12 +46,14 @@
 				type="button"
 				onclick={handleDone}
 				class="mt-2 p-3 rounded-lg border-green-300 bg-green-100 text-green-600 font-bold hover:bg-green-200 transition-colors cursor-pointer"
-			>Mark as done</button>
+				>Mark as done</button
+			>
 			{#if $isAdmin}
 				<a
 					href={`/chores/${chore.id}/edit`}
 					class="mt-2 p-3 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors"
-				>Edit</a>
+					>Edit</a
+				>
 			{/if}
 		</div>
 	</section>
