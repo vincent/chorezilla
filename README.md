@@ -37,7 +37,7 @@ You can host the platform yourself using the public [docker image](//ghcr.io/vin
 
 Check the [docker-compose](docker-compose.yml) file as an example.
 
-In case you need it, the pocketbase admin panel is available on https://your.instance/_
+In case you need it, the pocketbase admin panel is available on [https://your.instance/_](https://your.instance/_)
 
 ## 🛠️ Tech Stack
 
