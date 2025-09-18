@@ -15,6 +15,18 @@ Manage your chores, assign to other users, get notified.
 
 </div>
 
+## 📦 Features
+
+- Manage different rooms
+- Invite users
+- Add tasks to a room with a frequency and assigned users
+- Users get notified until task is done
+- Admins get notified when task is done
+
+## ⚡ Notifications
+
+Notifications are sent only via webpush for now, it could evolve in the future.
+
 ## 🐳 Selfhosting
 
 You can host the platform yourself using the public [docker image](//ghcr.io/vincent/chorezilla:main)
