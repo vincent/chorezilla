@@ -79,6 +79,7 @@ func NotifyDueChoreToAssignedUsers(app *pocketbase.PocketBase, choreId string) (
 
 			// Send Notification
 			resp, err := webpush.SendNotification([]byte(notificationBody), s, &webpush.Options{
+				Topic:           "due-chore-" + chore.Id,
 				Subscriber:      "example@example.com",
 				VAPIDPublicKey:  os.Getenv("CHOREZILLA_VAPID_PUBLIC_KEY"),
 				VAPIDPrivateKey: os.Getenv("CHOREZILLA_VAPID_PRIVATE_KEY"),
