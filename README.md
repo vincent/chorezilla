@@ -35,7 +35,7 @@ Check the [docker-compose](docker-compose.yml) file as an example.
 
 ## 🛠️ Tech Stack
 
-Spoti.es is built upon [PocketBase](https://pocketbase.io) and [SvelteKit](https://kit.svelte.dev)
+Built upon [PocketBase](https://pocketbase.io) and [SvelteKit](https://kit.svelte.dev)
 
 ## 📖 Development
 

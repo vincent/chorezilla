@@ -127,6 +127,7 @@ func main() {
 	// Custom config route
 	pb_routes.RegisterConfigRoute(app, hooksDir)
 	pb_routes.RegisterTestNotificationRoute(app)
+	pb_routes.RegisterSendInvitationRoute(app)
 
 	// Custom jobs
 	jobs.RegisterChoresNotificationsJob(app)

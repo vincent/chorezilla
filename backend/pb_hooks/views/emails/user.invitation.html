@@ -1,0 +1,15 @@
+{{define "title"}}
+    {{.subject}}
+{{end}}
+
+{{define "body"}}
+    <div class="invitation-text">
+        You have been invited to <strong>{{.household_name}}</strong> by {{.admin_name}}
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="footer">
+        <a href="{{.meta.appURL}}/login" class="link">Create an account now to continue</a>
+    </div>
+{{end}}

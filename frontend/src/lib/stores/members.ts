@@ -60,7 +60,6 @@ const createMembersStore = () => {
 		loadCollection,
 		reset: () => set([]),
 		findByUserId: (id: string) => get(members).find((r) => r.userId === id),
-		invite: (person: Person) => membersDB().create(person),
 		removePerson: (id: string) => membersDB().delete(id),
 		updatePerson: (updatedPerson: Person) => Promise.all([
 			membersDB().update(updatedPerson.memberId, updatedPerson),
