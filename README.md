@@ -5,8 +5,8 @@
 Manage your chores, assign to other users, get notified.
 
 <div style="margin-bottom: 1em;">
-<img alt="Home screenshot" style="float: left;" src="//github.com/vincent/chorezilla/blob/main/screenshot1.png?raw=true">
-<img alt="Rooms screenshot" src="//github.com/vincent/chorezilla/blob/main/screenshot2.png?raw=true">
+<img alt="Home screenshot" style="float: left;" src="https://github.com/vincent/chorezilla/blob/main/screenshot1.png?raw=true">
+<img alt="Rooms screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot2.png?raw=true">
 </div>
 
 [![Static Badge](https://img.shields.io/badge/Svelte_5-ff6c47?style=for-the-badge)](https://svelte.dev)
