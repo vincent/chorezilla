@@ -77,4 +77,4 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           host: ${{ secrets.SSH_HOST }}
           key: ${{ secrets.SSH_KEY }}
-          script: /home/debian/.local/bin/dockcheck.sh.sh -u -y
+          script: /home/debian/.local/bin/dockcheck.sh -u -y
