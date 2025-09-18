@@ -4,10 +4,10 @@
 
 Manage your chores, assign to other users, get notified.
 
-<div style="margin-bottom: 1em;">
-<img alt="Home screenshot" style="float: left;" src="https://github.com/vincent/chorezilla/blob/main/screenshot1.png?raw=true">
-<img alt="Rooms screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot2.png?raw=true">
-</div>
+<p float="left" align="middle">
+<img width="300" alt="Home screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot1.png?raw=true">
+<img width="300" alt="Rooms screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot2.png?raw=true">
+</p>
 
 [![Static Badge](https://img.shields.io/badge/Svelte_5-ff6c47?style=for-the-badge)](https://svelte.dev)
 [![Static Badge](https://img.shields.io/badge/Docker-1D63ED?style=for-the-badge)](https://www.docker.com)
