@@ -12,7 +12,12 @@ func RegisterChoresNotificationsJob(app *pocketbase.PocketBase) {
 		chores, err := services.FindDueChoresToNotify(app)
 
 		if err != nil {
-			app.Logger().Error("[new-user] cannot find due chores", "error", err)
+			app.Logger().Error("[chores-job] cannot find due chores", "error", err)
+			return
+		}
+
+		if len(chores) == 0 {
+			app.Logger().Error("[chores-job] no due chores")
 			return
 		}
 

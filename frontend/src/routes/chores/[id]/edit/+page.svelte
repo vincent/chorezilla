@@ -25,6 +25,7 @@
 						name: chore.name ?? '',
 						room: chore.room ?? '',
 						icon: chore.icon ?? '',
+						starts_at: chore.starts_at ?? '',
 						frequency: chore.frequency ?? '',
 						household: chore.household ?? '',
 						created_by: chore.created_by ?? '',

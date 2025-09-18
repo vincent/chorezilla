@@ -15,7 +15,7 @@
 	});
 
 	function handleAdd(event: Omit<ChoresRecord, 'id'>) {
-		const { name, room, icon, description, frequency, assigned_users } = event;
+		const { name, room, icon, description, starts_at, frequency, assigned_users } = event;
 		chores
 			.addChore({
 				household: $currentHousehold.id,
@@ -24,6 +24,7 @@
 				icon,
 				name,
 				room,
+				starts_at,
 				description
 			})
 			.then((c) => goto(`/chores/${c.id}`));

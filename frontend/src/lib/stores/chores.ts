@@ -10,6 +10,7 @@ function uniques(src: string[]) {
 }
 
 function isDue(c: ChoresRecord) {
+	if (c.starts_at && (Date.parse(c.starts_at) > new Date().getTime())) return false;
 	if (!c.last_completed) return true;
 
 	const now = new Date();

@@ -31,6 +31,9 @@ func FindDueChoresToNotify(app *pocketbase.PocketBase) ([]Chore, error) {
 			SELECT id, name, household, assigned_users
 			  FROM chores
 			 WHERE 1=1
+			 	AND (starts_at = NULL
+					OR starts_at < DATE()
+				)
 			 	AND (last_notified_push = NULL
 					OR last_notified_push < {:hourly}
 				)

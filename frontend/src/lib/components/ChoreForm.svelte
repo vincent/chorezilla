@@ -13,6 +13,7 @@
 			room: '',
 			icon: '',
 			assigned_users: [],
+			starts_at: new Date(),
 			frequency: 'weekly',
 			description: ''
 		},
@@ -25,6 +26,9 @@
 	let name = $state(initial.name);
 	let room = $state(initial.room);
 	let icon = $state(initial.icon);
+	let starts_at = $state(initial.starts_at?.toISOString
+		? initial.starts_at.toISOString()?.split(' ')[0]
+		: null);
 	let assigned_users = $state(initial.assigned_users);
 	let frequency = $state(initial.frequency);
 	let description = $state(initial.description);
@@ -35,6 +39,7 @@
 			name,
 			room,
 			icon,
+			starts_at,
 			frequency,
 			assigned_users: assigned_users || undefined,
 			description: description || undefined
@@ -57,6 +62,9 @@
 	<Field label="Description">
 		<textarea placeholder="More infos about the task" bind:value={description} class={input_class}
 		></textarea>
+	</Field>
+	<Field label="Starting at">
+		<input bind:value={starts_at} type="date" class={input_class} />
 	</Field>
 	<Field label="Frequency">
 		<select bind:value={frequency} class={input_class}>
