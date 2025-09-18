@@ -27,11 +27,17 @@ Manage your chores, assign to other users, get notified.
 
 Notifications are sent only via webpush for now, it could evolve in the future.
 
+#### Web push
+You'll need to generate VAPID keys, for example using [this tool online](https://www.stephane-quantin.com/en/tools/generators/vapid-keys) or the [provided go script](https://github.com/vincent/chorezilla/blob/main/backend/scripts/generate-vapid-keys/main.go)
+
+
 ## 🐳 Selfhosting
 
 You can host the platform yourself using the public [docker image](//ghcr.io/vincent/chorezilla:main)
 
 Check the [docker-compose](docker-compose.yml) file as an example.
+
+In case you need it, the pocketbase admin panel is available on https://your.instance/_
 
 ## 🛠️ Tech Stack
 
