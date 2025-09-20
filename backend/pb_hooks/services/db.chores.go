@@ -35,9 +35,18 @@ func FindDueChoresToNotify(app *pocketbase.PocketBase) ([]Chore, error) {
 					OR starts_at < DATE()
 				)
 			 	AND (last_notified_push = NULL
-					OR last_notified_push < {:hourly}
+					OR last_notified_push < {:daily}
 				)
-			 	AND (last_completed = null 
+			 	AND (last_notified_push = null 
+					OR last_notified_push < CASE frequency
+						WHEN 'yearly'  THEN {:monthly}
+						WHEN 'monthly' THEN {:weekly}
+						WHEN 'weekly'  THEN {:daily}
+						WHEN 'daily'   THEN {:hourly}
+						WHEN 'hourly'  THEN {:hourly}
+						ELSE last_completed END
+				)
+				AND (last_completed = null 
 					OR last_completed < CASE frequency
 						WHEN 'yearly'  THEN {:yearly}
 						WHEN 'monthly' THEN {:monthly}
