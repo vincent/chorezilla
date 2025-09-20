@@ -32,7 +32,7 @@
 				{:else}
 					<div class="flex px-4 my-8 mx-auto justify-center text-xl text-gray-500">
 						<span>All done ! Good job</span>
-						<ThumbsUp class="ms-3"/>
+						<ThumbsUp class="ms-3" />
 					</div>
 				{/if}
 			{/snippet}

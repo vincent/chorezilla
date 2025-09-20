@@ -38,9 +38,10 @@ function getSubscription() {
 
 export function resetNotifications() {
 	return navigator.serviceWorker.ready
-		.then((registration) => registration.pushManager.getSubscription().then(s => s?.unsubscribe()))
-		.finally(() => initNotifications(vapidPublicKey, true))
-
+		.then((registration) =>
+			registration.pushManager.getSubscription().then((s) => s?.unsubscribe())
+		)
+		.finally(() => initNotifications(vapidPublicKey, true));
 }
 
 export function initNotifications(publicKey: string, shouldSubscribe = false) {

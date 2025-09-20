@@ -38,7 +38,9 @@
 				{#snippet infos()}
 					{#if chore.last_completed}
 						<p class="text-end font-medium text-gray-800 dark:text-gray-100">last completed</p>
-						<p class="text-end text-sm text-gray-500 dark:text-gray-400">{Intl.DateTimeFormat('en').format(Date.parse(chore.last_completed))}</p>
+						<p class="text-end text-sm text-gray-500 dark:text-gray-400">
+							{Intl.DateTimeFormat('en').format(Date.parse(chore.last_completed))}
+						</p>
 					{/if}
 				{/snippet}
 			</Card>

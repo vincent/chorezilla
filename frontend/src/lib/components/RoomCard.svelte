@@ -3,7 +3,7 @@
 	import type { Room } from '$lib/models';
 	import { Users } from '@lucide/svelte';
 
-	let { room, members }: { room: Room, members: number } = $props();
+	let { room, members }: { room: Room; members: number } = $props();
 </script>
 
 <a

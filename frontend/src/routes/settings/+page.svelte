@@ -10,8 +10,8 @@
 			method: 'POST',
 			body: {
 				household: $currentHousehold.id,
-				scope,
-			},
+				scope
+			}
 		});
 	}
 </script>
@@ -22,12 +22,11 @@
 
 	<!-- Settings List -->
 	<div class="space-y-4">
-
 		<Field label="Notifications">
 			<div class="space-x-4">
 				<button
 					type="button"
-					onclick={() => testNotification('me')}	
+					onclick={() => testNotification('me')}
 					class="mt-3 p-4 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors cursor-pointer"
 					>Test mine</button
 				>
@@ -45,6 +44,5 @@
 				>
 			</div>
 		</Field>
-
 	</div>
 </main>

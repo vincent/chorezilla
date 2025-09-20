@@ -23,13 +23,12 @@
 	);
 
 	$effect(() => {
-		console.log($memberIdsByRoom)
-	})
+		console.log($memberIdsByRoom);
+	});
 </script>
 
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-6">
-
 	<!-- Search Bar -->
 	<div class="relative mb-6">
 		<input

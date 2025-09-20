@@ -34,8 +34,8 @@
 			.updateChore({
 				...chore,
 				id: String(id),
-				last_completed: '',
-			} )
+				last_completed: ''
+			})
 			.then(() => goto('/'));
 	}
 </script>

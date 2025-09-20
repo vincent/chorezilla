@@ -15,7 +15,7 @@ const createMembersStore = () => {
 			return false;
 		}
 		return true;
-	}
+	};
 
 	const mapToPerson = (row: HouseholdMember) => {
 		const u = row.expand?.user;
@@ -27,7 +27,7 @@ const createMembersStore = () => {
 			role: row.role || '',
 			choresCompleted: 0
 		};
-	}
+	};
 
 	const loadCollection = () =>
 		currentHousehold.id().then((hid) =>
@@ -37,10 +37,7 @@ const createMembersStore = () => {
 					filter: `household='${hid}'`,
 					expand: 'user'
 				})
-				.then((list) => list
-					.filter(warnMissingUser)
-					.map(mapToPerson)
-				)
+				.then((list) => list.filter(warnMissingUser).map(mapToPerson))
 				.then(set)
 		);
 
@@ -52,10 +49,11 @@ const createMembersStore = () => {
 		reset: () => set([]),
 		findByUserId: (id: string) => get(members).find((r) => r.userId === id),
 		removePerson: (id: string) => membersDB().delete(id),
-		updatePerson: (updatedPerson: Person) => Promise.all([
-			membersDB().update(updatedPerson.memberId, updatedPerson),
-			usersDB().update(updatedPerson.userId, { name: updatedPerson.name })
-		])
+		updatePerson: (updatedPerson: Person) =>
+			Promise.all([
+				membersDB().update(updatedPerson.memberId, updatedPerson),
+				usersDB().update(updatedPerson.userId, { name: updatedPerson.name })
+			])
 	};
 };
 

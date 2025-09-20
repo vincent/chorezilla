@@ -15,7 +15,7 @@ self.addEventListener('push', (event) => {
 	console.log(`[Service Worker] Push had this data: `, event.data.json());
 
 	const title = 'ChoreZilla';
-	let options = {}
+	let options = {};
 
 	switch (data.type) {
 		case 'due-chore':
@@ -24,7 +24,7 @@ self.addEventListener('push', (event) => {
 				vibrate: [200, 100, 200, 100, 200, 100, 200],
 				requireInteraction: true,
 				data
-			};			
+			};
 			break;
 
 		case 'completed-chore':
@@ -33,22 +33,21 @@ self.addEventListener('push', (event) => {
 				vibrate: [200, 100, 200, 100, 200, 100, 200],
 				requireInteraction: false,
 				data
-			};			
+			};
 			break;
-	
+
 		case 'test':
 			options = {
 				body: `Test`,
 				vibrate: [200, 100, 200, 100, 200, 100, 200],
 				requireInteraction: false,
 				data
-			};			
+			};
 			break;
-	
+
 		default:
 			break;
 	}
-
 
 	event.waitUntil(self.registration.showNotification(title, options));
 });

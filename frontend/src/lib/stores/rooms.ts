@@ -31,7 +31,8 @@ const createRoomsStore = () => {
 		findRoom: (id: string) => get(rooms).find((r) => r.id === id),
 		addRoom: (room: Omit<Room, 'id'>) => roomsDB().create(room),
 		removeRoom: (id: string) => roomsDB().delete(id),
-		updateRoom: (updatedRoom: Partial<Room> & { id: string }) => roomsDB().update(updatedRoom.id, updatedRoom)
+		updateRoom: (updatedRoom: Partial<Room> & { id: string }) =>
+			roomsDB().update(updatedRoom.id, updatedRoom)
 	};
 };
 

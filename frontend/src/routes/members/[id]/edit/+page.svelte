@@ -39,7 +39,7 @@
 				name: person.name,
 				email: person.email,
 				role: person.role ?? '',
-				choresCompleted: person.choresCompleted ?? 0,
+				choresCompleted: person.choresCompleted ?? 0
 			}}
 			submitLabel="Save Changes"
 			onSubmit={handleSubmit}

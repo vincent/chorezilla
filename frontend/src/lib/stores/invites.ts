@@ -28,12 +28,15 @@ const createInvitesStore = () => {
 		loadCollection,
 		reset: () => set([]),
 		invite: (email: string, name: string, role: string) =>
-			client.send(`/api/send-invitation`, { method: 'POST', body: {
-				household: get(currentHousehold).id,
-				email,
-				name,
-				role,
-			}})
+			client.send(`/api/send-invitation`, {
+				method: 'POST',
+				body: {
+					household: get(currentHousehold).id,
+					email,
+					name,
+					role
+				}
+			})
 	};
 };
 

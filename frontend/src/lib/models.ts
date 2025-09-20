@@ -1,22 +1,29 @@
-import type { ChoresRecord, HouseholdMembersRecord, HouseholdsRecord, InvitationsRecord, RoomsRecord, UsersRecord } from "./pocketbase/generated-types";
+import type {
+	ChoresRecord,
+	HouseholdMembersRecord,
+	HouseholdsRecord,
+	InvitationsRecord,
+	RoomsRecord,
+	UsersRecord
+} from './pocketbase/generated-types';
 
 export type Chore = ChoresRecord & {
-    expand?: {
-        room: RoomsRecord,
-    }
-}
+	expand?: {
+		room: RoomsRecord;
+	};
+};
 
 export type Room = RoomsRecord & {
-    expand?: {
-        chores_via_room: Chore[],
-    }
-}
+	expand?: {
+		chores_via_room: Chore[];
+	};
+};
 
 export type HouseholdMember = HouseholdMembersRecord & {
-    expand?: {
-        user: User,
-    }
-}
+	expand?: {
+		user: User;
+	};
+};
 
 export type User = UsersRecord;
 export type Household = HouseholdsRecord;

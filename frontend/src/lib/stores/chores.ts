@@ -6,11 +6,11 @@ import { derived, get, writable } from 'svelte/store';
 import { addDays, addHours, addMonths, addWeeks, addYears } from 'date-fns';
 
 function uniques(src: string[]) {
-	return Object.keys(src.reduce((acc, i) => ({ ...acc, [i]: true }), {}))
+	return Object.keys(src.reduce((acc, i) => ({ ...acc, [i]: true }), {}));
 }
 
 function isDue(c: Chore) {
-	if (c.starts_at && (Date.parse(c.starts_at) > new Date().getTime())) return false;
+	if (c.starts_at && Date.parse(c.starts_at) > new Date().getTime()) return false;
 	if (!c.last_completed) return true;
 
 	const now = new Date();
@@ -59,7 +59,8 @@ const createChoresStore = () => {
 		addChore: (chore: Omit<Chore, 'id' | 'created_by'>) =>
 			choresDB().create({ ...chore, created_by: client.authStore.record?.id }),
 		removeChore: (id: string) => choresDB().delete(id),
-		updateChore: (updatedChore: Partial<Chore> & { id: string }) => choresDB().update(updatedChore.id, updatedChore)
+		updateChore: (updatedChore: Partial<Chore> & { id: string }) =>
+			choresDB().update(updatedChore.id, updatedChore)
 	};
 };
 
@@ -72,18 +73,22 @@ export const userChores = derived(chores, (cs) =>
 export const dueChores = derived(userChores, (cs) => cs.filter((row) => isDue(row)));
 export const completedChores = derived(userChores, (cs) => cs.filter((row) => !isDue(row)));
 
-export const choresByRoom = derived(chores, (cs) => cs.reduce((acc, c) => ({
-	...acc,
-	[c.room]: [
-		...(acc[c.room] || []),
-		c,
-	]
-}), {} as Record<string, Chore[]>));
+export const choresByRoom = derived(chores, (cs) =>
+	cs.reduce(
+		(acc, c) => ({
+			...acc,
+			[c.room]: [...(acc[c.room] || []), c]
+		}),
+		{} as Record<string, Chore[]>
+	)
+);
 
-export const memberIdsByRoom = derived(chores, (cs) => cs.reduce((acc, c) => ({
-	...acc,
-	[c.room]: uniques([
-		...(acc[c.room] || []),
-		...(c.assigned_users || []),
-	])
-}), {} as Record<string, string[]>));
+export const memberIdsByRoom = derived(chores, (cs) =>
+	cs.reduce(
+		(acc, c) => ({
+			...acc,
+			[c.room]: uniques([...(acc[c.room] || []), ...(c.assigned_users || [])])
+		}),
+		{} as Record<string, string[]>
+	)
+);

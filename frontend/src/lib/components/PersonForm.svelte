@@ -27,7 +27,7 @@
 			...initial,
 			email: email,
 			name: name,
-			role: role,
+			role: role
 		});
 	}
 </script>

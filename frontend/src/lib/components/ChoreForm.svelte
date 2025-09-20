@@ -26,9 +26,9 @@
 	let name = $state(initial.name);
 	let room = $state(initial.room);
 	let icon = $state(initial.icon);
-	let starts_at = $state(initial.starts_at?.toISOString
-		? initial.starts_at.toISOString()?.split(' ')[0]
-		: null);
+	let starts_at = $state(
+		initial.starts_at?.toISOString ? initial.starts_at.toISOString()?.split(' ')[0] : null
+	);
 	let assigned_users = $state(initial.assigned_users);
 	let frequency = $state(initial.frequency);
 	let description = $state(initial.description);
