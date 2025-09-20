@@ -1,4 +1,3 @@
-/* eslint-disable no-constant-binary-expression */
 import { derived, writable } from 'svelte/store';
 import { currentHousehold } from './households';
 import { client } from '$lib/pocketbase';
@@ -33,4 +32,4 @@ const createMemberStore = () => {
 
 export const member = createMemberStore();
 
-export const isAdmin = derived(member, (m) => (m as any)?.role?.includes('admin'));
+export const isAdmin = derived(member, (m) => m?.role?.includes('admin'));

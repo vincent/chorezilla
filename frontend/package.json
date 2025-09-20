@@ -12,7 +12,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"typegen": "pocketbase-typegen --db ../backend/pb_data/data.db --out ./src/lib/pocketbase/generated-types.ts",
 		"lint": "eslint . && prettier --check .",
-		"format": "prettier --write ."
+		"format": "prettier --fix --write ."
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",

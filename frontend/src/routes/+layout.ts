@@ -25,7 +25,17 @@ export const load: LayoutLoad = async ({ url, fetch }) => {
 		};
 		signupAllowed: boolean;
 		vapidPublicKey: string;
-	} = {} as any;
+	} = {
+		site: {
+			url: '',
+			name: '',
+			logo: '',
+			copyright: '',
+			year: 2025
+		},
+		signupAllowed: false,
+		vapidPublicKey: ''
+	};
 
 	const title = 'Home';
 	const metadata: Metadata = {

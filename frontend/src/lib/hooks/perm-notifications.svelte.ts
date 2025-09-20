@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import type { RecordModel } from 'pocketbase';
 import { client } from '$lib/pocketbase';
 import { writable } from 'svelte/store';

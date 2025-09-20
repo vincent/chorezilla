@@ -8,7 +8,7 @@
 	const collection = client.collection('users');
 
 	let signup = $state(false);
-	let issue = $state(null);
+	let issue = $state<string | undefined>(undefined);
 
 	const form = $state({
 		email: '',
@@ -35,9 +35,9 @@
 			}
 
 			goto(urlParams.get('redirectUrl') || '/');
-		} catch (error: any) {
+		} catch (error) {
 			console.log(error);
-			issue = error.toString();
+			issue = error?.toString();
 		}
 	}
 </script>

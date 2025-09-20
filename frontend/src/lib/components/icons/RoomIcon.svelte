@@ -18,36 +18,38 @@
 	import SoupPlateIcon from './SoupPlateIcon.svelte';
 	import StoveCookingPotIcon from './StoveCookingPotIcon.svelte';
 
+	export type RoomIconName =
+		| 'arm-dumbbell'
+		| 'bathtub'
+		| 'bed-2'
+		| 'bicycle-3'
+		| 'book-shelf'
+		| 'bottle-wine'
+		| 'broom'
+		| 'car-washing'
+		| 'dining-room'
+		| 'gamepad'
+		| 'glass-drinks'
+		| 'hair-washing-sink'
+		| 'kitchen-cabinets'
+		| 'leisure'
+		| 'ping-pong'
+		| 'shower-2'
+		| 'sleeping-in-bed'
+		| 'sofa'
+		| 'soup-plate'
+		| 'stove-cooking-pot'
+		| 'summer'
+		| 'toilet-bowl'
+		| 'washing-machine'
+		| 'wing-chair';
+
 	let {
 		icon,
 		className
 	}: {
 		className?: string;
-		icon:
-			| 'arm-dumbbell'
-			| 'bathtub'
-			| 'bed-2'
-			| 'bicycle-3'
-			| 'book-shelf'
-			| 'bottle-wine'
-			| 'broom'
-			| 'car-washing'
-			| 'dining-room'
-			| 'gamepad'
-			| 'glass-drinks'
-			| 'hair-washing-sink'
-			| 'kitchen-cabinets'
-			| 'leisure'
-			| 'ping-pong'
-			| 'shower-2'
-			| 'sleeping-in-bed'
-			| 'sofa'
-			| 'soup-plate'
-			| 'stove-cooking-pot'
-			| 'summer'
-			| 'toilet-bowl'
-			| 'washing-machine'
-			| 'wing-chair';
+		icon: RoomIconName;
 	} = $props();
 </script>
 
