@@ -1,5 +1,6 @@
 import type { Household } from '$lib/models';
-import { get, writable } from 'svelte/store';
+import { derived, get, writable } from 'svelte/store';
+import { andSyncRemoteData } from './sync';
 import { client } from '$lib/pocketbase';
 
 const createHouseholdsStore = () => {
@@ -16,7 +17,10 @@ const createHouseholdsStore = () => {
 						requestKey: 'households',
 						filter: hs.map((h: string) => `id='${h}'`).join(' || ')
 					})
-					.then(set);
+					.then(set)
+					.then(() => {
+						if (!get(currentHousehold)) currentHousehold.set(get(households)[0])
+					});
 	};
 
 	return {
@@ -29,39 +33,12 @@ const createHouseholdsStore = () => {
 		create: (name: string) =>
 			db()
 				.create({ name })
-				.then(() => households.loadCollection())
+				.then(andSyncRemoteData)
 	};
 };
 
 export const households = createHouseholdsStore();
 
-const createCurrentHouseholdStore = () => {
-	const { subscribe, set, update } = writable<Household>(undefined);
+export const currentHousehold = writable<Household>(undefined);
 
-	const loadDefault = () =>
-		households
-			.loadCollection()
-			.then(() => get(households)[0])
-			.then(set);
-
-	loadDefault();
-
-	return {
-		set,
-		update,
-		subscribe,
-		loadDefault,
-
-		id: () =>
-			new Promise<string>((resolve) => {
-				const onReady = () => {
-					const id = get(currentHousehold)?.id;
-					if (id) resolve(id);
-					else setTimeout(onReady, 200);
-				};
-				onReady();
-			})
-	};
-};
-
-export const currentHousehold = createCurrentHouseholdStore();
+export const currentHouseholdId = derived(currentHousehold, h => h?.id)

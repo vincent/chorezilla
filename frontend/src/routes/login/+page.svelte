@@ -3,7 +3,7 @@
 	import type { User } from '$lib/models';
 	import { client } from '$lib/pocketbase';
 	import { member } from '$lib/stores/auth';
-	import { currentHousehold, households } from '$lib/stores/households';
+	import { syncRemoteData } from '$lib/stores/sync';
 
 	const collection = client.collection('users');
 
@@ -27,12 +27,11 @@
 				await collection.create(form);
 				await collection.requestVerification(form.email);
 				await collection.authWithPassword<User>(form.email, form.password);
-				await households.loadCollection();
-				currentHousehold.loadDefault();
-				await member.load();
 			} else {
 				await collection.authWithPassword<User>(form.email, form.password);
 			}
+
+			await syncRemoteData();
 
 			goto(urlParams.get('redirectUrl') || '/');
 		} catch (error) {

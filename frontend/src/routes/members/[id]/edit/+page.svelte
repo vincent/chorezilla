@@ -1,11 +1,13 @@
 <script lang="ts">
 	import PersonForm from '$lib/components/PersonForm.svelte';
-	import { members, type Person } from '$lib/stores/members';
 	import Title from '$lib/components/Title.svelte';
+	import { members } from '$lib/stores/members';
+	import type { Person } from '$lib/models';
 	import { goto } from '$app/navigation';
 	import { Trash } from '@lucide/svelte';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
+	import { appReady } from '$lib/stores/sync';
 
 	let id = '';
 	let person: Person | undefined;
@@ -13,9 +15,9 @@
 	onMount(() => {
 		id = String(page.params.id);
 		if (!id) return;
-		members.loadCollection().then(() => {
+		return appReady.subscribe(() => {
 			person = members.findByUserId(id);
-		});
+		})
 	});
 
 	function handleSubmit(person: Person) {

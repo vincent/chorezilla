@@ -1,16 +1,10 @@
 <script lang="ts">
 	import RoomCard from '$lib/components/RoomCard.svelte';
-	import { chores, memberIdsByRoom } from '$lib/stores/chores.js';
+	import { memberIdsByRoom } from '$lib/stores/chores.js';
 	import { Plus, Search } from '@lucide/svelte';
 	import { isAdmin } from '$lib/stores/auth';
 	import { rooms } from '$lib/stores/rooms';
-	import { onMount } from 'svelte';
-
-	onMount(() => {
-		rooms.loadCollection();
-		chores.loadCollection();
-	});
-
+	
 	let filter = $state('');
 	let filteredRooms = $derived(
 		$rooms.filter(
@@ -21,10 +15,6 @@
 				r.description?.toLowerCase().includes(filter)
 		)
 	);
-
-	$effect(() => {
-		console.log($memberIdsByRoom);
-	});
 </script>
 
 <!-- Main Content -->

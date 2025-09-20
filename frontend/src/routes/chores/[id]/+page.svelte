@@ -6,6 +6,7 @@
 	import { client } from '$lib/pocketbase';
 	import { isAdmin } from '$lib/stores/auth';
 	import { chores } from '$lib/stores/chores';
+	import { appReady } from '$lib/stores/sync';
 	import { onMount } from 'svelte';
 
 	let id = page.params.id;
@@ -13,9 +14,9 @@
 
 	onMount(() => {
 		if (!id) return;
-		chores.loadCollection().then(() => {
+		return appReady.subscribe((ready) => ready && chores.loadCollection().then(() => {
 			chore = chores.findChore(id);
-		});
+		}))
 	});
 
 	function handleDone() {

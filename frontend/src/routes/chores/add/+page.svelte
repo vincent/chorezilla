@@ -5,14 +5,6 @@
 	import Title from '$lib/components/Title.svelte';
 	import { currentHousehold } from '$lib/stores/households';
 	import { type Chore } from '$lib/models';
-	import { onMount } from 'svelte';
-	import { members } from '$lib/stores/members';
-	import { rooms } from '$lib/stores/rooms';
-
-	onMount(() => {
-		members.loadCollection();
-		rooms.loadCollection();
-	});
 
 	function handleAdd(event: Omit<Chore, 'id'>) {
 		const { name, room, icon, description, starts_at, frequency, assigned_users } = event;

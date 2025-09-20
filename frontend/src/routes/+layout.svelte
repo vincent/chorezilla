@@ -1,13 +1,13 @@
 <script lang="ts">
 	import '../app.css';
 	import { initNotifications } from '$lib/hooks/perm-notifications.svelte';
+	import { currentHousehold } from '$lib/stores/households';
 	import BottomNav from '$lib/components/BottomNav.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import { page } from '$app/state';
+	import { syncRemoteData } from '$lib/stores/sync';
 	import { client } from '$lib/pocketbase';
-	import { currentHousehold } from '$lib/stores/households';
-	import { member } from '$lib/stores/auth';
 	import { fade } from 'svelte/transition';
+	import { page } from '$app/state';
 
 	const { data, children } = $props();
 	const metadata = $derived(data.metadata ?? {});
@@ -15,7 +15,7 @@
 	$effect(() => {
 		if (client.authStore.isValid) {
 			initNotifications(data.config.vapidPublicKey, true);
-			member.load();
+			syncRemoteData();
 		}
 	});
 </script>
@@ -35,7 +35,7 @@
 		</div>
 	{/key}
 
-	{#if client.authStore.isValid}
+	{#if $currentHousehold}
 		<BottomNav active={page.route.id} />
 	{/if}
 

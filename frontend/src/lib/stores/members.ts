@@ -1,6 +1,7 @@
 import type { HouseholdMember, Person } from '$lib/models';
-import { currentHousehold } from './households';
+import { currentHouseholdId } from './households';
 import { get, writable } from 'svelte/store';
+import { andSyncRemoteData } from './sync';
 import { client } from '$lib/pocketbase';
 
 const createMembersStore = () => {
@@ -30,16 +31,14 @@ const createMembersStore = () => {
 	};
 
 	const loadCollection = () =>
-		currentHousehold.id().then((hid) =>
 			membersDB()
 				.getFullList<HouseholdMember>({
 					requestKey: 'household_members',
-					filter: `household='${hid}'`,
+					filter: `household='${get(currentHouseholdId)}'`,
 					expand: 'user'
 				})
 				.then((list) => list.filter(warnMissingUser).map(mapToPerson))
 				.then(set)
-		);
 
 	return {
 		set,
@@ -48,12 +47,13 @@ const createMembersStore = () => {
 		loadCollection,
 		reset: () => set([]),
 		findByUserId: (id: string) => get(members).find((r) => r.userId === id),
-		removePerson: (id: string) => membersDB().delete(id),
+		removePerson: (id: string) => membersDB().delete(id).then(andSyncRemoteData),
 		updatePerson: (updatedPerson: Person) =>
 			Promise.all([
 				membersDB().update(updatedPerson.memberId, updatedPerson),
 				usersDB().update(updatedPerson.userId, { name: updatedPerson.name })
 			])
+			.then(andSyncRemoteData)
 	};
 };
 

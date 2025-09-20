@@ -8,8 +8,6 @@
 	import { client } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 	import { ThumbsUp } from '@lucide/svelte';
-
-	chores.loadCollection();
 </script>
 
 <svelte:head>

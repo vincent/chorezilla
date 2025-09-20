@@ -5,9 +5,6 @@
 	import { members } from '$lib/stores/members';
 	import { isAdmin } from '$lib/stores/auth';
 
-	members.loadCollection();
-	invites.loadCollection();
-
 	let filter = $state('');
 	let filteredPeople = $derived(
 		$members.filter(

@@ -1,6 +1,7 @@
-import { currentHousehold } from './households';
+import { currentHousehold, currentHouseholdId } from './households';
 import type { Invitation } from '$lib/models';
 import { get, writable } from 'svelte/store';
+import { andSyncRemoteData } from './sync';
 import { client } from '$lib/pocketbase';
 
 const createInvitesStore = () => {
@@ -9,17 +10,15 @@ const createInvitesStore = () => {
 	const invitesDB = () => client.collection('invitations');
 
 	const loadCollection = () =>
-		currentHousehold.id().then((hid) =>
-			invitesDB()
-				.getFullList<Invitation>({
-					filter: `household='${hid}'&&status='pending'`,
-					requestKey: 'invites'
-				})
-				.then((list) => {
-					set(list);
-					return list;
-				})
-		);
+		invitesDB()
+			.getFullList<Invitation>({
+				filter: `household='${get(currentHouseholdId)}'&&status='pending'`,
+				requestKey: 'invites'
+			})
+			.then((list) => {
+				set(list);
+				return list;
+			})
 
 	return {
 		set,
@@ -37,6 +36,7 @@ const createInvitesStore = () => {
 					role
 				}
 			})
+			.then(andSyncRemoteData)
 	};
 };
 

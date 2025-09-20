@@ -1,7 +1,8 @@
 /* eslint-disable no-constant-binary-expression */
 import { client } from '$lib/pocketbase';
 import type { Chore } from '$lib/models';
-import { currentHousehold } from './households';
+import { andSyncRemoteData } from './sync';
+import { currentHouseholdId } from './households';
 import { derived, get, writable } from 'svelte/store';
 import { addDays, addHours, addMonths, addWeeks, addYears } from 'date-fns';
 
@@ -33,13 +34,11 @@ const createChoresStore = () => {
 	const choresDB = () => client.collection('chores');
 
 	const fetchAll = () =>
-		currentHousehold.id().then((hid) =>
-			choresDB().getFullList<Chore>({
-				requestKey: 'chores',
-				filter: `household='${hid}'`,
-				expand: 'room'
-			})
-		);
+		choresDB().getFullList<Chore>({
+			requestKey: 'chores',
+			filter: `household='${get(currentHouseholdId)}'`,
+			expand: 'room'
+		})
 	const loadCollection = () =>
 		fetchAll().then((list) => {
 			set(list);
@@ -57,10 +56,10 @@ const createChoresStore = () => {
 		findChoresByRoomId: (id: string) => get(chores).filter((c) => c.room === id),
 
 		addChore: (chore: Omit<Chore, 'id' | 'created_by'>) =>
-			choresDB().create({ ...chore, created_by: client.authStore.record?.id }),
-		removeChore: (id: string) => choresDB().delete(id),
+			choresDB().create({ ...chore, created_by: client.authStore.record?.id }).then(andSyncRemoteData),
+		removeChore: (id: string) => choresDB().delete(id).then(andSyncRemoteData),
 		updateChore: (updatedChore: Partial<Chore> & { id: string }) =>
-			choresDB().update(updatedChore.id, updatedChore)
+			choresDB().update(updatedChore.id, updatedChore).then(andSyncRemoteData)
 	};
 };
 
