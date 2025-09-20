@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import type { Room } from '$lib/models';
 	import { rooms } from '$lib/stores/rooms';
-	import RoomForm from '$lib/components/RoomForm.svelte';
 	import Title from '$lib/components/Title.svelte';
-	import type { RoomsRecord } from '$lib/pocketbase/generated-types';
+	import RoomForm from '$lib/components/RoomForm.svelte';
 	import { currentHousehold } from '$lib/stores/households';
 
-	function handleAdd(detail: Omit<RoomsRecord, 'id'>) {
+	function handleAdd(detail: Omit<Room, 'id'>) {
 		const { name, location, description, color } = detail;
 		rooms
 			.addRoom({

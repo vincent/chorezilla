@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { type HouseholdsRecord } from '../pocketbase/generated-types';
+	import type { Household } from '$lib/models';
 	import DinosaurIcon from './icons/DinosaurIcon.svelte';
 
-	let { household }: { household: HouseholdsRecord } = $props();
+	let { household }: { household: Household } = $props();
 </script>
 
 <header class="sticky top-0 z-10 bg-white dark:bg-gray-900 shadow-sm">

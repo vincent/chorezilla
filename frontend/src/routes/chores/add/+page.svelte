@@ -3,8 +3,8 @@
 	import { chores } from '$lib/stores/chores';
 	import ChoreForm from '$lib/components/ChoreForm.svelte';
 	import Title from '$lib/components/Title.svelte';
-	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
 	import { currentHousehold } from '$lib/stores/households';
+	import { type Chore } from '$lib/models';
 	import { onMount } from 'svelte';
 	import { members } from '$lib/stores/members';
 	import { rooms } from '$lib/stores/rooms';
@@ -14,7 +14,7 @@
 		rooms.loadCollection();
 	});
 
-	function handleAdd(event: Omit<ChoresRecord, 'id'>) {
+	function handleAdd(event: Omit<Chore, 'id'>) {
 		const { name, room, icon, description, starts_at, frequency, assigned_users } = event;
 		chores
 			.addChore({

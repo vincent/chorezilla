@@ -7,11 +7,11 @@
 	import Title from '$lib/components/Title.svelte';
 	import { members } from '$lib/stores/members';
 	import { rooms } from '$lib/stores/rooms';
-	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
 	import { Trash } from '@lucide/svelte';
+	import { type Chore } from '$lib/models';
 
 	let id = '';
-	let initial = null as ChoresRecord | null;
+	let initial = null as Chore | null;
 
 	onMount(() => {
 		id = String(page.params.id);
@@ -37,7 +37,7 @@
 		);
 	});
 
-	function handleEdit(data: ChoresRecord) {
+	function handleEdit(data: Chore) {
 		chores.updateChore({ ...data, id }).then(() => goto(`/chores/${id}`));
 	}
 

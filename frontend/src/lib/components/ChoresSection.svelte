@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ChoresRecord } from '$lib/pocketbase/generated-types';
 	import RoomIcon from './icons/RoomIcon.svelte';
+	import type { Chore } from '$lib/models';
 	import type { Snippet } from 'svelte';
 	import Card from './Card.svelte';
 
@@ -11,7 +11,7 @@
 		empty
 	}: {
 		title: string;
-		chores: ChoresRecord[];
+		chores: Chore[];
 		subtitle?: Snippet;
 		empty?: Snippet;
 	} = $props();
@@ -28,10 +28,10 @@
 			<Card
 				title={chore.name}
 				href={`/chores/${chore.id}`}
-				subtitle={`${(chore as any).expand.room.name} • ${chore.frequency}`}
+				subtitle={`${chore.expand?.room.name} • ${chore.frequency}`}
 			>
 				{#snippet icon()}
-					<div class={`p-3 rounded-full bg-${(chore as any).expand.room.color}-100 text-grey-600`}>
+					<div class={`p-3 rounded-full bg-${chore.expand?.room.color}-100 text-grey-600`}>
 						<RoomIcon icon={chore.icon as any} />
 					</div>
 				{/snippet}

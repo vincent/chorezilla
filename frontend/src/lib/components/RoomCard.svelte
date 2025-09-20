@@ -1,9 +1,9 @@
 <script lang="ts">
-	import type { RoomsRecord } from '$lib/pocketbase/generated-types.js';
 	import { shadow_hover } from '$lib/styles.svelte';
+	import type { Room } from '$lib/models';
 	import { Users } from '@lucide/svelte';
 
-	let { room, members }: { room: RoomsRecord, members: number } = $props();
+	let { room, members }: { room: Room, members: number } = $props();
 </script>
 
 <a
@@ -15,7 +15,7 @@
 			<h3 class="font-bold text-lg text-gray-800">{room.name}</h3>
 			<!-- Placeholder for chores count -->
 			<span class="px-2 py-1 bg-indigo-200 text-indigo-600 text-xs rounded-full"
-				>{(room as any).expand?.chores_via_room?.length ?? 0} chores</span
+				>{room.expand?.chores_via_room?.length ?? 0} chores</span
 			>
 		</div>
 	</div>

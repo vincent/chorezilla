@@ -1,11 +1,11 @@
 /* eslint-disable no-constant-binary-expression */
-import type { HouseholdMembersRecord } from '$lib/pocketbase/generated-types';
 import { derived, writable } from 'svelte/store';
 import { currentHousehold } from './households';
 import { client } from '$lib/pocketbase';
+import type { HouseholdMember } from '$lib/models';
 
 const createMemberStore = () => {
-	const { subscribe, set, update } = writable<HouseholdMembersRecord>(undefined);
+	const { subscribe, set, update } = writable<HouseholdMember>(undefined);
 
 	const membersDB = () => client.collection('household_members');
 
@@ -13,7 +13,7 @@ const createMemberStore = () => {
 		currentHousehold
 			.id()
 			.then((hid) =>
-				membersDB().getFirstListItem<HouseholdMembersRecord>(
+				membersDB().getFirstListItem<HouseholdMember>(
 					`household='${hid}'&&user='${client.authStore.record?.id}'`,
 					{
 						requestKey: 'me',

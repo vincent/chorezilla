@@ -1,16 +1,7 @@
-import type { HouseholdMembersResponse, UsersRecord } from '$lib/pocketbase/generated-types';
+import type { HouseholdMember, Person } from '$lib/models';
 import { currentHousehold } from './households';
 import { get, writable } from 'svelte/store';
 import { client } from '$lib/pocketbase';
-
-export type Person = {
-	memberId: string;
-	userId: string;
-	email: string;
-	name: string;
-	role?: string;
-	choresCompleted?: number;
-};
 
 const createMembersStore = () => {
 	const { subscribe, set, update } = writable<Person[]>([]);
@@ -18,21 +9,21 @@ const createMembersStore = () => {
 	const membersDB = () => client.collection('household_members');
 	const usersDB = () => client.collection('users');
 
-	const warnMissingUser = (row: HouseholdMembersResponse) => {
-		if (!(row.expand as any).user) {
+	const warnMissingUser = (row: HouseholdMember) => {
+		if (!row.expand?.user) {
 			console.warn(`missing associated user`);
 			return false;
 		}
 		return true;
 	}
 
-	const mapToPerson = (row: HouseholdMembersResponse) => {
-		const u = (row.expand as any).user as UsersRecord;
+	const mapToPerson = (row: HouseholdMember) => {
+		const u = row.expand?.user;
 		return {
 			memberId: row.id,
-			userId: u.id,
-			email: u.email || 'Unknown',
-			name: u.name || 'Unknown',
+			userId: String(u?.id),
+			email: u?.email || 'Unknown',
+			name: u?.name || 'Unknown',
 			role: row.role || '',
 			choresCompleted: 0
 		};
@@ -41,7 +32,7 @@ const createMembersStore = () => {
 	const loadCollection = () =>
 		currentHousehold.id().then((hid) =>
 			membersDB()
-				.getFullList<HouseholdMembersResponse>({
+				.getFullList<HouseholdMember>({
 					requestKey: 'household_members',
 					filter: `household='${hid}'`,
 					expand: 'user'

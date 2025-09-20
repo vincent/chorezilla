@@ -1,9 +1,9 @@
-import { client } from '$lib/pocketbase';
+import type { Household } from '$lib/models';
 import { get, writable } from 'svelte/store';
-import type { HouseholdsRecord } from '$lib/pocketbase/generated-types';
+import { client } from '$lib/pocketbase';
 
 const createHouseholdsStore = () => {
-	const { subscribe, set, update } = writable<HouseholdsRecord[]>([]);
+	const { subscribe, set, update } = writable<Household[]>([]);
 
 	const db = () => client.collection('households');
 
@@ -12,7 +12,7 @@ const createHouseholdsStore = () => {
 		return !hs?.length
 			? Promise.resolve()
 			: db()
-					.getFullList<HouseholdsRecord>({
+					.getFullList<Household>({
 						requestKey: 'households',
 						filter: hs.map((h: string) => `id='${h}'`).join(' || ')
 					})
@@ -36,7 +36,7 @@ const createHouseholdsStore = () => {
 export const households = createHouseholdsStore();
 
 const createCurrentHouseholdStore = () => {
-	const { subscribe, set, update } = writable<HouseholdsRecord>(undefined);
+	const { subscribe, set, update } = writable<Household>(undefined);
 
 	const loadDefault = () =>
 		households

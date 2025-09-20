@@ -1,15 +1,15 @@
 /* eslint-disable no-constant-binary-expression */
 import { client } from '$lib/pocketbase';
-import { derived, get, writable } from 'svelte/store';
+import type { Chore } from '$lib/models';
 import { currentHousehold } from './households';
-import type { ChoresRecord } from '$lib/pocketbase/generated-types';
+import { derived, get, writable } from 'svelte/store';
 import { addDays, addHours, addMonths, addWeeks, addYears } from 'date-fns';
 
 function uniques(src: string[]) {
 	return Object.keys(src.reduce((acc, i) => ({ ...acc, [i]: true }), {}))
 }
 
-function isDue(c: ChoresRecord) {
+function isDue(c: Chore) {
 	if (c.starts_at && (Date.parse(c.starts_at) > new Date().getTime())) return false;
 	if (!c.last_completed) return true;
 
@@ -28,13 +28,13 @@ function isDue(c: ChoresRecord) {
 
 // The main chores store
 const createChoresStore = () => {
-	const { subscribe, set, update } = writable<ChoresRecord[]>([]);
+	const { subscribe, set, update } = writable<Chore[]>([]);
 
 	const choresDB = () => client.collection('chores');
 
 	const fetchAll = () =>
 		currentHousehold.id().then((hid) =>
-			choresDB().getFullList<ChoresRecord>({
+			choresDB().getFullList<Chore>({
 				requestKey: 'chores',
 				filter: `household='${hid}'`,
 				expand: 'room'
@@ -56,10 +56,10 @@ const createChoresStore = () => {
 		findChore: (id: string) => get(chores).find((c) => c.id === id),
 		findChoresByRoomId: (id: string) => get(chores).filter((c) => c.room === id),
 
-		addChore: (chore: Omit<ChoresRecord, 'id' | 'created_by'>) =>
+		addChore: (chore: Omit<Chore, 'id' | 'created_by'>) =>
 			choresDB().create({ ...chore, created_by: client.authStore.record?.id }),
 		removeChore: (id: string) => choresDB().delete(id),
-		updateChore: (updatedChore: ChoresRecord) => choresDB().update(updatedChore.id, updatedChore)
+		updateChore: (updatedChore: Partial<Chore> & { id: string }) => choresDB().update(updatedChore.id, updatedChore)
 	};
 };
 
@@ -78,7 +78,7 @@ export const choresByRoom = derived(chores, (cs) => cs.reduce((acc, c) => ({
 		...(acc[c.room] || []),
 		c,
 	]
-}), {} as Record<string, ChoresRecord[]>));
+}), {} as Record<string, Chore[]>));
 
 export const memberIdsByRoom = derived(chores, (cs) => cs.reduce((acc, c) => ({
 	...acc,

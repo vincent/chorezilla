@@ -1,17 +1,17 @@
-import type { InvitationsRecord } from '$lib/pocketbase/generated-types';
 import { currentHousehold } from './households';
-import { client } from '$lib/pocketbase';
+import type { Invitation } from '$lib/models';
 import { get, writable } from 'svelte/store';
+import { client } from '$lib/pocketbase';
 
 const createInvitesStore = () => {
-	const { subscribe, set, update } = writable<InvitationsRecord[]>([]);
+	const { subscribe, set, update } = writable<Invitation[]>([]);
 
 	const invitesDB = () => client.collection('invitations');
 
 	const loadCollection = () =>
 		currentHousehold.id().then((hid) =>
 			invitesDB()
-				.getFullList<InvitationsRecord>({
+				.getFullList<Invitation>({
 					filter: `household='${hid}'&&status='pending'`,
 					requestKey: 'invites'
 				})

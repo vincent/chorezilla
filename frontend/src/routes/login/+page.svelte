@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import type { User } from '$lib/models';
 	import { client } from '$lib/pocketbase';
-	import type { UsersResponse } from '$lib/pocketbase/generated-types';
 	import { member } from '$lib/stores/auth';
 	import { currentHousehold, households } from '$lib/stores/households';
 
@@ -26,12 +26,12 @@
 			if (signup) {
 				await collection.create(form);
 				await collection.requestVerification(form.email);
-				await collection.authWithPassword<UsersResponse>(form.email, form.password);
+				await collection.authWithPassword<User>(form.email, form.password);
 				await households.loadCollection();
 				currentHousehold.loadDefault();
 				await member.load();
 			} else {
-				await collection.authWithPassword<UsersResponse>(form.email, form.password);
+				await collection.authWithPassword<User>(form.email, form.password);
 			}
 
 			goto(urlParams.get('redirectUrl') || '/');

@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
-	import { goto } from '$app/navigation';
-	import { rooms } from '$lib/stores/rooms';
-	import type { Room } from '$lib/models/room';
-	import RoomForm from '$lib/components/RoomForm.svelte';
-	import Title from '$lib/components/Title.svelte';
-	import type { RoomsRecord } from '$lib/pocketbase/generated-types';
 	import { Trash } from '@lucide/svelte';
+	import { goto } from '$app/navigation';
+	import type { Room } from '$lib/models';
+	import { rooms } from '$lib/stores/rooms';
+	import Title from '$lib/components/Title.svelte';
+	import RoomForm from '$lib/components/RoomForm.svelte';
 
 	let id = '';
-	let initial: RoomsRecord | null = null;
+	let initial: Room | null = null;
 
 	onMount(() => {
 		if (!page.params.id) return;

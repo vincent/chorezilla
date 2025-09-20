@@ -2,10 +2,10 @@
 	import { goto } from '$app/navigation';
 	import Title from '$lib/components/Title.svelte';
 	import { households } from '$lib/stores/households';
-	import type { RoomsRecord } from '$lib/pocketbase/generated-types';
 	import HouseholdForm from '$lib/components/HouseholdForm.svelte';
+	import { type Household } from '$lib/models';
 
-	function handleAdd(detail: Omit<RoomsRecord, 'id'>) {
+	function handleAdd(detail: Omit<Household, 'id'>) {
 		const { name } = detail;
 		households.create(name).then(() => goto('/'));
 	}

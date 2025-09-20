@@ -1,16 +1,16 @@
 <script lang="ts">
 	import ChoresSection from '$lib/components/ChoresSection.svelte';
-	import { page } from '$app/state';
+	import type { Chore, Room } from '$lib/models';
 	import { chores } from '$lib/stores/chores';
-	import { rooms } from '$lib/stores/rooms';
-	import { onMount } from 'svelte';
-	import type { ChoresRecord, RoomsRecord } from '$lib/pocketbase/generated-types';
-	import { Pen } from '@lucide/svelte';
 	import { isAdmin } from '$lib/stores/auth';
+	import { rooms } from '$lib/stores/rooms';
+	import { Pen } from '@lucide/svelte';
+	import { page } from '$app/state';
+	import { onMount } from 'svelte';
 
 	let roomId = String(page.params.id);
-	let room = $state(null as unknown as RoomsRecord);
-	let roomChores = $state<ChoresRecord[]>([]);
+	let room = $state(null as unknown as Room);
+	let roomChores = $state<Chore[]>([]);
 
 	onMount(() => {
 		Promise.all([chores.loadCollection(), rooms.loadCollection()])
