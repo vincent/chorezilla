@@ -1,4 +1,5 @@
 /* eslint-disable no-constant-binary-expression */
+import { toasts } from './toasts';
 import { client } from '$lib/pocketbase';
 import type { Chore } from '$lib/models';
 import { andSyncRemoteData } from './sync';
@@ -45,6 +46,10 @@ const createChoresStore = () => {
 			return list;
 		});
 
+	const updateChore = (updatedChore: Partial<Chore> & { id: string }) =>
+		choresDB()
+			.update(updatedChore.id, updatedChore)
+
 	return {
 		set,
 		update,
@@ -56,10 +61,38 @@ const createChoresStore = () => {
 		findChoresByRoomId: (id: string) => get(chores).filter((c) => c.room === id),
 
 		addChore: (chore: Omit<Chore, 'id' | 'created_by'>) =>
-			choresDB().create({ ...chore, created_by: client.authStore.record?.id }).then(andSyncRemoteData),
-		removeChore: (id: string) => choresDB().delete(id).then(andSyncRemoteData),
-		updateChore: (updatedChore: Partial<Chore> & { id: string }) =>
-			choresDB().update(updatedChore.id, updatedChore).then(andSyncRemoteData)
+			choresDB()
+				.create({ ...chore, created_by: client.authStore.record?.id })
+				.then(toasts.success(`Chore added`))
+				.catch(toasts.error())
+				.then(andSyncRemoteData),
+
+		removeChore: (id: string) =>
+			choresDB()
+				.delete(id)
+				.then(toasts.success(`Chore removed`))
+				.catch(toasts.error())
+				.then(andSyncRemoteData),
+
+		resetCompletion: (id: string) =>
+			updateChore({
+				id,
+				last_completed: ''
+			})
+			.then(toasts.success(`Chore reset`))
+			.catch(toasts.error())
+			.then(andSyncRemoteData),
+
+		markAsDone: (id: string) =>
+			updateChore({
+				id,
+				last_completed: new Date().toISOString(),
+				last_completed_by: client.authStore.record?.id
+			})
+			.then(toasts.success(`Chore marked as done`))
+			.catch(toasts.error())
+			.then(andSyncRemoteData)
+
 	};
 };
 

@@ -3,6 +3,7 @@ import type { Invitation } from '$lib/models';
 import { get, writable } from 'svelte/store';
 import { andSyncRemoteData } from './sync';
 import { client } from '$lib/pocketbase';
+import { toasts } from './toasts';
 
 const createInvitesStore = () => {
 	const { subscribe, set, update } = writable<Invitation[]>([]);
@@ -26,6 +27,7 @@ const createInvitesStore = () => {
 		subscribe,
 		loadCollection,
 		reset: () => set([]),
+
 		invite: (email: string, name: string, role: string) =>
 			client.send(`/api/send-invitation`, {
 				method: 'POST',
@@ -36,6 +38,8 @@ const createInvitesStore = () => {
 					role
 				}
 			})
+			.then(toasts.success(`Member invited`))
+			.catch(toasts.error())
 			.then(andSyncRemoteData)
 	};
 };

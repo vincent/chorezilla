@@ -2,6 +2,7 @@ import type { Household } from '$lib/models';
 import { derived, get, writable } from 'svelte/store';
 import { andSyncRemoteData } from './sync';
 import { client } from '$lib/pocketbase';
+import { toasts } from './toasts';
 
 const createHouseholdsStore = () => {
 	const { subscribe, set, update } = writable<Household[]>([]);
@@ -33,6 +34,8 @@ const createHouseholdsStore = () => {
 		create: (name: string) =>
 			db()
 				.create({ name })
+				.then(toasts.success(`Household created`))
+				.catch(toasts.error())
 				.then(andSyncRemoteData)
 	};
 };

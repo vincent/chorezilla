@@ -3,7 +3,6 @@
 	import { page } from '$app/state';
 	import Title from '$lib/components/Title.svelte';
 	import type { Chore } from '$lib/models';
-	import { client } from '$lib/pocketbase';
 	import { isAdmin } from '$lib/stores/auth';
 	import { chores } from '$lib/stores/chores';
 	import { appReady } from '$lib/stores/sync';
@@ -21,22 +20,13 @@
 
 	function handleDone() {
 		chores
-			.updateChore({
-				...chore,
-				id: String(id),
-				last_completed: new Date().toISOString(),
-				last_completed_by: client.authStore.record?.id
-			})
+			.markAsDone(String(id))
 			.then(() => goto('/'));
 	}
 
 	function handleReset() {
 		chores
-			.updateChore({
-				...chore,
-				id: String(id),
-				last_completed: ''
-			})
+			.resetCompletion(String(id))
 			.then(() => goto('/'));
 	}
 </script>

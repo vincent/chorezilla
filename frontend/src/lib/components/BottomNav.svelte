@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { isAdmin } from '$lib/stores/auth';
 	import { CalendarCheck, House, PlusIcon, Settings2, Users } from '@lucide/svelte';
 
-	let { active } = $props();
+	let { active, isAdmin } = $props();
 </script>
 
 <!-- Bottom Navigation -->
@@ -25,7 +24,7 @@
 			>
 				<House class="w-6 h-6" />
 			</a>
-			{#if $isAdmin}
+			{#if isAdmin}
 				<a
 					href="/chores/add"
 					aria-label="New chore"

@@ -3,6 +3,7 @@ import { currentHouseholdId } from './households';
 import { get, writable } from 'svelte/store';
 import { andSyncRemoteData } from './sync';
 import { client } from '$lib/pocketbase';
+import { toasts } from './toasts';
 
 const createMembersStore = () => {
 	const { subscribe, set, update } = writable<Person[]>([]);
@@ -47,12 +48,21 @@ const createMembersStore = () => {
 		loadCollection,
 		reset: () => set([]),
 		findByUserId: (id: string) => get(members).find((r) => r.userId === id),
-		removePerson: (id: string) => membersDB().delete(id).then(andSyncRemoteData),
+
+		removePerson: (id: string) =>
+			membersDB()
+				.delete(id)
+				.then(toasts.success(`Member removed`))
+				.catch(toasts.error())
+				.then(andSyncRemoteData),
+
 		updatePerson: (updatedPerson: Person) =>
 			Promise.all([
 				membersDB().update(updatedPerson.memberId, updatedPerson),
 				usersDB().update(updatedPerson.userId, { name: updatedPerson.name })
 			])
+			.then(toasts.success(`Member updated`))
+			.catch(toasts.error())
 			.then(andSyncRemoteData)
 	};
 };
