@@ -121,7 +121,9 @@ func main() {
 	})
 
 	// Custom hooks
-	services.BindPostSignUpInvitationHook(app)
+	services.BindAfterHouseholdMemberCreateSuccessHook(app)
+	services.BindAfterHouseholdCreateSuccessHook(app)
+	services.BindAfterUserCreateSuccessHook(app)
 	services.BindPostChoreCompletionHook(app)
 
 	// Custom config route

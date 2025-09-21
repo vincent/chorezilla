@@ -66,6 +66,8 @@ const createChoresStore = () => {
 				.then(toasts.success(`Chore added`))
 				.catch(toasts.error())
 				.then(andSyncRemoteData),
+		
+		updateChore,
 
 		removeChore: (id: string) =>
 			choresDB()

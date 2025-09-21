@@ -8,6 +8,8 @@
 	import { client } from '$lib/pocketbase';
 	import { goto } from '$app/navigation';
 	import { ThumbsUp } from '@lucide/svelte';
+	import { type User } from '$lib/models';
+	import { isAdmin } from '$lib/stores/auth';
 </script>
 
 <svelte:head>
@@ -16,14 +18,14 @@
 
 <!-- Main Content -->
 <main class="container mx-auto px-4 py-6">
-	<WelcomeSection user={client.authStore.record} pending={$dueChores.length} />
+	<WelcomeSection user={client.authStore.record as unknown as User} pending={$dueChores.length} />
 
 	{#if $currentHousehold}
 		<StatsSection pending={$dueChores.length} completed={$completedChores.length} />
 
 		<ChoresSection title="Today's Chores" chores={$dueChores}>
 			{#snippet empty()}
-				{#if !$chores.length}
+				{#if !$chores.length && $isAdmin}
 					<button onclick={() => goto('/chores/add')} class="w-full {button_class}" type="button"
 						>Create your first chore</button
 					>

@@ -1,6 +1,6 @@
-import { currentHouseholdId, households } from './households';
 import { derived, get, writable } from 'svelte/store';
 import type { HouseholdMember } from '$lib/models';
+import { currentHouseholdId } from './households';
 import { client } from '$lib/pocketbase';
 
 const createMemberStore = () => {
@@ -9,15 +9,12 @@ const createMemberStore = () => {
 	const membersDB = () => client.collection('household_members');
 
 	const load = () =>
-		households.loadCollection()
-			.then(() =>
-				membersDB().getFirstListItem<HouseholdMember>(
-					`household='${get(currentHouseholdId)}'&&user='${client.authStore.record?.id}'`,
-					{
-						requestKey: 'me',
-						expand: 'user'
-					}
-				)
+			membersDB().getFirstListItem<HouseholdMember>(
+				`household='${get(currentHouseholdId)}'&&user='${client.authStore.record?.id}'`,
+				{
+					requestKey: 'me',
+					expand: 'user'
+				}
 			)
 			.then(set);
 

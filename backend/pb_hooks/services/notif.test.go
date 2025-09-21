@@ -57,6 +57,7 @@ func NotifyTest(app *pocketbase.PocketBase, userIds []string) (int, error) {
 			})
 			if err != nil {
 				app.Logger().Info("[test-notification] error using subscription", "subscription", row, "error", err)
+				continue
 			}
 			defer resp.Body.Close()
 		}

@@ -1,18 +1,26 @@
 <script lang="ts">
 	import '../app.css';
 	import { initNotifications } from '$lib/hooks/perm-notifications.svelte';
-	import { currentHousehold } from '$lib/stores/households';
+	import { syncCurrentHouseholdData, syncRemoteData } from '$lib/stores/sync';
+	import { currentHousehold, households } from '$lib/stores/households';
 	import BottomNav from '$lib/components/BottomNav.svelte';
 	import Header from '$lib/components/Header.svelte';
-	import { syncRemoteData } from '$lib/stores/sync';
 	import { client } from '$lib/pocketbase';
 	import { fade } from 'svelte/transition';
 	import { Toaster } from 'svelte-sonner'
 	import { page } from '$app/state';
 	import { isAdmin } from '$lib/stores/auth';
+	import type { Household } from '$lib/models';
+	import { goto } from '$app/navigation';
 
 	const { data, children } = $props();
 	const metadata = $derived(data.metadata ?? {});
+
+	function switchHousehold(h: Household) {
+		currentHousehold.set(h)
+		syncCurrentHouseholdData()
+		if (page.url.pathname.includes('/households/add')) goto('/')
+	}
 
 	$effect(() => {
 		if (client.authStore.isValid) {
@@ -27,7 +35,7 @@
 </svelte:head>
 
 <div class="bg-gray-50 dark:bg-gray-800 h-screen font-sans">
-	<Header household={$currentHousehold} />
+	<Header active={$currentHousehold} households={$households} setActive={switchHousehold} />
 
 	{#key page.url.pathname}
 		<div in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 200 }}>

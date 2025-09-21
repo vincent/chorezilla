@@ -21,7 +21,8 @@ export type Room = RoomsRecord & {
 
 export type HouseholdMember = HouseholdMembersRecord & {
 	expand?: {
-		user: User;
+		household?: Household;
+		user?: User;
 	};
 };
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Search, User, UserCog, UserPlus } from '@lucide/svelte';
+	import { Search, User, UserCog, UserPlus, UserStar } from '@lucide/svelte';
 	import Card from '$lib/components/Card.svelte';
 	import { invites } from '$lib/stores/invites';
 	import { members } from '$lib/stores/members';
@@ -46,7 +46,11 @@
 				subtitle={`${person.role || 'Unknown'} • ${person.choresCompleted ?? 0} chores completed`}
 			>
 				{#snippet icon()}
-					<User class="text-gray-200" />
+					{#if person.role == "admin"}
+						<UserStar class="text-gray-200" />
+					{:else}
+						<User class="text-gray-200" />
+					{/if}
 				{/snippet}
 			</Card>
 		{/each}

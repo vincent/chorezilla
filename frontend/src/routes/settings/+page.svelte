@@ -4,6 +4,7 @@
 	import Field from '$lib/components/Field.svelte';
 	import { client } from '$lib/pocketbase';
 	import { currentHousehold } from '$lib/stores/households';
+	import { isAdmin } from '$lib/stores/auth';
 
 	function testNotification(scope: 'me' | 'all') {
 		client.send('/api/test-notification', {
@@ -30,12 +31,14 @@
 					class="mt-3 p-4 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors cursor-pointer"
 					>Test mine</button
 				>
-				<button
-					type="button"
-					onclick={() => testNotification('all')}
-					class="mt-3 p-4 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors cursor-pointer"
-					>Test household</button
-				>
+				{#if $isAdmin}
+					<button
+						type="button"
+						onclick={() => testNotification('all')}
+						class="mt-3 p-4 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors cursor-pointer"
+						>Test household</button
+					>
+				{/if}
 				<button
 					type="button"
 					onclick={resetNotifications}

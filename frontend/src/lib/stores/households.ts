@@ -1,5 +1,5 @@
-import type { Household } from '$lib/models';
 import { derived, get, writable } from 'svelte/store';
+import type { Household } from '$lib/models';
 import { andSyncRemoteData } from './sync';
 import { client } from '$lib/pocketbase';
 import { toasts } from './toasts';
@@ -10,18 +10,14 @@ const createHouseholdsStore = () => {
 	const db = () => client.collection('households');
 
 	const loadCollection = () => {
-		const hs = client.authStore.record?.households;
-		return !hs?.length
-			? Promise.resolve()
-			: db()
-					.getFullList<Household>({
-						requestKey: 'households',
-						filter: hs.map((h: string) => `id='${h}'`).join(' || ')
-					})
-					.then(set)
-					.then(() => {
-						if (!get(currentHousehold)) currentHousehold.set(get(households)[0])
-					});
+		return client.collection('households')
+			.getFullList<Household>({
+				requestKey: 'households',
+			})
+			.then(set)
+			.then(() => {
+				if (!get(currentHousehold)) currentHousehold.set(get(households)[0])
+			});
 	};
 
 	return {
@@ -33,7 +29,8 @@ const createHouseholdsStore = () => {
 
 		create: (name: string) =>
 			db()
-				.create({ name })
+				.create({ name, created_by: client.authStore.record?.id })
+				.then(() => client.collection('users').authRefresh())
 				.then(toasts.success(`Household created`))
 				.catch(toasts.error())
 				.then(andSyncRemoteData)

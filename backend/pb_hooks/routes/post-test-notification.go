@@ -37,7 +37,7 @@ func RegisterTestNotificationRoute(app *pocketbase.PocketBase) {
 
 				// TODO: check ownership
 				household, err := services.FindOwnedHouseholdAdminByUserId(app, e.Auth.Id, form.Household)
-				if err != nil {
+				if err != nil || household == nil {
 					return e.JSON(http.StatusServiceUnavailable, nil)
 				}
 

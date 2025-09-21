@@ -87,6 +87,7 @@ func NotifyDueChoreToAssignedUsers(app *pocketbase.PocketBase, choreId string) (
 			})
 			if err != nil {
 				app.Logger().Info("[challenge] error using subscription", "subscription", row, "error", err)
+				continue
 			}
 			defer resp.Body.Close()
 		}
