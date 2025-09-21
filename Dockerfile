@@ -39,4 +39,6 @@ COPY backend/main.go ./deployed/backend/
 # Expose ports
 EXPOSE 8090
 
-CMD ["/srv/chorezilla/deployed/backend/pocketbase", "serve", "--http", "0.0.0.0:8090", "--dir", "/srv/chorezilla/data", "--hooksDir", "/srv/chorezilla/deployed/backend/pb_hooks", "--migrationsDir", "/srv/chorezilla/deployed/backend/pb_migrations", "--publicDir", "/srv/chorezilla/deployed/frontend"]
+WORKDIR /srv/chorezilla/deployed/backend
+
+CMD ["./pocketbase", "serve", "--http", "0.0.0.0:8090", "--dir", "/srv/chorezilla/data", "--hooksDir", "/srv/chorezilla/deployed/backend/pb_hooks", "--migrationsDir", "/srv/chorezilla/deployed/backend/pb_migrations", "--publicDir", "/srv/chorezilla/deployed/frontend"]
