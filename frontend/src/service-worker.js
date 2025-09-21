@@ -15,11 +15,14 @@ self.addEventListener('push', (event) => {
 	console.log(`[Service Worker] Push had this data: `, event.data.json());
 
 	const title = 'ChoreZilla';
-	let options = {};
+	let options = {
+		icon: '/favicon.svg'
+	};
 
 	switch (data.type) {
 		case 'due-chore':
 			options = {
+				...options,
 				body: `${data.household} | ${data.location}: ${data.chore_name} is due`,
 				vibrate: [200, 100, 200, 100, 200, 100, 200],
 				requireInteraction: true,
@@ -29,6 +32,7 @@ self.addEventListener('push', (event) => {
 
 		case 'completed-chore':
 			options = {
+				...options,
 				body: `${data.household} | ${data.location}: ${data.chore_name} completed`,
 				vibrate: [200, 100, 200, 100, 200, 100, 200],
 				requireInteraction: false,
@@ -38,6 +42,7 @@ self.addEventListener('push', (event) => {
 
 		case 'test':
 			options = {
+				...options,
 				body: `Test`,
 				vibrate: [200, 100, 200, 100, 200, 100, 200],
 				requireInteraction: false,
