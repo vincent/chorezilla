@@ -17,9 +17,10 @@ Manage your chores, assign to other users, get notified.
 
 ## 📦 Features
 
+- Manage different households
 - Manage different rooms
 - Invite users
-- Add tasks to a room with a frequency and assigned users
+- Add tasks to a room, with a frequency and assigned users
 - Users get notified until task is done
 - Admins get notified when task is done
 

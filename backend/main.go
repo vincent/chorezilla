@@ -125,6 +125,7 @@ func main() {
 	services.BindAfterHouseholdCreateSuccessHook(app)
 	services.BindAfterUserCreateSuccessHook(app)
 	services.BindPostChoreCompletionHook(app)
+	services.BindBootstrapAdminAccount(app)
 
 	// Custom config route
 	pb_routes.RegisterConfigRoute(app, hooksDir)
