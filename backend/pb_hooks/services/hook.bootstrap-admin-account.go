@@ -31,7 +31,7 @@ func BindBootstrapAdminAccount(app *pocketbase.PocketBase) {
 
 		admin, err := e.App.FindAuthRecordByEmail("_superusers", email)
 		if err != nil {
-			e.App.Logger().Info("Creating the admin account", "admin", email)
+			e.App.Logger().Info("Creating the admin account from environment variables", "admin", email)
 
 			superusers, err := app.FindCollectionByNameOrId("_superusers")
 			if err != nil {
@@ -50,7 +50,7 @@ func BindBootstrapAdminAccount(app *pocketbase.PocketBase) {
 			}
 
 		} else {
-			e.App.Logger().Info("Updating the admin account", "admin", admin.Email())
+			e.App.Logger().Info("Updating the admin account from environment variables", "admin", admin.Email())
 
 			admin.SetEmail(email)
 			admin.SetPassword(password)

@@ -6,10 +6,18 @@ services:
     image: ghcr.io/vincent/chorezilla:main
     restart: unless-stopped
     environment:
-      - CHOREZILLA_VAPID_PUBLIC_KEY=           # push notifications public key
-      - CHOREZILLA_VAPID_PRIVATE_KEY=          # push notifications private key
-      - CHOREZILLA_ADMIN_EMAIL=                # superadmin account email (optional)
-      - CHOREZILLA_ADMIN_PASSWORD=             # superadmin account password (optional)
+      - CHOREZILLA_ADMIN_EMAIL=                # superadmin account email | optional
+      - CHOREZILLA_ADMIN_PASSWORD=             # superadmin account password | optional
+      - CHOREZILLA_SMTP_HOST=                  # SMTP host
+      - CHOREZILLA_SMTP_PORT=                  # SMTP port
+      - CHOREZILLA_SMTP_USERNAME=              # SMTP username
+      - CHOREZILLA_SMTP_PASSWORD=              # SMTP password
+      - CHOREZILLA_SMTP_TLS=                   # SMTP TLS, FALSE to disable | optional
+      - CHOREZILLA_SMTP_AUTHMETHOD=            # SMTP auth: PLAIN (default) or LOGIN | optional
+      - CHOREZILLA_SMTP_LOCALNAME=             # SMTP localname for EHLO/HELO exchange | optional
+      - CHOREZILLA_VAPID_PUBLIC_KEY=           # web push notifications public key
+      - CHOREZILLA_VAPID_PRIVATE_KEY=          # web push notifications private key
+
     volumes:
       - chorezilla_data:/srv/chorezilla/data
     ports:
