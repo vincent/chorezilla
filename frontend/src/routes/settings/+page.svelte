@@ -52,18 +52,18 @@
 			<div class="space-y-4">
 				<button 
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
-					type="button"><div class="w-full flex justify-between ">Project page <Github class="text-indigo-500"/></div>
+					type="button"><div class="w-full flex justify-between text-gray-800">Project page <Github class="text-indigo-500"/></div>
 					<span class="text-start text-sm w-full text-gray-500">Latest releases, new features, documentation</span>
 				</button>
 				<button 
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
-					type="button"><div class="w-full flex justify-between ">Report a bug <Bug class="text-indigo-500"/></div>
+					type="button"><div class="w-full flex justify-between text-gray-800">Report a bug <Bug class="text-indigo-500"/></div>
 					<span class="text-start text-sm w-full text-gray-500">You found a bug? Please report it!</span>
 				</button>
 				<a target="_blank" 
 					href="https://ko-fi.com/vlkofi"
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer">
-					<div class="w-full flex justify-between ">Support the project <CircleDollarSign class="text-indigo-500"/></div>
+					<div class="w-full flex justify-between text-gray-800">Support the project <CircleDollarSign class="text-indigo-500"/></div>
 					<span class="text-start text-sm w-full text-gray-500">If you can, support the developer</span>
 				</a>
 			</div>
