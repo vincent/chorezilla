@@ -10,17 +10,17 @@ const createRoomsStore = () => {
 
 	const roomsDB = () => client.collection('rooms');
 
-	const loadCollection = () => 
-			roomsDB()
-				.getFullList<Room>({
-					filter: `household='${get(currentHouseholdId)}'`,
-					expand: 'chores_via_room',
-					requestKey: 'rooms'
-				})
-				.then((list) => {
-					set(list);
-					return list;
-				})
+	const loadCollection = () =>
+		roomsDB()
+			.getFullList<Room>({
+				filter: `household='${get(currentHouseholdId)}'`,
+				expand: 'chores_via_room',
+				requestKey: 'rooms'
+			})
+			.then((list) => {
+				set(list);
+				return list;
+			});
 
 	return {
 		set,

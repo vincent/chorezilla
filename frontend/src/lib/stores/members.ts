@@ -31,16 +31,17 @@ const createMembersStore = () => {
 		};
 	};
 
-	const loadCollection = () => get(currentHouseholdId)
-		? membersDB()
-			.getFullList<HouseholdMember>({
-				requestKey: 'household_members',
-				filter: `household='${get(currentHouseholdId)}'`,
-				expand: 'user'
-			})
-			.then((list) => list.filter(warnMissingUser).map(mapToPerson))
-			.then(set)
-		: Promise.reject('no current household')
+	const loadCollection = () =>
+		get(currentHouseholdId)
+			? membersDB()
+					.getFullList<HouseholdMember>({
+						requestKey: 'household_members',
+						filter: `household='${get(currentHouseholdId)}'`,
+						expand: 'user'
+					})
+					.then((list) => list.filter(warnMissingUser).map(mapToPerson))
+					.then(set)
+			: Promise.reject('no current household');
 
 	return {
 		set,
@@ -62,9 +63,9 @@ const createMembersStore = () => {
 				membersDB().update(updatedPerson.memberId, updatedPerson),
 				usersDB().update(updatedPerson.userId, { name: updatedPerson.name })
 			])
-			.then(toasts.success(`Member updated`))
-			.catch(toasts.error())
-			.then(andSyncRemoteData)
+				.then(toasts.success(`Member updated`))
+				.catch(toasts.error())
+				.then(andSyncRemoteData)
 	};
 };
 

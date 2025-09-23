@@ -4,7 +4,7 @@
 	import { Plus, Search } from '@lucide/svelte';
 	import { isAdmin } from '$lib/stores/auth';
 	import { rooms } from '$lib/stores/rooms';
-	
+
 	let filter = $state('');
 	let filteredRooms = $derived(
 		$rooms.filter(

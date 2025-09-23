@@ -9,7 +9,8 @@ const createMemberStore = () => {
 	const membersDB = () => client.collection('household_members');
 
 	const load = () =>
-			membersDB().getFirstListItem<HouseholdMember>(
+		membersDB()
+			.getFirstListItem<HouseholdMember>(
 				`household='${get(currentHouseholdId)}'&&user='${client.authStore.record?.id}'`,
 				{
 					requestKey: 'me',

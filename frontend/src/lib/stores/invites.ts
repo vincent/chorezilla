@@ -19,7 +19,7 @@ const createInvitesStore = () => {
 			.then((list) => {
 				set(list);
 				return list;
-			})
+			});
 
 	return {
 		set,
@@ -29,18 +29,19 @@ const createInvitesStore = () => {
 		reset: () => set([]),
 
 		invite: (email: string, name: string, role: string) =>
-			client.send(`/api/send-invitation`, {
-				method: 'POST',
-				body: {
-					household: get(currentHousehold).id,
-					email,
-					name,
-					role
-				}
-			})
-			.then(toasts.success(`Member invited`))
-			.catch(toasts.error())
-			.then(andSyncRemoteData)
+			client
+				.send(`/api/send-invitation`, {
+					method: 'POST',
+					body: {
+						household: get(currentHousehold).id,
+						email,
+						name,
+						role
+					}
+				})
+				.then(toasts.success(`Member invited`))
+				.catch(toasts.error())
+				.then(andSyncRemoteData)
 	};
 };
 

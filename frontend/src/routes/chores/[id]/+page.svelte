@@ -13,21 +13,21 @@
 
 	onMount(() => {
 		if (!id) return;
-		return appReady.subscribe((ready) => ready && chores.loadCollection().then(() => {
-			chore = chores.findChore(id);
-		}))
+		return appReady.subscribe(
+			(ready) =>
+				ready &&
+				chores.loadCollection().then(() => {
+					chore = chores.findChore(id);
+				})
+		);
 	});
 
 	function handleDone() {
-		chores
-			.markAsDone(String(id))
-			.then(() => goto('/'));
+		chores.markAsDone(String(id)).then(() => goto('/'));
 	}
 
 	function handleReset() {
-		chores
-			.resetCompletion(String(id))
-			.then(() => goto('/'));
+		chores.resetCompletion(String(id)).then(() => goto('/'));
 	}
 </script>
 

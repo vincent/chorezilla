@@ -39,7 +39,7 @@ const createChoresStore = () => {
 			requestKey: 'chores',
 			filter: `household='${get(currentHouseholdId)}'`,
 			expand: 'room'
-		})
+		});
 	const loadCollection = () =>
 		fetchAll().then((list) => {
 			set(list);
@@ -47,8 +47,7 @@ const createChoresStore = () => {
 		});
 
 	const updateChore = (updatedChore: Partial<Chore> & { id: string }) =>
-		choresDB()
-			.update(updatedChore.id, updatedChore)
+		choresDB().update(updatedChore.id, updatedChore);
 
 	return {
 		set,
@@ -66,7 +65,7 @@ const createChoresStore = () => {
 				.then(toasts.success(`Chore added`))
 				.catch(toasts.error())
 				.then(andSyncRemoteData),
-		
+
 		updateChore,
 
 		removeChore: (id: string) =>
@@ -81,9 +80,9 @@ const createChoresStore = () => {
 				id,
 				last_completed: ''
 			})
-			.then(toasts.success(`Chore reset`))
-			.catch(toasts.error())
-			.then(andSyncRemoteData),
+				.then(toasts.success(`Chore reset`))
+				.catch(toasts.error())
+				.then(andSyncRemoteData),
 
 		markAsDone: (id: string) =>
 			updateChore({
@@ -91,10 +90,9 @@ const createChoresStore = () => {
 				last_completed: new Date().toISOString(),
 				last_completed_by: client.authStore.record?.id
 			})
-			.then(toasts.success(`Chore marked as done`))
-			.catch(toasts.error())
-			.then(andSyncRemoteData)
-
+				.then(toasts.success(`Chore marked as done`))
+				.catch(toasts.error())
+				.then(andSyncRemoteData)
 	};
 };
 

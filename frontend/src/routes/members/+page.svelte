@@ -46,7 +46,7 @@
 				subtitle={`${person.role || 'Unknown'} • ${person.choresCompleted ?? 0} chores completed`}
 			>
 				{#snippet icon()}
-					{#if person.role == "admin"}
+					{#if person.role == 'admin'}
 						<UserStar class="text-gray-500 dark:text-gray-200" />
 					{:else}
 						<User class="text-gray-500 dark:text-gray-200" />

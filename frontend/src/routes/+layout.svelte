@@ -7,7 +7,7 @@
 	import Header from '$lib/components/Header.svelte';
 	import { client } from '$lib/pocketbase';
 	import { fade } from 'svelte/transition';
-	import { Toaster } from 'svelte-sonner'
+	import { Toaster } from 'svelte-sonner';
 	import { page } from '$app/state';
 	import { isAdmin } from '$lib/stores/auth';
 	import type { Household } from '$lib/models';
@@ -17,9 +17,9 @@
 	const metadata = $derived(data.metadata ?? {});
 
 	function switchHousehold(h: Household) {
-		currentHousehold.set(h)
-		syncCurrentHouseholdData()
-		if (page.url.pathname.includes('/households/add')) goto('/')
+		currentHousehold.set(h);
+		syncCurrentHouseholdData();
+		if (page.url.pathname.includes('/households/add')) goto('/');
 	}
 
 	$effect(() => {
@@ -51,7 +51,8 @@
 
 	<Toaster position="top-center" richColors />
 
-	<div class="
+	<div
+		class="
 		bg-red-100 text-red-600
 		bg-orange-100 text-orange-600
 		bg-amber-100 text-amber-600

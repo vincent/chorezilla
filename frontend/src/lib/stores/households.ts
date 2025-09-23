@@ -10,13 +10,14 @@ const createHouseholdsStore = () => {
 	const db = () => client.collection('households');
 
 	const loadCollection = () => {
-		return client.collection('households')
+		return client
+			.collection('households')
 			.getFullList<Household>({
-				requestKey: 'households',
+				requestKey: 'households'
 			})
 			.then(set)
 			.then(() => {
-				if (!get(currentHousehold)) currentHousehold.set(get(households)[0])
+				if (!get(currentHousehold)) currentHousehold.set(get(households)[0]);
 			});
 	};
 
@@ -41,4 +42,4 @@ export const households = createHouseholdsStore();
 
 export const currentHousehold = writable<Household>(undefined);
 
-export const currentHouseholdId = derived(currentHousehold, h => h?.id)
+export const currentHouseholdId = derived(currentHousehold, (h) => h?.id);

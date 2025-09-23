@@ -17,7 +17,7 @@
 		if (!id) return;
 		return appReady.subscribe(() => {
 			person = members.findByUserId(id);
-		})
+		});
 	});
 
 	function handleSubmit(person: Person) {

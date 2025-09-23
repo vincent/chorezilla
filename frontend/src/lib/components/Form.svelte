@@ -4,8 +4,8 @@
 	let { onSubmit, children, submitLabel = 'Submit', altButtons = undefined } = $props();
 
 	function handleSubmit(e: Event) {
-		e.preventDefault()
-		onSubmit?.()
+		e.preventDefault();
+		onSubmit?.();
 	}
 </script>
 

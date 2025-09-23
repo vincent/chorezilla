@@ -2,7 +2,6 @@
 	import { goto } from '$app/navigation';
 	import type { User } from '$lib/models';
 	import { client } from '$lib/pocketbase';
-	import { member } from '$lib/stores/auth';
 	import { syncRemoteData } from '$lib/stores/sync';
 
 	const collection = client.collection('users');
