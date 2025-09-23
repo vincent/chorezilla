@@ -21,7 +21,7 @@ func BindBootstrapAdminAccount(app *pocketbase.PocketBase) {
 		return
 
 	} else if (email != "" && password == "") || (email == "" && password != "") {
-		panic(fmt.Sprintf("You must define none, or both %s and %s", emailVar, passwVar))
+		panic(fmt.Sprintf("[BootstrapAdminAccount] You must define none, or both %s and %s", emailVar, passwVar))
 	}
 
 	app.OnBootstrap().BindFunc(func(e *core.BootstrapEvent) error {
@@ -31,12 +31,12 @@ func BindBootstrapAdminAccount(app *pocketbase.PocketBase) {
 
 		admin, err := e.App.FindAuthRecordByEmail("_superusers", email)
 		if err != nil {
-			e.App.Logger().Info("Creating the admin account from environment variables", "admin", email)
+			e.App.Logger().Info("[BootstrapAdminAccount] Creating the admin account from environment variables", "admin", email)
 
 			superusers, err := app.FindCollectionByNameOrId("_superusers")
 			if err != nil {
-				e.App.Logger().Error("cannot create superuser", "error", err)
-				panic(fmt.Errorf("cannot create superuser: %s", err))
+				e.App.Logger().Error("[BootstrapAdminAccount] cannot create superuser", "error", err)
+				panic(fmt.Errorf("[BootstrapAdminAccount] cannot create superuser: %s", err))
 			}
 
 			admin := core.NewRecord(superusers)
@@ -45,19 +45,19 @@ func BindBootstrapAdminAccount(app *pocketbase.PocketBase) {
 
 			err = app.Save(admin)
 			if err != nil {
-				e.App.Logger().Error("cannot create superuser", "error", err)
-				panic(fmt.Errorf("cannot create superuser: %s", err))
+				e.App.Logger().Error("[BootstrapAdminAccount] cannot create superuser", "error", err)
+				panic(fmt.Errorf("[BootstrapAdminAccount] cannot create superuser: %s", err))
 			}
 
 		} else {
-			e.App.Logger().Info("Updating the admin account from environment variables", "admin", admin.Email())
+			e.App.Logger().Info("[BootstrapAdminAccount] Updating the admin account from environment variables", "admin", admin.Email())
 
 			admin.SetEmail(email)
 			admin.SetPassword(password)
 
 			err = app.Save(admin)
 			if err != nil {
-				panic(fmt.Errorf("cannot create superuser: %s", err))
+				panic(fmt.Errorf("[BootstrapAdminAccount] cannot create superuser: %s", err))
 			}
 		}
 

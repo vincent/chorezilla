@@ -4,7 +4,7 @@ package pb_routes
 import (
 	"net/http"
 	"net/mail"
-	"pocketbase/pb_hooks/services"
+	"pocketbase/pb_hooks/db"
 
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
@@ -31,12 +31,12 @@ func RegisterSendInvitationRoute(app *pocketbase.PocketBase) {
 				return e.JSON(http.StatusBadRequest, map[string]string{"error": "Invalid request body"})
 			}
 
-			household, err := services.FindOwnedHouseholdAdminByUserId(app, e.Auth.Id, form.Household)
+			household, err := db.FindOwnedHouseholdAdminByUserId(app, e.Auth.Id, form.Household)
 			if err != nil {
 				return e.JSON(http.StatusServiceUnavailable, nil)
 			}
 
-			invitation, err := services.UpsertInvitationForHousehold(app, household.Id, form.Email, form.Name, form.Role)
+			invitation, err := db.UpsertInvitationForHousehold(app, household.Id, form.Email, form.Name, form.Role)
 			if invitation == nil || err != nil {
 				return e.JSON(http.StatusBadRequest, map[string]string{"error": "cannot invite"})
 			}
@@ -71,13 +71,13 @@ func RegisterSendInvitationRoute(app *pocketbase.PocketBase) {
 			}
 
 			if err != nil {
-				app.Logger().Error("[send-invitation] cannot prepare email", "error", err)
+				app.Logger().Error("[SendInvitation] cannot prepare email", "error", err)
 				return e.JSON(http.StatusServiceUnavailable, nil)
 			}
 
 			err = e.App.NewMailClient().Send(message)
 			if err != nil {
-				app.Logger().Error("[send-invitation] cannot send email", "error", err)
+				app.Logger().Error("[SendInvitation] cannot send email", "error", err)
 				return e.JSON(http.StatusServiceUnavailable, nil)
 			}
 

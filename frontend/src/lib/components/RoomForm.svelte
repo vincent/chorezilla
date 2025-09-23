@@ -33,13 +33,13 @@
 
 <Form onSubmit={handleSubmit} {submitLabel}>
 	<Field label="Name">
-		<input bind:value={name} required class={input_class} />
+		<input placeholder="Bathroom, Garage" bind:value={name} required class={input_class} />
 	</Field>
 	<Field label="Location">
-		<input bind:value={location} class={input_class} />
+		<input placeholder="Main house, Guest house" bind:value={location} class={input_class} />
 	</Field>
 	<Field label="Description">
-		<textarea bind:value={description} class={input_class}></textarea>
+		<textarea placeholder="Room description" bind:value={description} class={input_class}></textarea>
 	</Field>
 	<Field label="Color">
 		<select

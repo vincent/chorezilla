@@ -36,7 +36,7 @@ func BindBootstrapSMTPConfig(app *pocketbase.PocketBase) {
 	if len(port) > 0 {
 		portNumber, err = strconv.Atoi(port)
 		if err != nil {
-			panic(fmt.Sprintf("%s %s is not a number", portVar, port))
+			panic(fmt.Sprintf("[BootstrapSMTPConfig] %s %s is not a number", portVar, port))
 		}
 	}
 	authmethod := strings.ToUpper(strings.TrimSpace(os.Getenv(authmethodVar)))
@@ -64,10 +64,10 @@ func BindBootstrapSMTPConfig(app *pocketbase.PocketBase) {
 
 		if err != nil {
 			e.App.Logger().Error("cannot validate SMTP config", "error", err)
-			panic(fmt.Errorf("cannot validate SMTP config: %s", err))
+			panic(fmt.Errorf("[BootstrapSMTPConfig] cannot validate SMTP config: %s", err))
 
 		} else {
-			e.App.Logger().Info("Updating SMTP config from environment variables")
+			e.App.Logger().Info("[BootstrapSMTPConfig] Updating SMTP config from environment variables")
 		}
 
 		return nil

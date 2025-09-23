@@ -2,9 +2,14 @@
 	import { button_class } from '$lib/styles.svelte';
 
 	let { onSubmit, children, submitLabel = 'Submit', altButtons = undefined } = $props();
+
+	function handleSubmit(e: Event) {
+		e.preventDefault()
+		onSubmit?.()
+	}
 </script>
 
-<form class="flex flex-col p-8 gap-5" on:submit|preventDefault={onSubmit}>
+<form class="flex flex-col p-8 gap-5" onsubmit={handleSubmit}>
 	{@render children()}
 
 	<div class="flex justify-between">

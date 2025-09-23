@@ -1,6 +1,7 @@
 package services
 
 import (
+	"pocketbase/pb_hooks/db"
 	"strings"
 
 	"github.com/pocketbase/pocketbase"
@@ -15,7 +16,7 @@ func BindAfterUserCreateSuccessHook(app *pocketbase.PocketBase) {
 
 		user.Set("name", removeNonAlpha(strings.Split(user.GetString("email"), "@")[0]))
 		if err := e.App.Save(user); err != nil {
-			e.App.Logger().Error("[BindAfterUserCreateSuccessHook] cannot update user", "error", err)
+			e.App.Logger().Error("[AfterUserCreateSuccessHook] cannot update user", "error", err)
 			return err
 		}
 
@@ -26,21 +27,21 @@ func BindAfterUserCreateSuccessHook(app *pocketbase.PocketBase) {
 
 		if err != nil || invitation == nil {
 			if err = createDefaultHousehold(e, e.Record); err != nil {
-				e.App.Logger().Error("[BindPostSignUpInvitationHook] cannot create default household", "error", err)
+				e.App.Logger().Error("[PostSignUpInvitationHook] cannot create default household", "error", err)
 				return err
 			}
 
-			e.App.Logger().Error("[BindPostSignUpInvitationHook] creates a default household", "user", user.Id)
+			e.App.Logger().Error("[PostSignUpInvitationHook] creates a default household", "user", user.Id)
 
 			return e.Next()
 		}
 
 		if err = attachToInvitedHousehold(e, invitation, e.Record); err != nil {
-			e.App.Logger().Error("[BindPostSignUpInvitationHook] cannot attach to invited household", "error", err)
+			e.App.Logger().Error("[PostSignUpInvitationHook] cannot attach to invited household", "error", err)
 			return err
 		}
 
-		e.App.Logger().Error("[BindPostSignUpInvitationHook] attach to invited household", "user", user.Id)
+		e.App.Logger().Error("[PostSignUpInvitationHook] attach to invited household", "user", user.Id)
 
 		return e.Next()
 	})
@@ -48,13 +49,13 @@ func BindAfterUserCreateSuccessHook(app *pocketbase.PocketBase) {
 
 func createDefaultHousehold(e *core.RecordEvent, user *core.Record) error {
 
-	household, err := CreateHousehold(e.App, user.Id)
+	household, err := db.CreateHousehold(e.App, user.Id)
 	if err != nil {
 		e.App.Logger().Error("[createDefaultHousehold] cannot create household", "error", err)
 		return err
 	}
 
-	_, err = CreateRoom(e.App, household.Id)
+	_, err = db.CreateRoom(e.App, household.Id)
 	if err != nil {
 		e.App.Logger().Error("[createDefaultHousehold] cannot create household", "error", err)
 		return err
@@ -71,7 +72,7 @@ func attachToInvitedHousehold(e *core.RecordEvent, invitation *core.Record, user
 		return err
 	}
 
-	_, err := AddHouseholdMember(e.App, invitation.GetString("household"), user.Id, invitation.GetString("role"))
+	_, err := db.AddHouseholdMember(e.App, invitation.GetString("household"), user.Id, invitation.GetString("role"))
 	if err != nil {
 		e.App.Logger().Error("[attachToInvitedHousehold] cannot create household_member", "error", err)
 		return err

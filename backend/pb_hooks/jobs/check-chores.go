@@ -1,7 +1,8 @@
 package jobs
 
 import (
-	"pocketbase/pb_hooks/services"
+	"pocketbase/pb_hooks/db"
+	"pocketbase/pb_hooks/notifications"
 
 	"github.com/pocketbase/pocketbase"
 )
@@ -9,29 +10,29 @@ import (
 func RegisterChoresNotificationsJob(app *pocketbase.PocketBase) {
 
 	app.Cron().MustAdd("NotifyDueChoresToAssignedUsers", "*/10 * * * *", func() {
-		chores, err := services.FindDueChoresToNotify(app)
+		chores, err := db.FindDueChoresToNotify(app)
 
 		if err != nil {
-			app.Logger().Error("[chores-job] cannot find due chores", "error", err)
+			app.Logger().Error("[NotifyDueChoresToAssignedUsers] cannot find due chores", "error", err)
 			return
 		}
 
 		if len(chores) == 0 {
-			app.Logger().Error("[chores-job] no due chores")
+			app.Logger().Debug("[NotifyDueChoresToAssignedUsers] no due chores")
 			return
 		}
 
 		for _, rec := range chores {
-			app.Logger().Info("[chores-job] chore is due", "id", rec.Id, "name", rec.Name, "assigned", rec.AssignedUsers)
+			app.Logger().Debug("[NotifyDueChoresToAssignedUsers] chore is due", "id", rec.Id, "name", rec.Name, "assigned", rec.AssignedUsers)
 
-			count, err := services.NotifyDueChoreToAssignedUsers(app, rec.Id)
+			count, err := notifications.NotifyDueChoreToAssignedUsers(app, rec.Id)
 
 			if err != nil {
-				app.Logger().Error("[chores-job] cannot send notifications", "error", err)
+				app.Logger().Error("[NotifyDueChoresToAssignedUsers] cannot send notifications", "error", err)
 				continue
 			}
 
-			app.Logger().Info("[chores-job] sent notifications", "count", count)
+			app.Logger().Debug("[NotifyDueChoresToAssignedUsers] sent notifications", "count", count)
 		}
 	})
 }

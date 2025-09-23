@@ -32,14 +32,14 @@
 			{/snippet}
 			{#snippet menu()}
 				{#each households as h (h.id)}
-					<li class="my-4 text-lg"><button class="btn flex items-center {h.id === active?.id ? 'text-slate-300' : 'text-slate-400'} cursor-pointer" onclick={() => selectItem(h)}><House class="me-3" /> {h.name}</button></li>
+					<li class="my-4 text-lg"><button class="btn flex items-center {h.id === active?.id ? 'text-slate-900 dark:text-slate-200' : 'text-slate-400'} cursor-pointer" onclick={() => selectItem(h)}><House class="me-3" /> {h.name}</button></li>
 				{/each}
 				<li class="my-4 text-lg"><a href="/households/add" class="btn flex items-center text-slate-500"><HousePlus class="me-3"/> New household</a></li>
 			{/snippet}
 		</Dropdown>
 		<div class="flex items-center space-x-2">
 			<h1 class="text-xl font-bold text-gray-800 dark:text-gray-400"><a href="/">ChoreZilla</a></h1>
-			<DinosaurIcon className="text-white" />
+			<DinosaurIcon className="text-gray-800 dark:text-gray-400" />
 		</div>
 	</div>
 </header>

@@ -13,7 +13,7 @@ func BindAfterHouseholdMemberCreateSuccessHook(app *pocketbase.PocketBase) {
 
 		user, err := app.FindRecordById("users", userId)
 		if err != nil || user == nil {
-			e.App.Logger().Error("[BindAfterHouseholdMemberCreateSuccessHook] cannot find the user", "error", err)
+			e.App.Logger().Error("[AfterHouseholdMemberCreateSuccessHook] cannot find the user", "error", err)
 			return err
 		}
 
@@ -21,11 +21,11 @@ func BindAfterHouseholdMemberCreateSuccessHook(app *pocketbase.PocketBase) {
 
 		err = e.App.Save(user)
 		if err != nil {
-			e.App.Logger().Error("[BindAfterHouseholdMemberCreateSuccessHook] cannot update the user", "error", err)
+			e.App.Logger().Error("[AfterHouseholdMemberCreateSuccessHook] cannot update the user", "error", err)
 			return err
 		}
 
-		e.App.Logger().Info("[BindAfterHouseholdMemberCreateSuccessHook] attached household to user", "user", user.Id, "household", householdId)
+		e.App.Logger().Debug("[AfterHouseholdMemberCreateSuccessHook] attached household to user", "user", user.Id, "household", householdId)
 
 		return nil
 	})

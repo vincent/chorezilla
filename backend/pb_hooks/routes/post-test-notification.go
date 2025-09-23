@@ -3,7 +3,8 @@ package pb_routes
 
 import (
 	"net/http"
-	"pocketbase/pb_hooks/services"
+	"pocketbase/pb_hooks/db"
+	"pocketbase/pb_hooks/notifications"
 
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase"
@@ -36,7 +37,7 @@ func RegisterTestNotificationRoute(app *pocketbase.PocketBase) {
 			if form.Scope == "all" {
 
 				// TODO: check ownership
-				household, err := services.FindOwnedHouseholdAdminByUserId(app, e.Auth.Id, form.Household)
+				household, err := db.FindOwnedHouseholdAdminByUserId(app, e.Auth.Id, form.Household)
 				if err != nil || household == nil {
 					return e.JSON(http.StatusServiceUnavailable, nil)
 				}
@@ -50,7 +51,7 @@ func RegisterTestNotificationRoute(app *pocketbase.PocketBase) {
 					dbx.Params{"household": household.Id},
 				)
 				if err != nil {
-					app.Logger().Error("[test-notification] cannot find household members", "error", err)
+					app.Logger().Error("[TestNotification] cannot find household members", "error", err)
 					return e.JSON(http.StatusServiceUnavailable, nil)
 				}
 
@@ -59,10 +60,10 @@ func RegisterTestNotificationRoute(app *pocketbase.PocketBase) {
 				}
 			}
 
-			count, err := services.NotifyTest(app, userIds)
+			count, err := notifications.NotifyTest(app, userIds)
 
 			if err != nil {
-				app.Logger().Error("[test-notification] cannot send test notifications", "error", err)
+				app.Logger().Error("[TestNotification] cannot send test notifications", "error", err)
 				return e.JSON(http.StatusServiceUnavailable, nil)
 			}
 

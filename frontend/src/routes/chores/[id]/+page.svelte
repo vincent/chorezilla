@@ -40,8 +40,8 @@
 {#if chore}
 	<section class="max-w-xl mx-auto mt-8 p-6 bg-white dark:bg-gray-700 rounded-xl shadow">
 		<Title title={chore.name} />
-		<p class="text-gray-500 mb-1">{chore.expand?.room.name} • {chore.frequency}</p>
-		<p class="text-gray-700 mt-4">{chore.description}</p>
+		<p class="text-gray-400 mb-1">{chore.expand?.room.name} • {chore.frequency}</p>
+		<p class="text-gray-500 my-4">{chore.description}</p>
 
 		<div class="flex justify-between">
 			<button

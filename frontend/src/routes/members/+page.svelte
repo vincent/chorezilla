@@ -47,9 +47,9 @@
 			>
 				{#snippet icon()}
 					{#if person.role == "admin"}
-						<UserStar class="text-gray-200" />
+						<UserStar class="text-gray-500 dark:text-gray-200" />
 					{:else}
-						<User class="text-gray-200" />
+						<User class="text-gray-500 dark:text-gray-200" />
 					{/if}
 				{/snippet}
 			</Card>
