@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { Household } from '$lib/models';
-	import { House, HousePlus } from '@lucide/svelte';
-	import Dropdown from './Dropdown.svelte';
+	import { Dot, House, HousePlus } from '@lucide/svelte';
 	import DinosaurIcon from './icons/DinosaurIcon.svelte';
+	import type { Household } from '$lib/models';
+	import Dropdown from './Dropdown.svelte';
 
 	let {
 		active = undefined,
@@ -36,12 +36,16 @@
 			{#snippet menu()}
 				{#each households as h (h.id)}
 					<li class="my-4 text-lg">
-						<button
-							class="btn flex items-center {h.id === active?.id
-								? 'text-slate-900 dark:text-slate-200'
-								: 'text-slate-400'} cursor-pointer"
-							onclick={() => selectItem(h)}><House class="me-3" /> {h.name}</button
-						>
+						{#if h.id === active?.id}
+							<button class="btn flex items-center text-slate-900 dark:text-slate-200 cursor-pointer">
+								<House class="me-3" /> {h.name}
+							</button
+							>
+						{:else}
+							<button class="btn flex items-center text-slate-400 cursor-pointer"
+								onclick={() => selectItem(h)}><Dot class="me-3" /> {h.name}</button
+							>
+						{/if}
 					</li>
 				{/each}
 				<li class="my-4 text-lg">
