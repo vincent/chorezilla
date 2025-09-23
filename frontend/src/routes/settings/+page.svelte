@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { resetNotifications } from '$lib/hooks/perm-notifications.svelte';
+	import { Bug, CircleDollarSign, Github } from '@lucide/svelte';
+	import { currentHousehold } from '$lib/stores/households';
 	import Title from '$lib/components/Title.svelte';
 	import Field from '$lib/components/Field.svelte';
-	import { client } from '$lib/pocketbase';
-	import { currentHousehold } from '$lib/stores/households';
 	import { isAdmin } from '$lib/stores/auth';
+	import { client } from '$lib/pocketbase';
 
 	function testNotification(scope: 'me' | 'all') {
 		client.send('/api/test-notification', {
@@ -24,7 +25,7 @@
 	<!-- Settings List -->
 	<div class="space-y-4">
 		<Field label="Notifications">
-			<div class="space-x-4">
+			<div class="space-x-4 flex justify-between">
 				<button
 					type="button"
 					onclick={() => testNotification('me')}
@@ -45,6 +46,26 @@
 					class="mt-3 p-4 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors cursor-pointer"
 					>Reset subscription</button
 				>
+			</div>
+		</Field>
+		<Field className="mt-3" label="ChoreZilla project">
+			<div class="space-y-4">
+				<button 
+					class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
+					type="button"><div class="w-full flex justify-between ">Project page <Github class="text-indigo-500"/></div>
+					<span class="text-start text-sm w-full text-gray-500">Latest releases, new features, documentation</span>
+				</button>
+				<button 
+					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
+					type="button"><div class="w-full flex justify-between ">Report a bug <Bug class="text-indigo-500"/></div>
+					<span class="text-start text-sm w-full text-gray-500">You found a bug? Please report it!</span>
+				</button>
+				<a target="_blank" 
+					href="https://ko-fi.com/vlkofi"
+					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer">
+					<div class="w-full flex justify-between ">Support the project <CircleDollarSign class="text-indigo-500"/></div>
+					<span class="text-start text-sm w-full text-gray-500">If you can, support the developer</span>
+				</a>
 			</div>
 		</Field>
 	</div>
