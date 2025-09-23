@@ -5,12 +5,12 @@
 Manage your chores, assign to other users, get notified.
 
 <p float="left" align="middle">
-<img width="220" alt="Rooms screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot5.png?raw=true">
-<img width="220" alt="Chore form screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot6.png?raw=true">
-<img width="220" alt="Members screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot4.png?raw=true">
-<img width="220" alt="Home screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot1.png?raw=true">
-<img width="220" alt="Rooms screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot2.png?raw=true">
-<img width="220" alt="Notification screenshot" src="https://github.com/vincent/chorezilla/blob/main/screenshot3.png?raw=true">
+<img width="220" alt="Rooms screenshot" src="https://github.com/vincent/chorezilla/blob/main/assets/screenshot5.png?raw=true">
+<img width="220" alt="Chore form screenshot" src="https://github.com/vincent/chorezilla/blob/main/assets/screenshot6.png?raw=true">
+<img width="220" alt="Members screenshot" src="https://github.com/vincent/chorezilla/blob/main/assets/screenshot4.png?raw=true">
+<img width="220" alt="Home screenshot" src="https://github.com/vincent/chorezilla/blob/main/assets/screenshot1.png?raw=true">
+<img width="220" alt="Rooms screenshot" src="https://github.com/vincent/chorezilla/blob/main/assets/screenshot2.png?raw=true">
+<img width="220" alt="Notification screenshot" src="https://github.com/vincent/chorezilla/blob/main/assets/screenshot3.png?raw=true">
 </p>
 
 [![Static Badge](https://img.shields.io/badge/Svelte_5-ff6c47?style=for-the-badge)](https://svelte.dev)
@@ -30,7 +30,7 @@ Manage your chores, assign to other users, get notified.
 
 ## ⚡ Notifications
 
-Notifications are sent only via webpush for now, it could evolve in the future.
+> Notifications are sent only via webpush for now, it could evolve in the future.
 
 #### Web push
 You'll need to generate VAPID keys, for example using [this tool online](https://www.stephane-quantin.com/en/tools/generators/vapid-keys) or the [provided go script](https://github.com/vincent/chorezilla/blob/main/backend/scripts/generate-vapid-keys/main.go)
