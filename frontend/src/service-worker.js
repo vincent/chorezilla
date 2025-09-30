@@ -16,27 +16,24 @@ self.addEventListener('push', (event) => {
 
 	const title = 'ChoreZilla';
 	let options = {
-		icon: '/favicon.svg'
+		icon: '/favicon.svg',
+		vibrate: [200, 100, 200, 100, 200, 100, 200],
+		requireInteraction: true,
+		data
 	};
 
 	switch (data.type) {
 		case 'due-chore':
 			options = {
 				...options,
-				body: `${data.household} | ${data.location}: ${data.chore_name} is due`,
-				vibrate: [200, 100, 200, 100, 200, 100, 200],
-				requireInteraction: true,
-				data
+				body: `${data.household} | ${data.location}: ${data.chore_name}`,
 			};
 			break;
 
 		case 'completed-chore':
 			options = {
 				...options,
-				body: `${data.household} | ${data.location}: ${data.chore_name} completed`,
-				vibrate: [200, 100, 200, 100, 200, 100, 200],
-				requireInteraction: false,
-				data
+				body: `${data.household} | ${data.location}: ${data.chore_name} ✓`,
 			};
 			break;
 
@@ -44,9 +41,6 @@ self.addEventListener('push', (event) => {
 			options = {
 				...options,
 				body: `Test`,
-				vibrate: [200, 100, 200, 100, 200, 100, 200],
-				requireInteraction: false,
-				data
 			};
 			break;
 
