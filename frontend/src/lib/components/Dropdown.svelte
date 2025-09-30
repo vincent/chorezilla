@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { isDropdownOpen = $bindable(false), button, menu } = $props();
+	let { isDropdownOpen = $bindable(false), button, buttonClass = '', menu, menuClass = '' } = $props();
 
 	const handleDropdownClick = () => {
 		isDropdownOpen = !isDropdownOpen;
@@ -15,11 +15,11 @@
 
 <div class="flex justify-between items-center">
 	<div class="dropdown" onfocusout={handleDropdownFocusLoss}>
-		<button class="btn m-1" onclick={handleDropdownClick}>
+		<button type="button" class="btn m-1 {buttonClass}" onclick={handleDropdownClick}>
 			{@render button?.()}
 		</button>
 		<ul
-			class="dropdown-content menu p-2 shadow bg-base-100 rounded-box bg-white dark:bg-gray-900 w-52"
+			class="dropdown-content menu p-2 shadow bg-base-100 rounded-box bg-white dark:bg-gray-900 w-52 max-h-100 overflow-y-scroll {menuClass}"
 			style:visibility={isDropdownOpen ? 'visible' : 'hidden'}
 		>
 			{@render menu?.()}
@@ -28,6 +28,11 @@
 </div>
 
 <style>
+	.dropdown {
+		--tw-translate-x: -100px;
+	}
+
+
 	.dropdown {
 		display: inline-block;
 		position: relative;

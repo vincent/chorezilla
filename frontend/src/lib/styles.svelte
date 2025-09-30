@@ -4,7 +4,7 @@
 	export const button_class =
 		'bg-indigo-600 text-white py-4 rounded hover:bg-indigo-700 transition';
 	export const input_class =
-		'mt-1 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-900 placeholder-gray-400';
+		'mt-1 p-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-500 dark:text-white dark:bg-gray-900 placeholder-gray-400';
 	export const select_class =
 		'mt-1 p-2 rounded-lg border border-gray-300 flex-grow dark:bg-gray-900 has-[option.placeholder:checked]:text-gray-300';
 	export const palette = [

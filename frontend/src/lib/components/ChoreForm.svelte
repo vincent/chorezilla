@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { input_class, select_class } from '$lib/styles.svelte';
-	import RoomIcon from './icons/RoomIcon.svelte';
+	import RoomIcon, { type RoomIconName } from './icons/RoomIcon.svelte';
 	import { members } from '$lib/stores/members';
 	import { rooms } from '$lib/stores/rooms';
 	import Field from './Field.svelte';
 	import Form from './Form.svelte';
 	import { icons } from './icons';
+	import Dropdown from './Dropdown.svelte';
 
 	let {
 		initial = {
@@ -32,6 +33,12 @@
 	let assigned_users = $state(initial.assigned_users);
 	let frequency = $state(initial.frequency);
 	let description = $state(initial.description);
+	let isDropdownOpen = $state(false);
+
+	function selectIcon(i: string) {
+		icon = i;
+		isDropdownOpen = false;
+	}
 
 	function handleSubmit(event: Event) {
 		event.preventDefault();
@@ -48,8 +55,26 @@
 </script>
 
 <Form onSubmit={handleSubmit} {submitLabel}>
-	<Field label="Title">
-		<input placeholder="Chore's title" bind:value={name} required class={input_class} />
+	<div class="flex position-relative chore-form">
+		<Dropdown bind:isDropdownOpen>
+			{#snippet button()}
+				<RoomIcon className="me-2 text-slate-900 dark:text-white" icon={icon as RoomIconName || 'broom'} />
+			{/snippet}
+			{#snippet menu()}
+				{#each Object.keys(icons) as i (i)}
+					<li class="my-4 text-lg">
+						<button class="btn flex items-center cursor-pointer" onclick={() => selectIcon(i)}>
+							<RoomIcon className="ms-2 text-slate-900 dark:text-gray-500" icon={i as any} />
+						</button>
+					</li>
+				{/each}
+			{/snippet}
+		</Dropdown>
+		<input placeholder="Chore's title" bind:value={name} required class="{input_class} flex-grow text-xl p-4" />
+	</div>
+	<Field label="Description">
+		<textarea placeholder="Optional description about this task" bind:value={description} class={input_class}
+		></textarea>
 	</Field>
 	<Field label="Location">
 		<select bind:value={room} class={select_class}>
@@ -58,10 +83,6 @@
 				<option value={r.id}>{r.name}</option>
 			{/each}
 		</select>
-	</Field>
-	<Field label="Description">
-		<textarea placeholder="More infos about the task" bind:value={description} class={input_class}
-		></textarea>
 	</Field>
 	<Field label="Starting at">
 		<input bind:value={starts_at} type="date" class={input_class} />
@@ -76,19 +97,6 @@
 			<option value="yearly">Yearly</option>
 		</select>
 	</Field>
-	<Field label="Icon">
-		<div class="flex">
-			<select class={select_class} bind:value={icon}>
-				<option class="placeholder" value="" disabled hidden>Select an icon</option>
-				{#each Object.keys(icons) as c (c)}
-					<option value={c}>{c}</option>
-				{/each}
-			</select>
-			{#if icon}
-				<RoomIcon className="ms-2 text-gray-500" {icon} />
-			{/if}
-		</div>
-	</Field>
 	<Field label="Assigned">
 		{#each $members as p (p.memberId)}
 			<label class="flex items-center ms-5 m-3"
@@ -102,3 +110,13 @@
 		{@render otherButtons?.()}
 	{/snippet}
 </Form>
+
+<style>
+	.chore-form :global(.dropdown-content.menu) {
+		display: grid;
+		width: 60svw;
+		max-width: 60svw;
+		grid-template-rows: repeat(2, auto);
+		grid-template-columns: repeat(4, auto);
+	}
+</style>
