@@ -12,7 +12,7 @@
 		initial = {
 			name: '',
 			room: '',
-			icon: '',
+			icon: 'cardboard-box-12',
 			assigned_users: [],
 			starts_at: new Date(),
 			frequency: 'weekly',
