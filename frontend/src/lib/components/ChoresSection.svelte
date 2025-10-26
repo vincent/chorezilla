@@ -1,8 +1,8 @@
 <script lang="ts">
-	import RoomIcon, { type RoomIconName } from './icons/RoomIcon.svelte';
 	import type { Chore } from '$lib/models';
 	import type { Snippet } from 'svelte';
 	import Card from './Card.svelte';
+	import ChoreIcon from './ChoreIcon.svelte';
 
 	let {
 		title,
@@ -32,7 +32,7 @@
 			>
 				{#snippet icon()}
 					<div class={`p-3 rounded-full bg-${chore.expand?.room.color}-100 text-grey-600`}>
-						<RoomIcon icon={chore.icon as RoomIconName} />
+						<ChoreIcon className="ms-2 text-slate-900 dark:text-gray-500" icon={chore.icon} />
 					</div>
 				{/snippet}
 				{#snippet infos()}

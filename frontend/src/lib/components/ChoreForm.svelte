@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { input_class, select_class } from '$lib/styles.svelte';
-	import RoomIcon, { type RoomIconName } from './icons/RoomIcon.svelte';
 	import { members } from '$lib/stores/members';
 	import { rooms } from '$lib/stores/rooms';
 	import Field from './Field.svelte';
 	import Form from './Form.svelte';
 	import { icons } from './icons';
 	import Dropdown from './Dropdown.svelte';
+	import ChoreIcon from './ChoreIcon.svelte';
 
 	let {
 		initial = {
@@ -58,13 +58,13 @@
 	<div class="flex position-relative chore-form">
 		<Dropdown bind:isDropdownOpen>
 			{#snippet button()}
-				<RoomIcon className="me-2 text-slate-900 dark:text-white" icon={icon as RoomIconName || 'broom'} />
+				<ChoreIcon className="me-2 text-slate-900 dark:text-white" icon={icon} />
 			{/snippet}
 			{#snippet menu()}
-				{#each Object.keys(icons) as i (i)}
+				{#each icons as i}
 					<li class="my-4 text-lg">
-						<button class="btn flex items-center cursor-pointer" onclick={() => selectIcon(i)}>
-							<RoomIcon className="ms-2 text-slate-900 dark:text-gray-500" icon={i as any} />
+						<button type="button" class="btn flex items-center cursor-pointer" onclick={() => selectIcon(i)}>
+							<ChoreIcon className="ms-2 text-slate-900 dark:text-gray-500" icon={i} />
 						</button>
 					</li>
 				{/each}

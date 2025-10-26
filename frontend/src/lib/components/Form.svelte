@@ -5,7 +5,7 @@
 
 	function handleSubmit(e: Event) {
 		e.preventDefault();
-		onSubmit?.();
+		onSubmit?.(e);
 	}
 </script>
 

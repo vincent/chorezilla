@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { resetNotifications } from '$lib/hooks/perm-notifications.svelte';
-	import { Bug, CircleDollarSign, Github } from '@lucide/svelte';
+	import { Bug, CircleDollarSign, Github, PowerOff } from '@lucide/svelte';
 	import { currentHousehold } from '$lib/stores/households';
 	import Title from '$lib/components/Title.svelte';
 	import Field from '$lib/components/Field.svelte';
 	import { isAdmin } from '$lib/stores/auth';
 	import { client } from '$lib/pocketbase';
+	import { goto } from '$app/navigation';
 
 	function testNotification(scope: 'me' | 'all') {
 		client.send('/api/test-notification', {
@@ -15,6 +16,11 @@
 				scope
 			}
 		});
+	}
+
+	function logoff() {
+		client.authStore.clear()
+		location.reload()
 	}
 </script>
 
@@ -66,6 +72,15 @@
 					<div class="w-full flex justify-between text-gray-800">Support the project <CircleDollarSign class="text-indigo-500"/></div>
 					<span class="text-start text-sm w-full text-gray-500">If you can, support the developer</span>
 				</a>
+			</div>
+		</Field>
+		<Field className="mt-3" label="Logged in a {client.authStore.record?.username}">
+			<div class="space-y-4">
+				<button 
+					onclick={() => logoff()}
+					class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
+					type="button"><div class="w-full flex justify-between text-gray-800">Log off <PowerOff class="text-indigo-500"/></div>
+				</button>
 			</div>
 		</Field>
 	</div>
