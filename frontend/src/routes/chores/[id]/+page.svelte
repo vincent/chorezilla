@@ -9,7 +9,7 @@
 	import { onMount } from 'svelte';
 
 	let id = page.params.id;
-	let chore: Chore | undefined;
+	let chore = $state<Chore>();
 
 	onMount(() => {
 		if (!id) return;

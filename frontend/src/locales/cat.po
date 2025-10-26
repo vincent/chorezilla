@@ -1,0 +1,473 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-26T14:32:32.124Z\n"
+"PO-Revision-Date: 2025-10-26T15:40:07.776Z\n"
+"Last-Translator: \n"
+"Language: cat\n"
+"Language-Team: \n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"MIME-Version: 1.0\n"
+
+#. placeholder {0}: metadata.title
+#. placeholder {0}: chore.name
+#. placeholder {0}: signup ? 'Signup' : 'Log in'
+#. placeholder {0}: person.name
+#: src/routes/+layout.svelte
+#: src/routes/chores/[id]/+page.svelte
+#: src/routes/login/+page.svelte
+#: src/routes/members/[id]/edit/+page.svelte
+msgid "ChoreZilla | {0}"
+msgstr "ChoreZilla | {0}"
+
+#: src/routes/chores/add/+page.svelte
+msgid "ChoreZilla | Add Chore"
+msgstr "ChoreZilla | Afegir tasca"
+
+#: src/routes/chores/add/+page.svelte
+msgid "Add a new Chore"
+msgstr "Afegeix una nova tasca"
+
+#: src/routes/chores/add/+page.svelte
+msgid "Add Chore"
+msgstr "Afegeix tasca"
+
+#: src/lib/components/Header.svelte
+msgid "<0/> New household"
+msgstr "<0/> Nova llar"
+
+#: src/lib/components/Header.svelte
+msgid "ChoreZilla"
+msgstr "ChoreZilla"
+
+#: src/lib/components/BottomNav.svelte
+msgid "Home"
+msgstr "Inici"
+
+#: src/lib/components/BottomNav.svelte
+msgid "Rooms"
+msgstr "Habitacions"
+
+#: src/lib/components/BottomNav.svelte
+msgid "New chore"
+msgstr "Nova tasca"
+
+#: src/lib/components/BottomNav.svelte
+msgid "People"
+msgstr "Persones"
+
+#: src/lib/components/BottomNav.svelte
+#: src/routes/settings/+page.svelte
+msgid "Settings"
+msgstr "Configuració"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Chore's title"
+msgstr "Títol de la tasca"
+
+#: src/lib/components/ChoreForm.svelte
+#: src/lib/components/RoomForm.svelte
+msgid "Description"
+msgstr "Descripció"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Optional description about this task"
+msgstr "Descripció opcional sobre aquesta tasca"
+
+#: src/lib/components/ChoreForm.svelte
+#: src/lib/components/RoomForm.svelte
+msgid "Location"
+msgstr "Ubicació"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Select a room"
+msgstr "Selecciona una habitació"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Starting at"
+msgstr "Comença a"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Frequency"
+msgstr "Freqüència"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Select a frequency"
+msgstr "Selecciona una freqüència"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Hourly"
+msgstr "Cada hora"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Daily"
+msgstr "Diàriament"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Weekly"
+msgstr "Setmanalment"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Monthly"
+msgstr "Mensualment"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Yearly"
+msgstr "Anualment"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Assigned"
+msgstr "Assignat"
+
+#: src/routes/+page.svelte
+msgid "ChoreZilla | Today's Chores"
+msgstr "ChoreZilla | Tasques d'avui"
+
+#: src/routes/+page.svelte
+msgid "Today's Chores"
+msgstr "Tasques d'avui"
+
+#: src/routes/+page.svelte
+msgid "Create your first chore"
+msgstr "Crea la teva primera tasca"
+
+#: src/routes/+page.svelte
+msgid "All done ! Good job"
+msgstr "Tot fet! Bona feina"
+
+#: src/routes/+page.svelte
+msgid "Create your first place"
+msgstr "Crea el teu primer lloc"
+
+#. placeholder {0}: user?.name
+#: src/lib/components/WelcomeSection.svelte
+msgid "Welcome back, {0}!"
+msgstr "Benvingut de nou, {0}!"
+
+#. placeholder {0}: pending
+#: src/lib/components/WelcomeSection.svelte
+msgid "You have {0} chores to complete today"
+msgstr "Tens {0} tasques per completar avui"
+
+#: src/lib/components/StatsSection.svelte
+msgid "Completed"
+msgstr "Completades"
+
+#: src/lib/components/StatsSection.svelte
+msgid "Pending"
+msgstr "Pendents"
+
+#: src/lib/components/ChoresSection.svelte
+msgid "last completed"
+msgstr "última completada"
+
+#: src/routes/chores/[id]/+page.svelte
+msgid "Mark as done"
+msgstr "Marca com a feta"
+
+#: src/routes/chores/[id]/+page.svelte
+msgid "Reset"
+msgstr "Reinicia"
+
+#: src/routes/chores/[id]/+page.svelte
+msgid "Edit"
+msgstr "Edita"
+
+#: src/routes/chores/[id]/+page.svelte
+#: src/routes/chores/[id]/edit/+page.svelte
+msgid "Chore not found"
+msgstr "Tasca no trobada"
+
+#: src/routes/chores/[id]/+page.svelte
+#: src/routes/chores/[id]/edit/+page.svelte
+msgid "No details available for this chore."
+msgstr "No hi ha detalls disponibles per a aquesta tasca."
+
+#~ msgid "POST"
+#~ msgstr "POST"
+
+#: src/routes/settings/+page.svelte
+msgid "Notifications"
+msgstr "Notificacions"
+
+#: src/routes/settings/+page.svelte
+msgid "Test mine"
+msgstr "Prova la meva"
+
+#: src/routes/settings/+page.svelte
+msgid "Test household"
+msgstr "Prova la llar"
+
+#: src/routes/settings/+page.svelte
+msgid "Reset subscription"
+msgstr "Reinicia la subscripció"
+
+#: src/routes/settings/+page.svelte
+msgid "ChoreZilla project"
+msgstr "Projecte ChoreZilla"
+
+#: src/routes/settings/+page.svelte
+msgid "Project page <0/>"
+msgstr "Pàgina del projecte <0/>"
+
+#: src/routes/settings/+page.svelte
+msgid "Latest releases, new features, documentation"
+msgstr "Últimes versions, noves funcions, documentació"
+
+#: src/routes/settings/+page.svelte
+msgid "Report a bug <0/>"
+msgstr "Informa d'un error <0/>"
+
+#: src/routes/settings/+page.svelte
+msgid "You found a bug? Please report it!"
+msgstr "Has trobat un error? Si us plau, informa'n!"
+
+#: src/routes/settings/+page.svelte
+msgid "Support the project <0/>"
+msgstr "Dóna suport al projecte <0/>"
+
+#: src/routes/settings/+page.svelte
+msgid "If you can, support the developer"
+msgstr "Si pots, dona suport al desenvolupador"
+
+#. placeholder {0}: client.authStore.record?.username
+#: src/routes/settings/+page.svelte
+msgid "Logged in a {0}"
+msgstr "Connectat com a {0}"
+
+#: src/routes/settings/+page.svelte
+msgid "Log off <0/>"
+msgstr "Tanca la sessió <0/>"
+
+#: src/routes/settings/+page.svelte
+msgid "Language"
+msgstr "Idioma"
+
+#: src/routes/settings/+page.svelte
+msgid "English"
+msgstr "Anglès"
+
+#: src/routes/settings/+page.svelte
+msgid "Français"
+msgstr "Francès"
+
+#: src/routes/settings/+page.svelte
+msgid "Espanol"
+msgstr "Espanyol"
+
+#: src/routes/settings/+page.svelte
+msgid "Deusch"
+msgstr "Alemany"
+
+#: src/routes/settings/+page.svelte
+msgid "Catala"
+msgstr "Català"
+
+#: src/routes/rooms/+page.svelte
+msgid "Search rooms..."
+msgstr "Cerca habitacions..."
+
+#: src/routes/rooms/+page.svelte
+msgid "Add new room"
+msgstr "Afegeix nova habitació"
+
+#: src/routes/rooms/+page.svelte
+msgid "Create a new space to manage"
+msgstr "Crea un nou espai per gestionar"
+
+#. placeholder {0}: room.expand?.chores_via_room?.length ?? 0
+#: src/lib/components/RoomCard.svelte
+msgid "{0} chores"
+msgstr "{0} tasques"
+
+#. placeholder {0}: members
+#: src/lib/components/RoomCard.svelte
+msgid "{0} members"
+msgstr "{0} membres"
+
+#. placeholder {0}: room.name
+#: src/routes/rooms/[id]/chores/+page.svelte
+msgid "ChoreZilla | Chores in {0}"
+msgstr "ChoreZilla | Tasques a {0}"
+
+#: src/routes/rooms/[id]/chores/+page.svelte
+msgid "edit room <0/>"
+msgstr "edita habitació <0/>"
+
+#. placeholder {0}: room.name
+#: src/routes/rooms/[id]/chores/+page.svelte
+msgid "No chore in {0}"
+msgstr "Cap tasca a {0}"
+
+#: src/routes/rooms/[id]/chores/+page.svelte
+msgid "No such room"
+msgstr "No existeix aquesta habitació"
+
+#: src/routes/rooms/add/+page.svelte
+msgid "ChoreZilla | Add Room"
+msgstr "ChoreZilla | Afegir habitació"
+
+#: src/routes/rooms/add/+page.svelte
+msgid "Add a new room"
+msgstr "Afegeix una nova habitació"
+
+#: src/routes/rooms/add/+page.svelte
+msgid "Add Room"
+msgstr "Afegeix habitació"
+
+#: src/lib/components/HouseholdForm.svelte
+#: src/lib/components/PersonForm.svelte
+#: src/lib/components/RoomForm.svelte
+msgid "Name"
+msgstr "Nom"
+
+#: src/lib/components/RoomForm.svelte
+msgid "Bathroom, Garage"
+msgstr "Bany, Garatge"
+
+#: src/lib/components/RoomForm.svelte
+msgid "Main house, Guest house"
+msgstr "Casa principal, Casa de convidats"
+
+#: src/lib/components/RoomForm.svelte
+msgid "Room description"
+msgstr "Descripció de l'habitació"
+
+#: src/lib/components/RoomForm.svelte
+msgid "Color"
+msgstr "Color"
+
+#: src/routes/chores/[id]/edit/+page.svelte
+msgid "ChoreZilla | Edit Chore"
+msgstr "ChoreZilla | Edita tasca"
+
+#: src/routes/chores/[id]/edit/+page.svelte
+msgid "Edit Chore"
+msgstr "Edita tasca"
+
+#: src/routes/chores/[id]/edit/+page.svelte
+#: src/routes/members/[id]/edit/+page.svelte
+#: src/routes/rooms/[id]/edit/+page.svelte
+msgid "Save Changes"
+msgstr "Desa els canvis"
+
+#: src/lib/components/PersonForm.svelte
+#: src/lib/components/PersonForm.svelte
+#: src/routes/login/+page.svelte
+msgid "Email"
+msgstr "Correu electrònic"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Member email"
+msgstr "Correu electrònic del membre"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Member name"
+msgstr "Nom del membre"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Role"
+msgstr "Rol"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Select a role"
+msgstr "Selecciona un rol"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Regular user (cannot edit chores, members)"
+msgstr "Usuari regular (no pot editar tasques ni membres)"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Administrator"
+msgstr "Administrador"
+
+#: src/routes/members/+page.svelte
+msgid "ChoreZilla | Members"
+msgstr "ChoreZilla | Membres"
+
+#: src/routes/members/+page.svelte
+msgid "Search members..."
+msgstr "Cerca membres..."
+
+#: src/routes/members/+page.svelte
+msgid "No members found."
+msgstr "No s'han trobat membres."
+
+#: src/routes/members/+page.svelte
+msgid "Add new person"
+msgstr "Afegeix nova persona"
+
+#: src/routes/members/+page.svelte
+msgid "Invite someone to your household"
+msgstr "Convida algú a la teva llar"
+
+#: src/routes/login/+page.svelte
+msgid "Password"
+msgstr "Contrasenya"
+
+#: src/routes/login/+page.svelte
+msgid "Confirm password"
+msgstr "Confirma la contrasenya"
+
+#: src/routes/login/+page.svelte
+msgid "Already have an account?"
+msgstr "Ja tens un compte?"
+
+#: src/routes/login/+page.svelte
+msgid "Sign in"
+msgstr "Inicia sessió"
+
+#: src/routes/login/+page.svelte
+msgid "Don't have an account?"
+msgstr "No tens un compte?"
+
+#: src/routes/login/+page.svelte
+msgid "Sign up"
+msgstr "Registra't"
+
+#: src/routes/members/invite/+page.svelte
+msgid "ChoreZilla | Add member"
+msgstr "ChoreZilla | Afegir membre"
+
+#: src/routes/members/invite/+page.svelte
+msgid "Invite a new member"
+msgstr "Convida un nou membre"
+
+#: src/routes/members/invite/+page.svelte
+msgid "Invite"
+msgstr "Convida"
+
+#: src/routes/households/add/+page.svelte
+msgid "ChoreZilla | Add household"
+msgstr "ChoreZilla | Afegir llar"
+
+#: src/routes/households/add/+page.svelte
+msgid "Add a new household"
+msgstr "Afegeix una nova llar"
+
+#: src/routes/households/add/+page.svelte
+msgid "Create"
+msgstr "Crea"
+
+#: src/routes/members/[id]/edit/+page.svelte
+msgid "Edit Person"
+msgstr "Edita persona"
+
+#: src/routes/members/[id]/edit/+page.svelte
+msgid "Person not found"
+msgstr "Persona no trobada"
+
+#: src/routes/members/[id]/edit/+page.svelte
+msgid "No details available for this person."
+msgstr "No hi ha detalls disponibles per a aquesta persona."
+
+#: src/routes/rooms/[id]/edit/+page.svelte
+msgid "ChoreZilla | Edit Room"
+msgstr "ChoreZilla | Edita habitació"
+
+#: src/routes/rooms/[id]/edit/+page.svelte
+msgid "Edit room"
+msgstr "Edita habitació"

@@ -31,6 +31,7 @@ const createInvitesStore = () => {
 		invite: (email: string, name: string, role: string) =>
 			client
 				.send(`/api/send-invitation`, {
+					// @wc-ignore
 					method: 'POST',
 					body: {
 						household: get(currentHousehold).id,

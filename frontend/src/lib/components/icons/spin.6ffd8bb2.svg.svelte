@@ -1,5 +1,5 @@
 <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
-<svg width="38" height="38" viewBox="-1 -1 42 42" xmlns="http://www.w3.org/2000/svg">
+<!-- @wc-ignore --><svg width="38" height="38" viewBox="-1 -1 42 42" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
             <stop stop-color="#222" class="circle" stop-opacity="0" offset="0%"/>

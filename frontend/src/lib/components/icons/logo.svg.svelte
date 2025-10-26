@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="73" height="22" viewBox="0 0 73 22">
+<!-- @wc-ignore --><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="73" height="22" viewBox="0 0 73 22">
   <defs>
     <clipPath id="clip-logo_svg">
       <rect width="73" height="22"/>

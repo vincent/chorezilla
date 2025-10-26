@@ -12,6 +12,8 @@
 	import { isAdmin } from '$lib/stores/auth';
 	import type { Household } from '$lib/models';
 	import { goto } from '$app/navigation';
+	import { locale } from '$lib/stores/lang';
+	import { onMount } from 'svelte';
 
 	const { data, children } = $props();
 	const metadata = $derived(data.metadata ?? {});
@@ -21,6 +23,10 @@
 		syncCurrentHouseholdData();
 		if (page.url.pathname.includes('/households/add')) goto('/');
 	}
+
+	onMount(() => {
+		locale.switchLocale()
+	})
 
 	$effect(() => {
 		if (client.authStore.isValid) {

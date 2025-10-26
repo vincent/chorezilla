@@ -11,7 +11,7 @@
 	import { type Chore } from '$lib/models';
 
 	let id = '';
-	let initial = null as Chore | null;
+	let initial = $state<Chore>();
 
 	onMount(() => {
 		id = String(page.params.id);

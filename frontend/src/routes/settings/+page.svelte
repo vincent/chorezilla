@@ -6,10 +6,12 @@
 	import Field from '$lib/components/Field.svelte';
 	import { isAdmin } from '$lib/stores/auth';
 	import { client } from '$lib/pocketbase';
-	import { goto } from '$app/navigation';
+	import { locale } from '$lib/stores/lang';
+	import { get } from 'svelte/store';
 
 	function testNotification(scope: 'me' | 'all') {
 		client.send('/api/test-notification', {
+			// @wc-ignore
 			method: 'POST',
 			body: {
 				household: $currentHousehold.id,
@@ -22,6 +24,11 @@
 		client.authStore.clear()
 		location.reload()
 	}
+
+	let localeValue = $state(get(locale))
+	$effect(() => {
+		locale.switchLocale(localeValue)
+	})
 </script>
 
 <!-- Main Content -->
@@ -72,6 +79,17 @@
 					<div class="w-full flex justify-between text-gray-800">Support the project <CircleDollarSign class="text-indigo-500"/></div>
 					<span class="text-start text-sm w-full text-gray-500">If you can, support the developer</span>
 				</a>
+			</div>
+		</Field>
+		<Field className="mt-3" label="Language">
+			<div class="space-y-4">
+				<select bind:value={localeValue}>
+					<option value="en">English</option>
+					<option value="fr">Français</option>
+					<option value="es">Espanol</option>
+					<option value="de">Deusch</option>
+					<option value="cat">Catala</option>
+				</select>
 			</div>
 		</Field>
 		<Field className="mt-3" label="Logged in a {client.authStore.record?.username}">

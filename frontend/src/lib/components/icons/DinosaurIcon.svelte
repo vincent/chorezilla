@@ -4,7 +4,7 @@
 </script>
 
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg
+<!-- @wc-ignore --><svg
 	fill="currentColor"
 	width="48px"
 	height="48px"

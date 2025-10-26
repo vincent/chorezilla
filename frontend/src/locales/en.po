@@ -1,0 +1,482 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-26T14:32:31.780Z\n"
+"PO-Revision-Date: 2025-10-26T15:40:07.768Z\n"
+"Last-Translator: \n"
+"Language: en\n"
+"Language-Team: \n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n == 1 ? 0 : 1;\n"
+"MIME-Version: 1.0\n"
+
+#. placeholder {0}: metadata.title
+#. placeholder {0}: chore.name
+#. placeholder {0}: signup ? 'Signup' : 'Log in'
+#. placeholder {0}: person.name
+#: src/routes/+layout.svelte
+#: src/routes/chores/[id]/+page.svelte
+#: src/routes/login/+page.svelte
+#: src/routes/members/[id]/edit/+page.svelte
+msgid "ChoreZilla | {0}"
+msgstr "ChoreZilla | {0}"
+
+#: src/routes/chores/add/+page.svelte
+msgid "ChoreZilla | Add Chore"
+msgstr "ChoreZilla | Add Chore"
+
+#: src/routes/chores/add/+page.svelte
+msgid "Add a new Chore"
+msgstr "Add a new Chore"
+
+#: src/routes/chores/add/+page.svelte
+msgid "Add Chore"
+msgstr "Add Chore"
+
+#: src/lib/components/BottomNav.svelte
+msgid "Home"
+msgstr "Home"
+
+#: src/lib/components/BottomNav.svelte
+msgid "Rooms"
+msgstr "Rooms"
+
+#: src/lib/components/BottomNav.svelte
+msgid "New chore"
+msgstr "New chore"
+
+#: src/lib/components/BottomNav.svelte
+msgid "People"
+msgstr "People"
+
+#: src/lib/components/BottomNav.svelte
+#: src/routes/settings/+page.svelte
+msgid "Settings"
+msgstr "Settings"
+
+#: src/lib/components/Header.svelte
+msgid "<0/> New household"
+msgstr "<0/> New household"
+
+#: src/lib/components/Header.svelte
+msgid "ChoreZilla"
+msgstr "ChoreZilla"
+
+#~ msgid "Submit"
+#~ msgstr "Submit"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Chore's title"
+msgstr "Chore's title"
+
+#: src/lib/components/ChoreForm.svelte
+#: src/lib/components/RoomForm.svelte
+msgid "Description"
+msgstr "Description"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Optional description about this task"
+msgstr "Optional description about this task"
+
+#: src/lib/components/ChoreForm.svelte
+#: src/lib/components/RoomForm.svelte
+msgid "Location"
+msgstr "Location"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Select a room"
+msgstr "Select a room"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Starting at"
+msgstr "Starting at"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Frequency"
+msgstr "Frequency"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Select a frequency"
+msgstr "Select a frequency"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Hourly"
+msgstr "Hourly"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Daily"
+msgstr "Daily"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Weekly"
+msgstr "Weekly"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Monthly"
+msgstr "Monthly"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Yearly"
+msgstr "Yearly"
+
+#: src/lib/components/ChoreForm.svelte
+msgid "Assigned"
+msgstr "Assigned"
+
+#: src/routes/+page.svelte
+msgid "ChoreZilla | Today's Chores"
+msgstr "ChoreZilla | Today's Chores"
+
+#: src/routes/+page.svelte
+msgid "Today's Chores"
+msgstr "Today's Chores"
+
+#: src/routes/+page.svelte
+msgid "Create your first chore"
+msgstr "Create your first chore"
+
+#: src/routes/+page.svelte
+msgid "All done ! Good job"
+msgstr "All done ! Good job"
+
+#: src/routes/+page.svelte
+msgid "Create your first place"
+msgstr "Create your first place"
+
+#~ msgid "loading translations..."
+#~ msgstr "loading translations..."
+
+#. placeholder {0}: user?.name
+#: src/lib/components/WelcomeSection.svelte
+msgid "Welcome back, {0}!"
+msgstr "Welcome back, {0}!"
+
+#. placeholder {0}: pending
+#: src/lib/components/WelcomeSection.svelte
+msgid "You have {0} chores to complete today"
+msgstr "You have {0} chores to complete today"
+
+#: src/lib/components/StatsSection.svelte
+msgid "Completed"
+msgstr "Completed"
+
+#: src/lib/components/StatsSection.svelte
+msgid "Pending"
+msgstr "Pending"
+
+#: src/lib/components/ChoresSection.svelte
+msgid "last completed"
+msgstr "last completed"
+
+#: src/routes/chores/[id]/+page.svelte
+msgid "Mark as done"
+msgstr "Mark as done"
+
+#: src/routes/chores/[id]/+page.svelte
+msgid "Reset"
+msgstr "Reset"
+
+#: src/routes/chores/[id]/+page.svelte
+msgid "Edit"
+msgstr "Edit"
+
+#: src/routes/chores/[id]/+page.svelte
+#: src/routes/chores/[id]/edit/+page.svelte
+msgid "Chore not found"
+msgstr "Chore not found"
+
+#: src/routes/chores/[id]/+page.svelte
+#: src/routes/chores/[id]/edit/+page.svelte
+msgid "No details available for this chore."
+msgstr "No details available for this chore."
+
+#~ msgid "POST"
+#~ msgstr "POST"
+
+#: src/routes/settings/+page.svelte
+msgid "Notifications"
+msgstr "Notifications"
+
+#: src/routes/settings/+page.svelte
+msgid "Test mine"
+msgstr "Test mine"
+
+#: src/routes/settings/+page.svelte
+msgid "Test household"
+msgstr "Test household"
+
+#: src/routes/settings/+page.svelte
+msgid "Reset subscription"
+msgstr "Reset subscription"
+
+#: src/routes/settings/+page.svelte
+msgid "ChoreZilla project"
+msgstr "ChoreZilla project"
+
+#: src/routes/settings/+page.svelte
+msgid "Project page <0/>"
+msgstr "Project page <0/>"
+
+#: src/routes/settings/+page.svelte
+msgid "Latest releases, new features, documentation"
+msgstr "Latest releases, new features, documentation"
+
+#: src/routes/settings/+page.svelte
+msgid "Report a bug <0/>"
+msgstr "Report a bug <0/>"
+
+#: src/routes/settings/+page.svelte
+msgid "You found a bug? Please report it!"
+msgstr "You found a bug? Please report it!"
+
+#: src/routes/settings/+page.svelte
+msgid "Support the project <0/>"
+msgstr "Support the project <0/>"
+
+#: src/routes/settings/+page.svelte
+msgid "If you can, support the developer"
+msgstr "If you can, support the developer"
+
+#. placeholder {0}: client.authStore.record?.username
+#: src/routes/settings/+page.svelte
+msgid "Logged in a {0}"
+msgstr "Logged in a {0}"
+
+#: src/routes/settings/+page.svelte
+msgid "Log off <0/>"
+msgstr "Log off <0/>"
+
+#: src/routes/settings/+page.svelte
+msgid "Language"
+msgstr "Language"
+
+#: src/routes/settings/+page.svelte
+msgid "English"
+msgstr "English"
+
+#: src/routes/settings/+page.svelte
+msgid "Français"
+msgstr "Français"
+
+#: src/routes/settings/+page.svelte
+msgid "Espanol"
+msgstr "Espanol"
+
+#: src/routes/settings/+page.svelte
+msgid "Deusch"
+msgstr "Deusch"
+
+#: src/routes/settings/+page.svelte
+msgid "Catala"
+msgstr "Catala"
+
+#: src/routes/rooms/+page.svelte
+msgid "Search rooms..."
+msgstr "Search rooms..."
+
+#: src/routes/rooms/+page.svelte
+msgid "Add new room"
+msgstr "Add new room"
+
+#: src/routes/rooms/+page.svelte
+msgid "Create a new space to manage"
+msgstr "Create a new space to manage"
+
+#. placeholder {0}: room.expand?.chores_via_room?.length ?? 0
+#: src/lib/components/RoomCard.svelte
+msgid "{0} chores"
+msgstr "{0} chores"
+
+#. placeholder {0}: members
+#: src/lib/components/RoomCard.svelte
+msgid "{0} members"
+msgstr "{0} members"
+
+#. placeholder {0}: room.name
+#: src/routes/rooms/[id]/chores/+page.svelte
+msgid "ChoreZilla | Chores in {0}"
+msgstr "ChoreZilla | Chores in {0}"
+
+#~ msgid "Chores in {0}"
+#~ msgstr "Chores in {0}"
+
+#: src/routes/rooms/[id]/chores/+page.svelte
+msgid "edit room <0/>"
+msgstr "edit room <0/>"
+
+#. placeholder {0}: room.name
+#: src/routes/rooms/[id]/chores/+page.svelte
+msgid "No chore in {0}"
+msgstr "No chore in {0}"
+
+#: src/routes/rooms/[id]/chores/+page.svelte
+msgid "No such room"
+msgstr "No such room"
+
+#: src/routes/rooms/add/+page.svelte
+msgid "ChoreZilla | Add Room"
+msgstr "ChoreZilla | Add Room"
+
+#: src/routes/rooms/add/+page.svelte
+msgid "Add a new room"
+msgstr "Add a new room"
+
+#: src/routes/rooms/add/+page.svelte
+msgid "Add Room"
+msgstr "Add Room"
+
+#: src/lib/components/HouseholdForm.svelte
+#: src/lib/components/PersonForm.svelte
+#: src/lib/components/RoomForm.svelte
+msgid "Name"
+msgstr "Name"
+
+#: src/lib/components/RoomForm.svelte
+msgid "Bathroom, Garage"
+msgstr "Bathroom, Garage"
+
+#: src/lib/components/RoomForm.svelte
+msgid "Main house, Guest house"
+msgstr "Main house, Guest house"
+
+#: src/lib/components/RoomForm.svelte
+msgid "Room description"
+msgstr "Room description"
+
+#: src/lib/components/RoomForm.svelte
+msgid "Color"
+msgstr "Color"
+
+#: src/routes/chores/[id]/edit/+page.svelte
+msgid "ChoreZilla | Edit Chore"
+msgstr "ChoreZilla | Edit Chore"
+
+#: src/routes/chores/[id]/edit/+page.svelte
+msgid "Edit Chore"
+msgstr "Edit Chore"
+
+#: src/routes/chores/[id]/edit/+page.svelte
+#: src/routes/members/[id]/edit/+page.svelte
+#: src/routes/rooms/[id]/edit/+page.svelte
+msgid "Save Changes"
+msgstr "Save Changes"
+
+#: src/lib/components/PersonForm.svelte
+#: src/lib/components/PersonForm.svelte
+#: src/routes/login/+page.svelte
+msgid "Email"
+msgstr "Email"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Member email"
+msgstr "Member email"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Member name"
+msgstr "Member name"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Role"
+msgstr "Role"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Select a role"
+msgstr "Select a role"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Regular user (cannot edit chores, members)"
+msgstr "Regular user (cannot edit chores, members)"
+
+#: src/lib/components/PersonForm.svelte
+msgid "Administrator"
+msgstr "Administrator"
+
+#: src/routes/members/+page.svelte
+msgid "ChoreZilla | Members"
+msgstr "ChoreZilla | Members"
+
+#: src/routes/members/+page.svelte
+msgid "Search members..."
+msgstr "Search members..."
+
+#: src/routes/members/+page.svelte
+msgid "No members found."
+msgstr "No members found."
+
+#: src/routes/members/+page.svelte
+msgid "Add new person"
+msgstr "Add new person"
+
+#: src/routes/members/+page.svelte
+msgid "Invite someone to your household"
+msgstr "Invite someone to your household"
+
+#: src/routes/login/+page.svelte
+msgid "Password"
+msgstr "Password"
+
+#: src/routes/login/+page.svelte
+msgid "Confirm password"
+msgstr "Confirm password"
+
+#: src/routes/login/+page.svelte
+msgid "Already have an account?"
+msgstr "Already have an account?"
+
+#: src/routes/login/+page.svelte
+msgid "Sign in"
+msgstr "Sign in"
+
+#: src/routes/login/+page.svelte
+msgid "Don't have an account?"
+msgstr "Don't have an account?"
+
+#: src/routes/login/+page.svelte
+msgid "Sign up"
+msgstr "Sign up"
+
+#: src/routes/members/invite/+page.svelte
+msgid "ChoreZilla | Add member"
+msgstr "ChoreZilla | Add member"
+
+#: src/routes/members/invite/+page.svelte
+msgid "Invite a new member"
+msgstr "Invite a new member"
+
+#: src/routes/members/invite/+page.svelte
+msgid "Invite"
+msgstr "Invite"
+
+#: src/routes/households/add/+page.svelte
+msgid "ChoreZilla | Add household"
+msgstr "ChoreZilla | Add household"
+
+#: src/routes/households/add/+page.svelte
+msgid "Add a new household"
+msgstr "Add a new household"
+
+#: src/routes/households/add/+page.svelte
+msgid "Create"
+msgstr "Create"
+
+#: src/routes/members/[id]/edit/+page.svelte
+msgid "Edit Person"
+msgstr "Edit Person"
+
+#: src/routes/members/[id]/edit/+page.svelte
+msgid "Person not found"
+msgstr "Person not found"
+
+#: src/routes/members/[id]/edit/+page.svelte
+msgid "No details available for this person."
+msgstr "No details available for this person."
+
+#: src/routes/rooms/[id]/edit/+page.svelte
+msgid "ChoreZilla | Edit Room"
+msgstr "ChoreZilla | Edit Room"
+
+#: src/routes/rooms/[id]/edit/+page.svelte
+msgid "Edit room"
+msgstr "Edit room"
