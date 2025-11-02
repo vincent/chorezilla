@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-26T14:32:31.780Z\n"
-"PO-Revision-Date: 2025-11-02T11:34:42.469Z\n"
+"PO-Revision-Date: 2025-11-02T11:41:33.726Z\n"
 "Last-Translator: \n"
 "Language: en\n"
 "Language-Team: \n"
@@ -258,17 +258,14 @@ msgstr "English"
 msgid "Français"
 msgstr "Français"
 
-#: src/routes/settings/+page.svelte
-msgid "Espanol"
-msgstr "Espanol"
+#~ msgid "Espanol"
+#~ msgstr "Espanol"
 
-#: src/routes/settings/+page.svelte
-msgid "Deusch"
-msgstr "Deusch"
+#~ msgid "Deusch"
+#~ msgstr "Deusch"
 
-#: src/routes/settings/+page.svelte
-msgid "Catala"
-msgstr "Catala"
+#~ msgid "Catala"
+#~ msgstr "Catala"
 
 #: src/routes/rooms/+page.svelte
 msgid "Search rooms..."
@@ -483,3 +480,15 @@ msgstr "Edit room"
 #: src/routes/settings/+page.svelte
 msgid "Logged in as {0}"
 msgstr "Logged in as {0}"
+
+#: src/routes/settings/+page.svelte
+msgid "Español"
+msgstr "Español"
+
+#: src/routes/settings/+page.svelte
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#: src/routes/settings/+page.svelte
+msgid "Català"
+msgstr "Català"

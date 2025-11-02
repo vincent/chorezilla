@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-26T14:32:31.860Z\n"
-"PO-Revision-Date: 2025-11-02T11:34:42.476Z\n"
+"PO-Revision-Date: 2025-11-02T11:41:33.728Z\n"
 "Last-Translator: \n"
 "Language: es\n"
 "Language-Team: \n"
@@ -258,17 +258,14 @@ msgstr "Inglés"
 msgid "Français"
 msgstr "Francés"
 
-#: src/routes/settings/+page.svelte
-msgid "Espanol"
-msgstr "Español"
+#~ msgid "Espanol"
+#~ msgstr "Español"
 
-#: src/routes/settings/+page.svelte
-msgid "Deusch"
-msgstr "Alemán"
+#~ msgid "Deusch"
+#~ msgstr "Alemán"
 
-#: src/routes/settings/+page.svelte
-msgid "Catala"
-msgstr "Catalán"
+#~ msgid "Catala"
+#~ msgstr "Catalán"
 
 #: src/routes/rooms/+page.svelte
 msgid "Search rooms..."
@@ -482,4 +479,16 @@ msgstr "Editar habitación"
 #. placeholder {0}: client.authStore.record?.username
 #: src/routes/settings/+page.svelte
 msgid "Logged in as {0}"
+msgstr ""
+
+#: src/routes/settings/+page.svelte
+msgid "Español"
+msgstr ""
+
+#: src/routes/settings/+page.svelte
+msgid "Deutsch"
+msgstr ""
+
+#: src/routes/settings/+page.svelte
+msgid "Català"
 msgstr ""

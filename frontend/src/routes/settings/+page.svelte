@@ -63,16 +63,18 @@
 		</Field>
 		<Field className="mt-3" label="ChoreZilla project">
 			<div class="space-y-4">
-				<button 
+				<a target="_blank"
+					href="https://github.com/vincent/chorezilla"
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
 					type="button"><div class="w-full flex justify-between text-gray-800">Project page <Github class="text-indigo-500"/></div>
 					<span class="text-start text-sm w-full text-gray-500">Latest releases, new features, documentation</span>
-				</button>
-				<button 
+				</a>
+				<a target="_blank"
+					href="https://github.com/vincent/chorezilla/issues"
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
 					type="button"><div class="w-full flex justify-between text-gray-800">Report a bug <Bug class="text-indigo-500"/></div>
 					<span class="text-start text-sm w-full text-gray-500">You found a bug? Please report it!</span>
-				</button>
+				</a>
 				<a target="_blank" 
 					href="https://ko-fi.com/vlkofi"
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer">
@@ -86,9 +88,9 @@
 				<select bind:value={localeValue}>
 					<option value="en">English</option>
 					<option value="fr">Français</option>
-					<option value="es">Espanol</option>
-					<option value="de">Deusch</option>
-					<option value="cat">Catala</option>
+					<option value="es">Español</option>
+					<option value="de">Deutsch</option>
+					<option value="cat">Català</option>
 				</select>
 			</div>
 		</Field>
