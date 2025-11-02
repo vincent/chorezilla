@@ -38,7 +38,7 @@
 </svelte:head>
 
 {#if chore}
-	<section class="max-w-xl mx-auto p-6 bg-white dark:bg-gray-700 rounded-xl shadow">
+	<section class="max-w-xl mx-auto p-6 bg-white dark:bg-gray-700 rounded-b-xl shadow">
 		<Title title={chore.name} />
 		<p class="text-gray-400 mb-1">{chore.expand?.room.name} • {chore.frequency}</p>
 		<p class="text-gray-500 my-4">{chore.description}</p>
@@ -47,19 +47,19 @@
 			<button
 				type="button"
 				onclick={handleDone}
-				class="mt-2 p-3 rounded-lg border-green-300 bg-green-100 text-green-600 font-bold hover:bg-green-200 transition-colors cursor-pointer"
+				class="flex items-center mt-2 p-3 rounded-lg border-green-300 bg-green-100 text-green-600 font-bold hover:bg-green-200 transition-colors cursor-pointer"
 				>Mark as done</button
 			>
 			{#if $isAdmin}
 				<button
 					type="button"
 					onclick={handleReset}
-					class="ms-auto me-2 mt-2 p-3 rounded-lg border-orange-300 bg-orange-100 text-orange-600 font-bold hover:bg-orange-200 transition-colors cursor-pointer"
+					class="flex items-center ms-auto me-2 mt-2 p-3 rounded-lg border-orange-300 bg-orange-100 text-orange-600 font-bold hover:bg-orange-200 transition-colors cursor-pointer"
 					>Reset</button
 				>
 				<a
 					href={`/chores/${chore.id}/edit`}
-					class="mt-2 p-3 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors"
+					class="flex items-center mt-2 p-3 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors"
 					>Edit</a
 				>
 			{/if}

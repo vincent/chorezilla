@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-26T14:32:32.124Z\n"
-"PO-Revision-Date: 2025-11-02T11:41:33.746Z\n"
+"PO-Revision-Date: 2025-11-02T12:13:22.064Z\n"
 "Last-Translator: \n"
 "Language: cat\n"
 "Language-Team: \n"
@@ -201,9 +201,8 @@ msgstr "Prova la meva"
 msgid "Test household"
 msgstr "Prova la llar"
 
-#: src/routes/settings/+page.svelte
-msgid "Reset subscription"
-msgstr "Reinicia la subscripció"
+#~ msgid "Reset subscription"
+#~ msgstr "Reinicia la subscripció"
 
 #: src/routes/settings/+page.svelte
 msgid "ChoreZilla project"
@@ -482,4 +481,8 @@ msgstr ""
 
 #: src/routes/settings/+page.svelte
 msgid "Català"
+msgstr ""
+
+#: src/routes/settings/+page.svelte
+msgid "Reset subs"
 msgstr ""

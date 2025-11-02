@@ -208,8 +208,8 @@ msgid "Test household"
 msgstr "Test household"
 
 #: src/routes/settings/+page.svelte
-msgid "Reset subscription"
-msgstr "Reset subscription"
+msgid "Reset subs"
+msgstr "Reset subs"
 
 #: src/routes/settings/+page.svelte
 msgid "ChoreZilla project"

@@ -41,6 +41,7 @@
 	<div class="space-y-4">
 		{#each filteredPeople as person (person.userId)}
 			<Card
+				className="p-4"
 				title={person.name}
 				href={`/members/${person.userId}/edit`}
 				subtitle={`${person.role || 'Unknown'} • ${person.choresCompleted ?? 0} chores completed`}
@@ -61,6 +62,7 @@
 
 		{#each filteredInvites as person (person.id)}
 			<Card
+				className="p-4"
 				title={person.name}
 				href="/members"
 				subtitle={`${person.role || 'Unknown'} • ${person.status}`}

@@ -208,7 +208,7 @@ msgid "Test household"
 msgstr "Probar hogar"
 
 #: src/routes/settings/+page.svelte
-msgid "Reset subscription"
+msgid "Reset subs"
 msgstr "Restablecer suscripción"
 
 #: src/routes/settings/+page.svelte

@@ -172,11 +172,11 @@ msgstr "dernière terminée"
 
 #: src/routes/chores/[id]/+page.svelte
 msgid "Mark as done"
-msgstr "Marquer comme fait"
+msgstr "C'est fait"
 
 #: src/routes/chores/[id]/+page.svelte
 msgid "Reset"
-msgstr "Réinitialiser"
+msgstr "Reset"
 
 #: src/routes/chores/[id]/+page.svelte
 msgid "Edit"
@@ -208,7 +208,7 @@ msgid "Test household"
 msgstr ""
 
 #: src/routes/settings/+page.svelte
-msgid "Reset subscription"
+msgid "Reset subs"
 msgstr ""
 
 #: src/routes/settings/+page.svelte

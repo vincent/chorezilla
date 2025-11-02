@@ -57,7 +57,7 @@
 					type="button"
 					onclick={resetNotifications}
 					class="mt-3 p-4 rounded-lg border-indigo-300 bg-indigo-100 text-indigo-600 font-bold hover:bg-indigo-200 transition-colors cursor-pointer"
-					>Reset subscription</button
+					>Reset subs</button
 				>
 			</div>
 		</Field>

@@ -302,6 +302,6 @@
 {:else if icon === 'delivery'}
 	<Delivery />
 {:else}
-	<img class="{className}" alt={icon} src="/svgs/{icon || 'cube-1'}.svg" {width} />
+	<BoxFree />
 {/if}
 </div>

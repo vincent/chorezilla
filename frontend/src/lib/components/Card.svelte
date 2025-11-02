@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { shadow_hover } from '$lib/styles.svelte';
 
-	let { href, icon = undefined, title, infos = undefined, subtitle = undefined } = $props();
+	let { href, icon = undefined, title, infos = undefined, subtitle = undefined, className = '' } = $props();
 </script>
 
 <a
-	class="card bg-white dark:bg-gray-700 rounded-xl shadow p-4 flex items-center justify-between {shadow_hover} transition hover:scale-[1.01]"
+	class="card bg-white dark:bg-gray-700 rounded-xl shadow flex items-center justify-between {shadow_hover} transition hover:scale-[1.01] {className}"
 	{href}
 >
 	<div class="flex items-center space-x-3">
