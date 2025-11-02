@@ -1,15 +1,27 @@
 <script lang="ts">
 	let { width = 64, height = 64 } = $props();
 </script>
-<!-- @wc-ignore --><svg height={`${height}px`} width={`${width}px`} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
+
+<!-- @wc-ignore --><svg
+	height={`${height}px`}
+	width={`${width}px`}
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
 <![CDATA[
 	:root { color-scheme: dark light; }
 ]]>
-</style>
-<g>
-	<path fill="currentColor" d="M286.366,246.164c0,34.422,0.328,78.844-22.938,74.578c-46.625-8.578-70.078-206.359-187.063-253.563
+	</style>
+	<g>
+		<path
+			fill="currentColor"
+			d="M286.366,246.164c0,34.422,0.328,78.844-22.938,74.578c-46.625-8.578-70.078-206.359-187.063-253.563
 		C14.491,42.226-14.619,56.882,7.209,70.304c64.641,39.781,98.969,123,128.5,223.406c33.594,114.203,93.328,164.657,173.609,164.657
-		c80.297,0,192.546-57.157,202.625-204.969C516.068,192.976,276.803,182.851,286.366,246.164z"/>
-</g>
+		c80.297,0,192.546-57.157,202.625-204.969C516.068,192.976,276.803,182.851,286.366,246.164z"
+		/>
+	</g>
 </svg>

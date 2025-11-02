@@ -37,12 +37,15 @@
 				{#each households as h (h.id)}
 					<li class="my-4 text-lg">
 						{#if h.id === active?.id}
-							<button class="btn flex items-center text-slate-900 dark:text-slate-200 cursor-pointer">
-								<House class="me-3" /> {h.name}
-							</button
+							<button
+								class="btn flex items-center text-slate-900 dark:text-slate-200 cursor-pointer"
 							>
+								<House class="me-3" />
+								{h.name}
+							</button>
 						{:else}
-							<button class="btn flex items-center text-slate-400 cursor-pointer"
+							<button
+								class="btn flex items-center text-slate-400 cursor-pointer"
 								onclick={() => selectItem(h)}><Dot class="me-3" /> {h.name}</button
 							>
 						{/if}

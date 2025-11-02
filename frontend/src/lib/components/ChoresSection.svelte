@@ -32,7 +32,9 @@
 				subtitle={`${chore.expand?.room.name} • ${chore.frequency}`}
 			>
 				{#snippet icon()}
-					<div class={`p-3 rounded-full bg-${chore.expand?.room.color}-100 text-grey-600  absolute -left-6 h-28 w-28 flex items-center pl-8`}>
+					<div
+						class={`p-3 rounded-full bg-${chore.expand?.room.color}-100 text-grey-600  absolute -left-6 h-28 w-28 flex items-center pl-8`}
+					>
 						<ChoreIcon className="text-slate-900 dark:text-gray-500" icon={chore.icon} />
 					</div>
 				{/snippet}

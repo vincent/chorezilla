@@ -21,14 +21,14 @@
 	}
 
 	function logoff() {
-		client.authStore.clear()
-		location.reload()
+		client.authStore.clear();
+		location.reload();
 	}
 
-	let localeValue = $state(get(locale))
+	let localeValue = $state(get(locale));
 	$effect(() => {
-		locale.switchLocale(localeValue)
-	})
+		locale.switchLocale(localeValue);
+	});
 </script>
 
 <!-- Main Content -->
@@ -63,28 +63,48 @@
 		</Field>
 		<Field className="mt-3" label="ChoreZilla project">
 			<div class="space-y-4">
-				<a target="_blank"
+				<a
+					target="_blank"
 					href="https://github.com/vincent/chorezilla"
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
-					type="button"><div class="w-full flex justify-between text-gray-800">Project page <Github class="text-indigo-500"/></div>
-					<span class="text-start text-sm w-full text-gray-500">Latest releases, new features, documentation</span>
+					type="button"
+					><div class="w-full flex justify-between text-gray-800">
+						Project page <Github class="text-indigo-500" />
+					</div>
+					<span class="text-start text-sm w-full text-gray-500"
+						>Latest releases, new features, documentation</span
+					>
 				</a>
-				<a target="_blank"
+				<a
+					target="_blank"
 					href="https://github.com/vincent/chorezilla/issues"
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
-					type="button"><div class="w-full flex justify-between text-gray-800">Report a bug <Bug class="text-indigo-500"/></div>
-					<span class="text-start text-sm w-full text-gray-500">You found a bug? Please report it!</span>
+					type="button"
+					><div class="w-full flex justify-between text-gray-800">
+						Report a bug <Bug class="text-indigo-500" />
+					</div>
+					<span class="text-start text-sm w-full text-gray-500"
+						>You found a bug? Please report it!</span
+					>
 				</a>
-				<a target="_blank" 
+				<a
+					target="_blank"
 					href="https://ko-fi.com/vlkofi"
-					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer">
-					<div class="w-full flex justify-between text-gray-800">Support the project <CircleDollarSign class="text-indigo-500"/></div>
-					<span class="text-start text-sm w-full text-gray-500">If you can, support the developer</span>
+					class="mt-3 p-4 w-full flex flex-col rounded-lg border-gray-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
+				>
+					<div class="w-full flex justify-between text-gray-800">
+						Support the project <CircleDollarSign class="text-indigo-500" />
+					</div>
+					<span class="text-start text-sm w-full text-gray-500"
+						>If you can, support the developer</span
+					>
 				</a>
 			</div>
 		</Field>
 		<Field className="mt-3" label="Language">
-			<div class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer">
+			<div
+				class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
+			>
 				<select bind:value={localeValue}>
 					<option value="en">English</option>
 					<option value="fr">Français</option>
@@ -96,10 +116,13 @@
 		</Field>
 		<Field className="mt-3" label="Logged in as {client.authStore.record?.username}">
 			<div class="space-y-4">
-				<button 
+				<button
 					onclick={() => logoff()}
 					class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer"
-					type="button"><div class="w-full flex justify-between text-gray-800">Log off <PowerOff class="text-indigo-500"/></div>
+					type="button"
+					><div class="w-full flex justify-between text-gray-800">
+						Log off <PowerOff class="text-indigo-500" />
+					</div>
 				</button>
 			</div>
 		</Field>

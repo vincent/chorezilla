@@ -58,22 +58,34 @@
 	<div class="flex position-relative chore-form">
 		<Dropdown bind:isDropdownOpen>
 			{#snippet button()}
-				<ChoreIcon className="me-2 text-slate-900 dark:text-white" icon={icon} />
+				<ChoreIcon className="me-2 text-slate-900 dark:text-white" {icon} />
 			{/snippet}
 			{#snippet menu()}
-				{#each icons as i}
+				{#each icons as i (i)}
 					<li class="my-4 text-lg">
-						<button type="button" class="btn flex items-center cursor-pointer" onclick={() => selectIcon(i)}>
+						<button
+							type="button"
+							class="btn flex items-center cursor-pointer"
+							onclick={() => selectIcon(i)}
+						>
 							<ChoreIcon className="text-slate-900 dark:text-gray-500" icon={i} />
 						</button>
 					</li>
 				{/each}
 			{/snippet}
 		</Dropdown>
-		<input placeholder="Chore's title" bind:value={name} required class="{input_class} flex-grow text-xl p-4" />
+		<input
+			placeholder="Chore's title"
+			bind:value={name}
+			required
+			class="{input_class} flex-grow text-xl p-4"
+		/>
 	</div>
 	<Field label="Description">
-		<textarea placeholder="Optional description about this task" bind:value={description} class={input_class}
+		<textarea
+			placeholder="Optional description about this task"
+			bind:value={description}
+			class={input_class}
 		></textarea>
 	</Field>
 	<Field label="Location">

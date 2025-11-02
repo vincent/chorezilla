@@ -26,21 +26,21 @@ self.addEventListener('push', (event) => {
 		case 'due-chore':
 			options = {
 				...options,
-				body: `${data.household} | ${data.location}: ${data.chore_name}`,
+				body: `${data.household} | ${data.location}: ${data.chore_name}`
 			};
 			break;
 
 		case 'completed-chore':
 			options = {
 				...options,
-				body: `${data.household} | ${data.location}: ${data.chore_name} ✓`,
+				body: `${data.household} | ${data.location}: ${data.chore_name} ✓`
 			};
 			break;
 
 		case 'test':
 			options = {
 				...options,
-				body: `Test`,
+				body: `Test`
 			};
 			break;
 

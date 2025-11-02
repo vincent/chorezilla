@@ -1,7 +1,14 @@
 <script lang="ts">
 	import { shadow_hover } from '$lib/styles.svelte';
 
-	let { href, icon = undefined, title, infos = undefined, subtitle = undefined, className = '' } = $props();
+	let {
+		href,
+		icon = undefined,
+		title,
+		infos = undefined,
+		subtitle = undefined,
+		className = ''
+	} = $props();
 </script>
 
 <a

@@ -1,18 +1,31 @@
 <script lang="ts">
 	let { width = 64, height = 64 } = $props();
 </script>
-<!-- @wc-ignore --><svg height={`${height}px`} width={`${width}px`} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
-	:root { color-scheme: dark light; }
-</style>
-<g>
-	<path fill="currentColor" d="M512,165.167V41.304H346.849h-16.515H181.698h-16.515H0.032v107.324H0v123.863h0.032v90.833H0v107.348h82.608
+
+<!-- @wc-ignore --><svg
+	height={`${height}px`}
+	width={`${width}px`}
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
+		:root {
+			color-scheme: dark light;
+		}
+	</style>
+	<g>
+		<path
+			fill="currentColor"
+			d="M512,165.167V41.304H346.849h-16.515H181.698h-16.515H0.032v107.324H0v123.863h0.032v90.833H0v107.348h82.608
 		v0.024h165.151h16.515h165.151v-0.024h82.543v-90.809H512V256h-0.032v-90.833H512z M181.698,57.819h148.636v90.833H181.698V57.819z
 		 M412.91,165.167V256H264.274v-90.833H412.91z M247.758,165.167V256H99.123v-90.833H247.758z M16.547,57.819h148.636v90.833H16.547
 		V57.819z M16.515,165.143h66.06v90.833h-66.06V165.143z M82.576,454.157h-66.06v-74.318h66.06V454.157z M16.547,363.348v-90.833
 		h148.636v90.833H16.547z M247.758,454.181H99.123v-74.318h148.636V454.181z M181.698,363.348v-90.833h148.636v90.833H181.698z
 		 M412.91,454.181H264.274v-74.318H412.91V454.181z M495.453,454.157h-66.06v-74.318h66.06V454.157z M495.485,363.348H346.849
-		v-90.833h148.636V363.348z M429.392,255.976v-90.833h66.06v90.833H429.392z M495.485,148.652H346.849V57.819h148.636V148.652z"/>
-</g>
+		v-90.833h148.636V363.348z M429.392,255.976v-90.833h66.06v90.833H429.392z M495.485,148.652H346.849V57.819h148.636V148.652z"
+		/>
+	</g>
 </svg>

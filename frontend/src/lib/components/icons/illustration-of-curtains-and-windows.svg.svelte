@@ -1,19 +1,42 @@
-<!-- @wc-ignore --><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
-	:root { color-scheme: dark light; }
-</style>
-<g>
-	<rect y="233.666" fill="currentColor" width="68.805" height="32"/>
-	<path fill="currentColor" d="M378.438,6.556c0,0,2.328,10.203,6.258,26.297h-257.39c3.93-16.094,6.258-26.297,6.258-26.297H0v213.992
+<!-- @wc-ignore --><svg
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
+		:root {
+			color-scheme: dark light;
+		}
+	</style>
+	<g>
+		<rect y="233.666" fill="currentColor" width="68.805" height="32" />
+		<path
+			fill="currentColor"
+			d="M378.438,6.556c0,0,2.328,10.203,6.258,26.297h-257.39c3.93-16.094,6.258-26.297,6.258-26.297H0v213.992
 		h68.805c16.633-31.969,36.039-100.102,49.242-150.953H242v333.039H117.617L64.758,278.915H0v217.883c0,0,24.282,19.453,68.805,0
 		c44.523-19.454,44.523,15.562,89.046,0l-25.492-59.664h247.282l-25.492,59.664c44.523,15.562,44.523-19.454,89.046,0
 		c44.523,19.453,68.805,0,68.805,0V278.915h-64.758l-52.859,123.719H266V69.595h127.953c13.203,50.851,32.61,118.984,49.242,150.953
-		H512V6.556H378.438z"/>
-	<rect x="443.195" y="233.666" fill="currentColor" width="68.805" height="32"/>
-	<polygon fill="currentColor" points="380.125,168.681 297.398,251.415 304.469,258.486 387.203,175.759 	"/>
-	<polygon fill="currentColor" points="192.828,229.65 110.102,312.384 117.172,319.454 199.906,236.728 	"/>
-	
-		<rect x="267.879" y="305.346" transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 815.0195 283.0814)" fill="currentColor" width="161.999" height="9.999"/>
-</g>
+		H512V6.556H378.438z"
+		/>
+		<rect x="443.195" y="233.666" fill="currentColor" width="68.805" height="32" />
+		<polygon
+			fill="currentColor"
+			points="380.125,168.681 297.398,251.415 304.469,258.486 387.203,175.759 	"
+		/>
+		<polygon
+			fill="currentColor"
+			points="192.828,229.65 110.102,312.384 117.172,319.454 199.906,236.728 	"
+		/>
+
+		<rect
+			x="267.879"
+			y="305.346"
+			transform="matrix(-0.7071 0.7071 -0.7071 -0.7071 815.0195 283.0814)"
+			fill="currentColor"
+			width="161.999"
+			height="9.999"
+		/>
+	</g>
 </svg>

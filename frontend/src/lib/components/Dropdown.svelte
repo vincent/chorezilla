@@ -1,5 +1,11 @@
 <script lang="ts">
-	let { isDropdownOpen = $bindable(false), button, buttonClass = '', menu, menuClass = '' } = $props();
+	let {
+		isDropdownOpen = $bindable(false),
+		button,
+		buttonClass = '',
+		menu,
+		menuClass = ''
+	} = $props();
 
 	const handleDropdownClick = () => {
 		isDropdownOpen = !isDropdownOpen;
@@ -31,7 +37,6 @@
 	.dropdown {
 		--tw-translate-x: -100px;
 	}
-
 
 	.dropdown {
 		display: inline-block;

@@ -1,15 +1,28 @@
 <script lang="ts">
 	let { width = 64, height = 64 } = $props();
 </script>
-<!-- @wc-ignore --><svg height={`${height}px`} width={`${width}px`} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
-	:root { color-scheme: dark light; }
-</style>
-<g>
-	<path fill="currentColor" d="M320.004,192.02L313.6,0C240.185,30.712,192.558,122.902,192.02,191.996L0,198.399
+
+<!-- @wc-ignore --><svg
+	height={`${height}px`}
+	width={`${width}px`}
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
+		:root {
+			color-scheme: dark light;
+		}
+	</style>
+	<g>
+		<path
+			fill="currentColor"
+			d="M320.004,192.02L313.6,0C240.185,30.712,192.558,122.902,192.02,191.996L0,198.399
 		c30.712,73.416,122.902,121.042,191.996,121.58L198.4,512c73.415-30.712,121.042-122.902,121.58-191.996L512,313.6
 		C481.288,240.185,389.098,192.55,320.004,192.02z M257.021,284.512c-15.744,0-28.504-12.768-28.504-28.512
-		s12.76-28.511,28.504-28.511c15.752,0,28.511,12.767,28.511,28.511S272.773,284.512,257.021,284.512z"/>
-</g>
+		s12.76-28.511,28.504-28.511c15.752,0,28.511,12.767,28.511,28.511S272.773,284.512,257.021,284.512z"
+		/>
+	</g>
 </svg>

@@ -1,18 +1,28 @@
-<!-- @wc-ignore --><svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
-	:root { color-scheme: dark light; }
-</style>
-<g>
-	<path fill="currentColor" d="M504.24,170.048c-14.848-0.008-28.216-6-37.953-15.728c-9.728-9.736-15.72-23.112-15.72-37.96v-7.752H61.44
+<!-- @wc-ignore --><svg
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
+		:root {
+			color-scheme: dark light;
+		}
+	</style>
+	<g>
+		<path
+			fill="currentColor"
+			d="M504.24,170.048c-14.848-0.008-28.216-6-37.953-15.728c-9.728-9.736-15.72-23.112-15.72-37.96v-7.752H61.44
 		v7.752c-0.008,14.848-5.992,28.224-15.72,37.96c-9.744,9.728-23.112,15.72-37.96,15.728H0V341.96h7.76
 		c14.848,0,28.216,5.992,37.96,15.72c9.728,9.736,15.712,23.105,15.72,37.953v7.76h389.128v-7.76
 		c0-14.848,5.992-28.216,15.72-37.953c9.736-9.728,23.105-15.72,37.953-15.72H512v-7.76V170.048H504.24z M496.488,326.912
 		c-32.016,3.568-57.4,28.952-60.976,60.968H76.496c-3.584-32.016-28.968-57.4-60.984-60.968V185.104
-		c32.016-3.584,57.4-28.968,60.984-60.984h359.016c3.576,32.016,28.96,57.4,60.976,60.984V326.912z"/>
-	<rect x="120.68" y="139.552" fill="currentColor" width="15.512" height="42.928"/>
-	<rect x="120.68" y="202.824" fill="currentColor" width="15.512" height="42.92"/>
-	<rect x="120.68" y="266.088" fill="currentColor" width="15.512" height="42.928"/>
-	<rect x="120.68" y="329.352" fill="currentColor" width="15.512" height="42.928"/>
-</g>
+		c32.016-3.584,57.4-28.968,60.984-60.984h359.016c3.576,32.016,28.96,57.4,60.976,60.984V326.912z"
+		/>
+		<rect x="120.68" y="139.552" fill="currentColor" width="15.512" height="42.928" />
+		<rect x="120.68" y="202.824" fill="currentColor" width="15.512" height="42.92" />
+		<rect x="120.68" y="266.088" fill="currentColor" width="15.512" height="42.928" />
+		<rect x="120.68" y="329.352" fill="currentColor" width="15.512" height="42.928" />
+	</g>
 </svg>

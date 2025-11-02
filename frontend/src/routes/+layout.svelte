@@ -25,8 +25,8 @@
 	}
 
 	onMount(() => {
-		locale.switchLocale()
-	})
+		locale.switchLocale();
+	});
 
 	$effect(() => {
 		if (client.authStore.isValid) {

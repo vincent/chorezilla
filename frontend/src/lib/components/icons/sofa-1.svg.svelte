@@ -1,20 +1,36 @@
 <script lang="ts">
 	let { width = 64, height = 64 } = $props();
 </script>
-<!-- @wc-ignore --><svg height={`${height}px`} width={`${width}px`} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
-	:root { color-scheme: dark light; }
-</style>
-<g>
-	<path fill="currentColor" d="M446.328,130.932h-23.145c-19.338,0-35.016,15.678-35.016,35.016v162.62H123.833v-162.62
+
+<!-- @wc-ignore --><svg
+	height={`${height}px`}
+	width={`${width}px`}
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
+		:root {
+			color-scheme: dark light;
+		}
+	</style>
+	<g>
+		<path
+			fill="currentColor"
+			d="M446.328,130.932h-23.145c-19.338,0-35.016,15.678-35.016,35.016v162.62H123.833v-162.62
 		c0-19.338-15.678-35.016-35.017-35.016H65.671c-19.728,0-35.717,15.988-35.717,35.717v225.019
 		c0,19.722,15.988,35.718,35.717,35.718h58.162h264.334h58.161c19.722,0,35.717-15.996,35.717-35.718V166.65
-		C482.045,146.92,466.05,130.932,446.328,130.932z"/>
-	<polygon fill="currentColor" points="99.923,512 137.85,512 142.298,443.562 95.475,443.562 	"/>
-	<polygon fill="currentColor" points="374.143,512 412.07,512 416.517,443.562 369.694,443.562 	"/>
-	<path fill="currentColor" d="M143.591,153.188v155.615h224.811V153.188c0-23.209,18.812-42.021,42.014-42.021h1.221V74.229
+		C482.045,146.92,466.05,130.932,446.328,130.932z"
+		/>
+		<polygon fill="currentColor" points="99.923,512 137.85,512 142.298,443.562 95.475,443.562 	" />
+		<polygon fill="currentColor" points="374.143,512 412.07,512 416.517,443.562 369.694,443.562 	" />
+		<path
+			fill="currentColor"
+			d="M143.591,153.188v155.615h224.811V153.188c0-23.209,18.812-42.021,42.014-42.021h1.221V74.229
 		C411.636,33.234,378.403,0,337.407,0H174.592c-40.996,0-74.229,33.234-74.229,74.229v36.938h1.214
-		C124.779,111.167,143.591,129.979,143.591,153.188z"/>
-</g>
+		C124.779,111.167,143.591,129.979,143.591,153.188z"
+		/>
+	</g>
 </svg>

@@ -1,18 +1,33 @@
 <script lang="ts">
 	let { width = 64, height = 64 } = $props();
 </script>
-<!-- @wc-ignore --><svg height={`${height}px`} width={`${width}px`} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
+
+<!-- @wc-ignore --><svg
+	height={`${height}px`}
+	width={`${width}px`}
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
 <![CDATA[
 	:root { color-scheme: dark light; }
 ]]>
-</style>
-<g>
-	<path fill="currentColor" d="M511.317,0.683c-43.328-3.938-75.594,9.047-112.063,45.516l66.547,66.547
-		C502.286,76.261,515.255,44.026,511.317,0.683z"/>
-	<polygon fill="currentColor" points="381.161,64.292 314.021,131.433 249.239,115.667 221.239,143.683 261.505,183.964 126.536,318.917 
+	</style>
+	<g>
+		<path
+			fill="currentColor"
+			d="M511.317,0.683c-43.328-3.938-75.594,9.047-112.063,45.516l66.547,66.547
+		C502.286,76.261,515.255,44.026,511.317,0.683z"
+		/>
+		<polygon
+			fill="currentColor"
+			points="381.161,64.292 314.021,131.433 249.239,115.667 221.239,143.683 261.505,183.964 126.536,318.917 
 		44.177,317.245 0.005,361.401 53.692,415.12 119.661,349.151 129.88,359.354 47.567,441.667 70.349,464.433 152.646,382.12 
 		162.849,392.339 96.88,458.292 150.599,511.995 194.755,467.808 193.083,385.464 328.036,250.495 368.302,290.776 396.333,262.761 
-		380.583,197.979 447.708,130.839 	"/>
-</g>
+		380.583,197.979 447.708,130.839 	"
+		/>
+	</g>
 </svg>

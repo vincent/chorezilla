@@ -1,17 +1,30 @@
 <script lang="ts">
 	let { width = 64, height = 64 } = $props();
 </script>
-<!-- @wc-ignore --><svg height={`${height}px`} width={`${width}px`} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
-	:root { color-scheme: dark light; }
-</style>
-<g>
-	<path fill="currentColor" d="M307.47,0l-105.34,25.285v99.86l-87.602,21.022v99.869l-87.601,21.022v119.029L204.53,512l6.478-1.554
+
+<!-- @wc-ignore --><svg
+	height={`${height}px`}
+	width={`${width}px`}
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
+		:root {
+			color-scheme: dark light;
+		}
+	</style>
+	<g>
+		<path
+			fill="currentColor"
+			d="M307.47,0l-105.34,25.285v99.86l-87.602,21.022v99.869l-87.601,21.022v119.029L204.53,512l6.478-1.554
 		l274.066-65.776V125.922L307.47,0z M301.362,31.666l138.118,97.936l-54.382,13.054L247.74,44.542L301.362,31.666z M231.5,59.996
 		L371.772,160.2v72.792L231.5,132.796V59.996z M219.374,151.207l137.36,98.121l-59.237,14.2l-137.35-98.113L219.374,151.207z
 		 M143.898,180.886L284.17,281.082v72.792L143.898,253.679V180.886z M196.569,470.362L56.298,370.916v-69.138l140.271,100.195
 		V470.362z M209.896,384.419L72.545,286.316l59.236-14.218l137.35,98.113L209.896,384.419z M455.702,421.522l-237.106,56.907
-		v-73.446l87.602-21.022V284.1l87.602-21.022V163.21l61.902-14.854V421.522z"/>
-</g>
+		v-73.446l87.602-21.022V284.1l87.602-21.022V163.21l61.902-14.854V421.522z"
+		/>
+	</g>
 </svg>

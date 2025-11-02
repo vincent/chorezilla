@@ -1,16 +1,31 @@
 <script lang="ts">
 	let { width = 64, height = 64 } = $props();
 </script>
-<!-- @wc-ignore --><svg height={`${height}px`} width={`${width}px`} version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 512 512"  xml:space="preserve">
-<style type="text/css">
+
+<!-- @wc-ignore --><svg
+	height={`${height}px`}
+	width={`${width}px`}
+	version="1.1"
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	viewBox="0 0 512 512"
+	xml:space="preserve"
+>
+	<style type="text/css">
 <![CDATA[
 	:root { color-scheme: dark light; }
 ]]>
-</style>
-<g>
-	<path fill="currentColor" d="M256,0c-28.938,24.109-40.734,83.984-40.734,128.656h81.469C296.734,83.984,284.953,24.109,256,0z"/>
-	<polygon fill="currentColor" points="296.734,405.25 296.734,150.813 215.266,150.813 215.266,405.25 163.797,454.656 163.797,512 
+	</style>
+	<g>
+		<path
+			fill="currentColor"
+			d="M256,0c-28.938,24.109-40.734,83.984-40.734,128.656h81.469C296.734,83.984,284.953,24.109,256,0z"
+		/>
+		<polygon
+			fill="currentColor"
+			points="296.734,405.25 296.734,150.813 215.266,150.813 215.266,405.25 163.797,454.656 163.797,512 
 		229.547,512 229.547,427.969 242.063,427.969 242.063,512 269.938,512 269.938,427.969 282.438,427.969 282.438,512 348.203,512 
-		348.203,454.656 	"/>
-</g>
+		348.203,454.656 	"
+		/>
+	</g>
 </svg>
