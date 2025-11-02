@@ -78,7 +78,7 @@
 			placeholder="Chore's title"
 			bind:value={name}
 			required
-			class="{input_class} flex-grow text-xl p-4"
+			class="{input_class} flex-grow text-xl p-4 min-w-[50%]"
 		/>
 	</div>
 	<Field label="Description">
@@ -126,8 +126,8 @@
 <style>
 	.chore-form :global(.dropdown-content.menu) {
 		display: grid;
-		width: 60svw;
-		max-width: 60svw;
+		width: 78svw;
+		max-width: 78svw;
 		grid-template-rows: repeat(2, auto);
 		grid-template-columns: repeat(4, auto);
 	}
