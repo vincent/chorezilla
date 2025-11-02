@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-26T14:32:32.124Z\n"
-"PO-Revision-Date: 2025-10-26T15:40:07.776Z\n"
+"PO-Revision-Date: 2025-11-02T11:34:42.504Z\n"
 "Last-Translator: \n"
 "Language: cat\n"
 "Language-Team: \n"
@@ -233,10 +233,8 @@ msgstr "Dóna suport al projecte <0/>"
 msgid "If you can, support the developer"
 msgstr "Si pots, dona suport al desenvolupador"
 
-#. placeholder {0}: client.authStore.record?.username
-#: src/routes/settings/+page.svelte
-msgid "Logged in a {0}"
-msgstr "Connectat com a {0}"
+#~ msgid "Logged in a {0}"
+#~ msgstr "Connectat com a {0}"
 
 #: src/routes/settings/+page.svelte
 msgid "Log off <0/>"
@@ -471,3 +469,8 @@ msgstr "ChoreZilla | Edita habitació"
 #: src/routes/rooms/[id]/edit/+page.svelte
 msgid "Edit room"
 msgstr "Edita habitació"
+
+#. placeholder {0}: client.authStore.record?.username
+#: src/routes/settings/+page.svelte
+msgid "Logged in as {0}"
+msgstr ""

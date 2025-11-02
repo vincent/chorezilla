@@ -82,7 +82,7 @@
 			</div>
 		</Field>
 		<Field className="mt-3" label="Language">
-			<div class="space-y-4">
+			<div class="mt-3 p-4 w-full flex flex-col rounded-lg border-indigo-300 bg-gray-100 text-gray-600 font-bold hover:bg-gray-200 transition-colors cursor-pointer">
 				<select bind:value={localeValue}>
 					<option value="en">English</option>
 					<option value="fr">Français</option>
@@ -92,7 +92,7 @@
 				</select>
 			</div>
 		</Field>
-		<Field className="mt-3" label="Logged in a {client.authStore.record?.username}">
+		<Field className="mt-3" label="Logged in as {client.authStore.record?.username}">
 			<div class="space-y-4">
 				<button 
 					onclick={() => logoff()}

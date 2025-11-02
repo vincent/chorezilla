@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-26T14:32:32.107Z\n"
-"PO-Revision-Date: 2025-10-26T15:27:52.601Z\n"
+"PO-Revision-Date: 2025-11-02T11:34:42.480Z\n"
 "Last-Translator: \n"
 "Language: fr\n"
 "Language-Team: \n"
@@ -192,9 +192,8 @@ msgstr "Tâche non trouvée"
 msgid "No details available for this chore."
 msgstr "Aucun détail disponible pour cette tâche."
 
-#: src/routes/settings/+page.svelte
-msgid "POST"
-msgstr ""
+#~ msgid "POST"
+#~ msgstr ""
 
 #: src/routes/settings/+page.svelte
 msgid "Notifications"
@@ -240,10 +239,8 @@ msgstr ""
 msgid "If you can, support the developer"
 msgstr ""
 
-#. placeholder {0}: client.authStore.record?.username
-#: src/routes/settings/+page.svelte
-msgid "Logged in a {0}"
-msgstr ""
+#~ msgid "Logged in a {0}"
+#~ msgstr ""
 
 #: src/routes/settings/+page.svelte
 msgid "Log off <0/>"
@@ -481,3 +478,8 @@ msgstr ""
 #: src/routes/rooms/[id]/edit/+page.svelte
 msgid "Edit room"
 msgstr ""
+
+#. placeholder {0}: client.authStore.record?.username
+#: src/routes/settings/+page.svelte
+msgid "Logged in as {0}"
+msgstr "Connecté avec : {0}"

@@ -32,7 +32,7 @@
 			>
 				{#snippet icon()}
 					<div class={`p-3 rounded-full bg-${chore.expand?.room.color}-100 text-grey-600`}>
-						<ChoreIcon className="ms-2 text-slate-900 dark:text-gray-500" icon={chore.icon} />
+						<ChoreIcon className="text-slate-900 dark:text-gray-500" icon={chore.icon} />
 					</div>
 				{/snippet}
 				{#snippet infos()}

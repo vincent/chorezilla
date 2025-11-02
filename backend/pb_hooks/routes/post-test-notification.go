@@ -60,10 +60,17 @@ func RegisterTestNotificationRoute(app *pocketbase.PocketBase) {
 				}
 			}
 
+			app.Logger().Debug("[TestNotification] test notifications of users", "users", userIds)
+
 			count, err := notifications.NotifyTest(app, userIds)
 
 			if err != nil {
 				app.Logger().Error("[TestNotification] cannot send test notifications", "error", err)
+				return e.JSON(http.StatusServiceUnavailable, nil)
+			}
+
+			if count == 0 {
+				app.Logger().Error("[TestNotification] cannot any subscription", "error", err)
 				return e.JSON(http.StatusServiceUnavailable, nil)
 			}
 

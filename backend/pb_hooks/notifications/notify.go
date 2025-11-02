@@ -21,13 +21,16 @@ func Notify(app *pocketbase.PocketBase, method NotificationMethod, userIds []str
 	case None:
 		return 0, nil
 	case WebPush:
-	default:
 		return notifyWithWebPush(app, userIds, data)
+	default:
+		app.Logger().Error("[Notify] unknown method given", "method", method)
 	}
 	return 0, nil
 }
 
 func notifyWithWebPush(app *pocketbase.PocketBase, userIds []string, data any) (int, error) {
+
+	app.Logger().Debug("[notifyWithWebPush] test notifications of users", "users", userIds)
 
 	if len(userIds) == 0 {
 		return 0, nil

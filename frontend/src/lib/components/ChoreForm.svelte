@@ -64,7 +64,7 @@
 				{#each icons as i}
 					<li class="my-4 text-lg">
 						<button type="button" class="btn flex items-center cursor-pointer" onclick={() => selectIcon(i)}>
-							<ChoreIcon className="ms-2 text-slate-900 dark:text-gray-500" icon={i} />
+							<ChoreIcon className="text-slate-900 dark:text-gray-500" icon={i} />
 						</button>
 					</li>
 				{/each}
